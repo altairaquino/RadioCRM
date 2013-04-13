@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="grafico_grfm"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<queryString><![CDATA[SELECT extract(month from a.CRDINIC) mes, extract(year from a.CRDINIC) ano, ct.CTCNOME contato, sum(a.CRNVALR) valor
+FROM CONTRATO a
+inner join CONTATO ct on
+    ct.CTNCODG = a.CRNCGCT
+where a.CRLATIV = 'T'
+and extract(month from a.CRDINIC) = 11 
+and extract(year from a.CRDINIC) = 2012
+group by 1, 2, 3
+order by 2, 1, 3]]></queryString>
+
+	<field name="MES" class="java.lang.Integer"/>
+	<field name="ANO" class="java.lang.Integer"/>
+	<field name="CONTATO" class="java.lang.String"/>
+	<field name="VALOR" class="java.lang.Double"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="17"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="176"  isSplitAllowed="true" >
+				<barChart>
+					<chart  hyperlinkTarget="Self" >
+					<reportElement
+						x="4"
+						y="5"
+						width="175"
+						height="165"
+						key="element-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+						<chartLegend textColor="#000000" backgroundColor="#FFFFFF" >
+					<font fontName="SansSerif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+					</chartLegend>
+					</chart>
+					<categoryDataset>
+						<dataset >
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA[$F{CONTATO}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{CONTATO}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{VALOR}]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+					</categoryDataset>
+					<barPlot >
+						<plot />
+						<categoryAxisFormat>
+							<axisFormat >
+								<labelFont>
+					<font fontName="SansSerif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</labelFont>
+								<tickLabelFont>
+								</tickLabelFont>
+							</axisFormat>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat >
+								<labelFont>
+					<font fontName="SansSerif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</labelFont>
+								<tickLabelFont>
+					<font fontName="SansSerif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</tickLabelFont>
+							</axisFormat>
+						</valueAxisFormat>
+					</barPlot>
+				</barChart>
+				<bar3DChart>
+					<chart  hyperlinkTarget="Self" >
+					<reportElement
+						x="216"
+						y="4"
+						width="262"
+						height="149"
+						key="element-2"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+						<chartLegend textColor="#000000" backgroundColor="#FFFFFF" >
+					<font fontName="SansSerif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+					</chartLegend>
+					</chart>
+					<categoryDataset>
+						<dataset >
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA[$F{CONTATO}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{CONTATO}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{VALOR}]]></valueExpression>
+							<labelExpression><![CDATA[$F{CONTATO}]]></labelExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+					</categoryDataset>
+					<bar3DPlot isShowLabels="true" >
+						<plot />
+						<categoryAxisFormat>
+							<axisFormat >
+							</axisFormat>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat >
+							</axisFormat>
+						</valueAxisFormat>
+					</bar3DPlot>
+				</bar3DChart>
+			</band>
+		</summary>
+</jasperReport>

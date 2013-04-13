@@ -1,0 +1,20 @@
+ip-server: 189.43.225.161
+
+ftp:
+user: tomcat
+senha: 0451869
+
+
+tomcat manager
+
+usuario: root
+senha: 0451869FA!B*
+
+logmein ServerFM
+email: sistemafm@tvgranderio.com.br
+senha: radiosistema
+
+
+Server FM
+usuario: administrador
+senha: WS2006adm

@@ -1,0 +1,2 @@
+@del *.java
+@del *.bak
