@@ -3,7 +3,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 	
 	<appender name="INFO" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="../logs/webservice-info.log" />
+		<param name="File" value="../logs/sicom-info.log" />
 		<param name="Append" value="true" />
 		<param name="MaxFileSize" value="10240KB" />
 		<param name="MaxBackupIndex" value="10" />
@@ -17,7 +17,7 @@
 	</appender>
 
 	<appender name="DEBUG" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="../logs/webservice-debug.log" />
+		<param name="File" value="../logs/sicom-debug.log" />
 		<param name="Append" value="true" />
 		<param name="MaxFileSize" value="10240KB" />
 		<param name="MaxBackupIndex" value="10" />
@@ -31,7 +31,7 @@
 	</appender>
 
 	<appender name="WARM" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="../logs/webservice-warm.log" />
+		<param name="File" value="../logs/sicom-warm.log" />
 		<param name="Append" value="true" />
 		<param name="MaxFileSize" value="10240KB" />
 		<param name="MaxBackupIndex" value="10" />
@@ -45,7 +45,7 @@
 	</appender>
 
 	<appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="../logs/webservice-erro.log" />
+		<param name="File" value="../logs/sicom-erro.log" />
 		<param name="Append" value="true" />
 		<param name="MaxFileSize" value="10240KB" />
 		<param name="MaxBackupIndex" value="10" />
@@ -59,7 +59,7 @@
 	</appender>
 
 	<appender name="ALL" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="../logs/webservice.log" />
+		<param name="File" value="../logs/sicom.log" />
 		<param name="Append" value="true" />
 		<param name="datePattern" value="'.'yyyy-MM-dd-HH" />
 		<layout class="org.apache.log4j.PatternLayout">

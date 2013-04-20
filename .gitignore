@@ -2,3 +2,6 @@
 .classpath
 *.settings*
 *.class
+*/target/*
+*/*.log
+radio/src/main/webapp/WEB-INF/classes/

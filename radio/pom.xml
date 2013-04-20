@@ -26,6 +26,7 @@
 			<groupId>struts</groupId>
 			<artifactId>struts</artifactId>
 			<version>1.2.9</version>
+			<!-- 
 			<exclusions>
 				<exclusion>
 					<groupId>antlr</groupId>
@@ -36,11 +37,13 @@
 					<artifactId>xalan</artifactId>
 				</exclusion>
 			</exclusions>
+			 -->
 		</dependency>
 		<dependency>
 			<groupId>dwr</groupId>
 			<artifactId>dwr</artifactId>
 			<version>1.1.3</version>
+			<!-- 
 			<exclusions>
 				<exclusion>
 					<groupId>xerces</groupId>
@@ -55,6 +58,7 @@
 					<artifactId>xalan</artifactId>
 				</exclusion>
 			</exclusions>
+			 -->
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.barbecue</groupId>
@@ -74,10 +78,12 @@
 					<groupId>javax.mail</groupId>
 					<artifactId>mail</artifactId>
 				</exclusion>
+				<!-- 
 				<exclusion>
 					<groupId>xalan</groupId>
 					<artifactId>xalan</artifactId>
 				</exclusion>
+				 -->
 			</exclusions>
 		</dependency>
 		

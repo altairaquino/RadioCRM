@@ -1,3 +1,7 @@
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN"
+    "http://directwebremoting.org/schema/dwr10.dtd">
+    
 <dwr>
 	<allow>
 		<create creator="static" javascript="Mapping">
