@@ -1,7 +1,0 @@
-<dwr>
-	<allow>
-		<create creator="static" javascript="Mapping">
-			<param name="class" value="com.grupooc.radiogrfm.dwr.DwrMapping"/>
-		</create>		
-	</allow>
-</dwr>
