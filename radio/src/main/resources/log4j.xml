@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	
+	<appender name="INFO" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="../logs/webservice-info.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="10240KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="V1.0.0 %-5p -- %d{dd/MM/yyyy} %d{HH:mm:ss} - %c{1} -- %t -- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="INFO" />
+			<param name="LevelMax" value="INFO" />
+		</filter>
+	</appender>
+
+	<appender name="DEBUG" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="../logs/webservice-debug.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="10240KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="V1.0.0 %-5p -- %d{dd/MM/yyyy} %d{HH:mm:ss} - %c{1} -- %t -- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="DEBUG" />
+		</filter>
+	</appender>
+
+	<appender name="WARM" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="../logs/webservice-warm.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="10240KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="V1.0.0 %-5p -- %d{dd/MM/yyyy} %d{HH:mm:ss} - %c{1} -- %t -- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="WARM" />
+			<param name="LevelMax" value="WARM" />
+		</filter>
+	</appender>
+
+	<appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="../logs/webservice-erro.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="10240KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="V1.0.0 %-5p -- %d{dd/MM/yyyy} %d{HH:mm:ss} - %c{1} -- %t -- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+	<appender name="ALL" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../logs/webservice.log" />
+		<param name="Append" value="true" />
+		<param name="datePattern" value="'.'yyyy-MM-dd-HH" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="V1.0.0 %-5p %d{dd/MM/yyyy} %d{HH:mm:ss}[%c{1}-%t]->%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+	
+	<logger name="br.com.m2msoutions">
+		<level value="info" />
+	</logger>
+		
+	<logger name="org">
+		<level value="info" />
+	</logger>	
+	
+	<logger name="com">
+		<level value="info" />
+	</logger>	
+	
+	<!-- 	alterar abaixo para exibir os níveis de log desejados. LEmbrar de combinar com o logguer definido acima-->
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="DEBUG" />
+		<appender-ref ref="WARM" />
+		<appender-ref ref="INFO" />
+		<appender-ref ref="ERROR" />		
+	</root>
+</log4j:configuration>

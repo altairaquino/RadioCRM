@@ -1,0 +1,16 @@
+V1.0.0 INFO  -- 20/04/2013 12:13:13 - Logger -- main -- Logging using commons-logging.
+V1.0.0 INFO  -- 20/04/2013 12:13:13 - DWRServlet -- main -- retrieved system configuration file: sun.net.www.protocol.jar.JarURLConnection$JarURLInputStream@ffaa35
+V1.0.0 INFO  -- 20/04/2013 12:13:13 - DefaultConfiguration -- main -- Creator 'pageflow' not loaded due to ClassNotFoundException. This is only an problem if you wanted to use it. Cause: Beehive/Weblogic Creator not available.
+V1.0.0 INFO  -- 20/04/2013 12:13:13 - DefaultConfiguration -- main -- Creator 'spring' not loaded due to NoClassDefFoundError. This is only an problem if you wanted to use it. Cause: org/springframework/beans/factory/BeanFactory
+V1.0.0 INFO  -- 20/04/2013 12:13:13 - DefaultConfiguration -- main -- Converter 'jdom' not loaded due to NoClassDefFoundError. This is only an problem if you wanted to use it. Cause: org/jdom/Document
+V1.0.0 INFO  -- 20/04/2013 12:13:13 - DefaultConfiguration -- main -- Converter 'hibernate' not loaded due to ClassNotFoundException. This is only an problem if you wanted to use it. Cause: Failed to find either org.hibernate.Hibernate or net.sf.hibernate.Hibernate.
+V1.0.0 INFO  -- 20/04/2013 12:13:13 - DefaultConverterManager -- main -- Type 'org.jdom.Document' is not convertable due to missing converter 'jdom'. This is only an problem if you wanted to use it.
+V1.0.0 INFO  -- 20/04/2013 12:13:13 - DefaultConverterManager -- main -- Type 'org.jdom.Element' is not convertable due to missing converter 'jdom'. This is only an problem if you wanted to use it.
+V1.0.0 INFO  -- 20/04/2013 12:14:30 - Logger -- main -- Logging using commons-logging.
+V1.0.0 INFO  -- 20/04/2013 12:14:30 - DWRServlet -- main -- retrieved system configuration file: sun.net.www.protocol.jar.JarURLConnection$JarURLInputStream@12add5f
+V1.0.0 INFO  -- 20/04/2013 12:14:30 - DefaultConfiguration -- main -- Creator 'pageflow' not loaded due to ClassNotFoundException. This is only an problem if you wanted to use it. Cause: Beehive/Weblogic Creator not available.
+V1.0.0 INFO  -- 20/04/2013 12:14:30 - DefaultConfiguration -- main -- Creator 'spring' not loaded due to NoClassDefFoundError. This is only an problem if you wanted to use it. Cause: org/springframework/beans/factory/BeanFactory
+V1.0.0 INFO  -- 20/04/2013 12:14:30 - DefaultConfiguration -- main -- Converter 'jdom' not loaded due to NoClassDefFoundError. This is only an problem if you wanted to use it. Cause: org/jdom/Document
+V1.0.0 INFO  -- 20/04/2013 12:14:30 - DefaultConfiguration -- main -- Converter 'hibernate' not loaded due to ClassNotFoundException. This is only an problem if you wanted to use it. Cause: Failed to find either org.hibernate.Hibernate or net.sf.hibernate.Hibernate.
+V1.0.0 INFO  -- 20/04/2013 12:14:30 - DefaultConverterManager -- main -- Type 'org.jdom.Document' is not convertable due to missing converter 'jdom'. This is only an problem if you wanted to use it.
+V1.0.0 INFO  -- 20/04/2013 12:14:30 - DefaultConverterManager -- main -- Type 'org.jdom.Element' is not convertable due to missing converter 'jdom'. This is only an problem if you wanted to use it.
