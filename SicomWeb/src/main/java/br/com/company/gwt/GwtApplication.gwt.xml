@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module SYSTEM 
+"http://google-web-toolkit.googlecode.com/svn/releases/2.3/distro-source/core/src/gwt-module.dtd">
+<module rename-to="gwtapplication">
+	
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.i18n.I18N"/>
+	
+	<inherits name="com.extjs.gxt.ui.GXT"/>
+	<inherits name="com.extjs.gxt.desktop.WebDesktop"/>
+	<inherits name="com.extjs.gxt.charts.Chart"/>
+	
+	<entry-point class="br.com.company.gwt.client.GwtApplication" />
+	
+	<set-property name="locale" value="default" />
+
+	<source path="client"/>
+	<source path="shared"/>
+
+</module>

@@ -1,0 +1,112 @@
+
+.desktop-link {
+	margin: 15px;
+	float: right;
+	background-image: url('imagens/curtsom_logo.png');
+	background-repeat: no-repeat;
+	width: 150px;
+	height: 64px;
+}
+
+.app_window {
+	width: 16px;
+	height: 16px;
+	background: url(imagens/app_window.png);
+}
+
+.login_window {
+	width: 16px;
+	height: 16px;
+	background: url(imagens/app_window.png);
+}
+
+.icon_transferencia {
+	width: 16px;
+	height: 16px;
+	background: url(imagens/icones/transferencia_produto_16.png);
+}
+
+.icon_venda {
+	width: 16px;
+	height: 16px;
+	background: url(imagens/icones/icone_venda_16.png);
+}
+
+.icone_cliente {
+	width: 16px;
+	height: 16px;
+	background: url(imagens/icones/icone_cliente_16.png);
+}
+
+.icone_produto {
+	width: 16px;
+	height: 16px;
+	background: url(imagens/icones/icone_produto_16.png);
+}
+
+#movimento-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/alliance_64.png);
+}
+
+#venda-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/shortcut_venda_64.png);
+}
+
+#caixa_produto-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/caixa_produto_64.png);
+}
+
+#client-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/client_64.png);
+}
+#agencia-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/agencia_64.png);
+}
+#cliente-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/cliente_64.png);
+}
+
+#money-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/money_64.png);
+}
+
+#produto-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/shortcut_produto_64.png);
+}
+
+.icon_about {
+	width: 16px;
+	height: 16px;
+	background: url(imagens/icones/icon_about_16.png);
+}
+
+.icon_logout {
+	width: 16px;
+	height: 16px;
+	background: url(imagens/icones/icon_logout_16.png);
+}
+.user_icon_man {
+	background: url(imagens/icones/user_icon_man_24.png);
+}
+.user_icon_female {
+	background: url(imagens/icones/user_icon_female_22.png);
+}
+.colums-back {
+	background-color: red;
+}	

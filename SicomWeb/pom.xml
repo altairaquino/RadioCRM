@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.company</groupId>
+	<artifactId>SicomWeb</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<name>SicomWeb</name>
+
+	<developers>
+		<developer>
+			<name>Altair Aquino</name>
+			<email>altairaquino@gmail.com</email>
+			<timezone>GMT-3</timezone>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Convenience property to set the GWT version -->
+		<springVersion>3.1.2.RELEASE</springVersion>
+		<hibernateVersion>3.6.10.Final</hibernateVersion>
+
+		<gwtVersion>2.1.0</gwtVersion>
+
+		<!-- GWT needs at least java 1.5 -->
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.extjs</groupId>
+			<artifactId>gxt</artifactId>
+			<version>2.2.0</version>
+			<!--
+			<scope>system</scope>
+    		<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gxt-2.2.4-gwt2.jar</systemPath>
+			 -->
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.0.GA</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.10.Final</version>
+		</dependency>
+            
+
+		<dependency>
+			<groupId>org.firebirdsql.jdbc</groupId>
+			<artifactId>jaybird</artifactId>
+			<version>2.1.6</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>				
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwtVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+			<classifier>sources</classifier>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.16.1-GA</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>4.7.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.persistence</groupId>
+					<artifactId>persistence-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.fdvs</groupId>
+			<artifactId>DynamicJasper-core-fonts</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.barbecue</groupId>
+			<artifactId>barbecue</artifactId>
+			<version>1.5-beta1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<outputDirectory>target/www/WEB-INF/classes</outputDirectory>
+		<finalName>SicomWeb</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.10</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<stopKey>foo</stopKey>
+					<stopPort>9999</stopPort>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-jetty</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<scanIntervalSeconds>0</scanIntervalSeconds>
+							<daemon>true</daemon>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop-jetty</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- GWT Maven Plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gwtVersion}</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-user</artifactId>
+						<version>${gwtVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-dev</artifactId>
+						<version>${gwtVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-servlet</artifactId>
+						<version>${gwtVersion}</version>
+					</dependency>
+				</dependencies>
+				<!-- JS is only needed in the package phase, this speeds up testing -->
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
+					documentation at codehaus.org -->
+				<configuration>
+					<!-- URL that should be automatically opened in the GWT shell (gwt:run). -->
+					<runTarget><![CDATA[GwtApplication.html]]></runTarget>
+					<!-- Location of the develop-mode web application structure (gwt:run). -->
+					<hostedWebapp>target/www</hostedWebapp>
+					<!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
+					<compileReport>true</compileReport>
+
+				</configuration>
+			</plugin>
+
+			<!-- Add source folders to test classpath in order to run gwt-tests as 
+				normal junit-tests -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<additionalClasspathElements>
+						<additionalClasspathElement>${project.build.sourceDirectory}</additionalClasspathElement>
+						<additionalClasspathElement>${project.build.testSourceDirectory}</additionalClasspathElement>
+					</additionalClasspathElements>
+					<useManifestOnlyJar>false</useManifestOnlyJar>
+					<forkMode>always</forkMode>
+
+					<!-- Folder for generated testing stuff -->
+					<systemProperties>
+						<property>
+							<name>gwt.args</name>
+							<value>-out target/www</value>
+						</property>
+					</systemProperties>
+				</configuration>
+			</plugin>
+
+			<!-- Copy static web files before executing gwt:run -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.2</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/www</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/webapp</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Delete gwt generated stuff -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/webapp/WEB-INF/classes</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.7</version>  <!-- Note 2.8 does not work with AspectJ aspect path -->
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+					<wtpversion>2.0</wtpversion>
+					<additionalBuildcommands>
+						<buildCommand>
+							<name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
+						</buildCommand>
+					</additionalBuildcommands>
+					<additionalProjectnatures>
+						<projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
+					</additionalProjectnatures>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<!--Repositórios -->
+	<repositories>
+		<!-- add JBOSS repository for easy access to Hibernate libraries -->
+		<repository>
+			<id>JBOSS</id>
+			<url>http://repository.jboss.com/maven2</url>
+		</repository>
+		<repository>
+			<id>JBOSS2</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+		</repository>
+
+		<repository>
+			<id>maven</id>
+			<name>central</name>
+			<url>http://repo2.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>jahia</id>
+			<name>jahiaMaven</name>
+			<url>http://maven.jahia.org/maven2/</url>
+		</repository>
+		<!--Para uso do hibernate spatial (ABAIXO) -->
+		<repository>
+			<id>OSGEO GeoTools repo</id>
+			<url>http://download.osgeo.org/webdav/geotools</url>
+		</repository>
+		<repository>
+			<id>Hibernate Spatial repo</id>
+			<url>http://www.hibernatespatial.org/repository</url>
+		</repository>
+		<repository>
+			<id>fdvsolution.public</id>
+			<url>http://archiva.fdvs.com.ar/repository/public1/</url>
+		</repository>
+	</repositories>
+	
+</project>
