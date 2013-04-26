@@ -5,20 +5,19 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanHorario;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelHorario {
+@Named("modelHorario")
+public class ModelHorario extends ModelAbstract{
 
-	public static ModelHorario getInstance(){
-		return new ModelHorario();
-	}
-	
 	public ArrayList<BeanHorario> getHorariosDoPrograma(int pgncodg){
 		ArrayList<BeanHorario> horarios = new ArrayList<BeanHorario>();
 		try {
 			String sql = "SELECT * FROM VW_HORARIO WHERE HRNCGPG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, pgncodg);
 			
 			horarios.addAll(Utils.getObjectsStr(st, BeanHorario.class));
@@ -34,7 +33,7 @@ public class ModelHorario {
 		BeanHorario programa = null;
 		try {
 			String sql = "SELECT * FROM VW_HORARIO WHERE HRNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, hrncodg);
 			
 			List<BeanHorario> l = Utils.getObjectsStr(st, BeanHorario.class); 
@@ -52,7 +51,7 @@ public class ModelHorario {
 	public void inserir(BeanHorario horario) {
 		try {
 			String sql = "INSERT INTO HORARIO (HRNCGPG, HRNCGDS, HRHINIC, HRHTERM) VALUES (?,?,?,?)";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			st.setInt(1, Integer.parseInt(horario.getHrncgpg()));
 			st.setInt(2, Integer.parseInt(horario.getHrncgds()));
@@ -75,7 +74,7 @@ public class ModelHorario {
 					     " HRHINIC = ?," +
 					     " HRHTERM = ?" +
 					     " WHERE HRNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			st.setInt(1, Integer.parseInt(horario.getHrncgpg()));
 			st.setInt(2, Integer.parseInt(horario.getHrncgds()));

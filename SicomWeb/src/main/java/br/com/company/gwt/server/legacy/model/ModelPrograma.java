@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanPrograma;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelPrograma {
+@Named
+public class ModelPrograma extends ModelAbstract{
 
-	public static ModelPrograma getInstance(){
-		return new ModelPrograma();
-	}
-	
 	public ArrayList<BeanPrograma> getProgramas(int epncodg){
 		ArrayList<BeanPrograma> programas = new ArrayList<BeanPrograma>();
 		try {
 			String sql = " SELECT * FROM VW_PROGRAMA WHERE PGNCGEP = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, epncodg);
 			
 			programas.addAll(Utils.getObjectsStr(st, BeanPrograma.class));
@@ -34,7 +33,7 @@ public class ModelPrograma {
 		try {
 			String sql = " SELECT PGNCODG, PGCDESC||' - (R$ '|| CAST(PGYVALR AS DECIMAL(10,2))||' - '||PGNDURC||' seg)' PGCDESC,  PGYVALR,   PGNDURC" +
 					     " FROM VW_PROGRAMA";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			programas.addAll(Utils.getObjectsStr(st, BeanPrograma.class));
 			
@@ -49,7 +48,7 @@ public class ModelPrograma {
 		BeanPrograma programa = null;
 		try {
 			String sql = "SELECT * FROM VW_PROGRAMA WHERE PGNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, pgncodg);
 			
 			List<BeanPrograma> l = Utils.getObjectsStr(st, BeanPrograma.class); 
@@ -72,7 +71,7 @@ public class ModelPrograma {
 					     " PGYVALR = ?"+
 					     " WHERE PGNCODG = ?";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, programa.getPgcdesc().toUpperCase());
 			st.setInt(2, Integer.parseInt(programa.getPgndurc()));
 			st.setFloat(3, Float.parseFloat(Utils.converteFloatBR(programa.getPgyvalr())));
@@ -90,7 +89,7 @@ public class ModelPrograma {
 		try {
 			String sql = " INSERT INTO PROGRAMA (PGCDESC, PGNDURC, PGYVALR, PGNCGEP) VALUES (?,?,?, ?)";					     
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, programa.getPgcdesc().toUpperCase());
 			st.setInt(2, Integer.parseInt(programa.getPgndurc()));
 			st.setFloat(3, Float.parseFloat(Utils.converteFloatBR(programa.getPgyvalr())));

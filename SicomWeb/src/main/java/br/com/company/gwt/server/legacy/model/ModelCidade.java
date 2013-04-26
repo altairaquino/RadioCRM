@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanCidade;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelCidade {
+@Named("modelCidade")
+public class ModelCidade extends ModelAbstract{
 
-	public static ModelCidade getInstance(){
-		return new ModelCidade();
-	}
-	
 	public ArrayList<BeanCidade> getCidadesDoEstado(String uf){
 		ArrayList<BeanCidade> cidades = new ArrayList<BeanCidade>();
 		try {
 			String sql = "SELECT CDNCODG, CDCUF, CDCDESC FROM VW_CIDADE WHERE CDCUF = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, uf);
 			
 			cidades.addAll(Utils.getObjectsStr(st, BeanCidade.class));
@@ -33,7 +32,7 @@ public class ModelCidade {
 		ArrayList<BeanCidade> cidades = new ArrayList<BeanCidade>();
 		try {
 			String sql = "SELECT CDNCODG, CDCUF, CDCDESC FROM VW_CIDADE";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 						
 			cidades.addAll(Utils.getObjectsStr(st, BeanCidade.class));
 			
@@ -49,7 +48,7 @@ public class ModelCidade {
 		try {
 			
 			String sql = " SELECT DISTINCT CDCUF FROM VW_CIDADE ";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 						
 			cidades.addAll(Utils.getObjectsStr(st, BeanCidade.class));
 			
@@ -64,7 +63,7 @@ public class ModelCidade {
 		BeanCidade cidade = null;
 		try {
 			String sql = "  SELECT CDNCODG, CDCUF, CDCDESC FROM VW_CIDADE WHERE CDNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, cdncodg);
 			
 			List<BeanCidade> l = Utils.getObjectsStr(st, BeanCidade.class); 

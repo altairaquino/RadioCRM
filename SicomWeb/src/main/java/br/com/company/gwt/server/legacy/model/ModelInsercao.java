@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanInsercao;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelInsercao {
+@Named("modelInsercao")
+public class ModelInsercao extends ModelAbstract{
 
-	public static ModelInsercao getInstance(){
-		return new ModelInsercao();
-	}
-	
 	public ArrayList<BeanInsercao> getInsercoesDoContrato(int crncodg){
 		ArrayList<BeanInsercao> horarios = new ArrayList<BeanInsercao>();
 		try {
 			String sql = "SELECT * FROM VW_INSERCAO WHERE INNCGCR = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, crncodg);
 			
 			horarios.addAll(Utils.getObjectsStr(st, BeanInsercao.class));
@@ -33,7 +32,7 @@ public class ModelInsercao {
 		String ret = null;
 		try {
 			String sql = "SELECT SUM(INNSOMA)INNSOMA FROM VW_INSERCAO WHERE INNCGCR = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, crncodg);
 			
 			ret = Utils.getObjectsStr(st, BeanInsercao.class).get(0).getInnsoma();
@@ -49,7 +48,7 @@ public class ModelInsercao {
 		BeanInsercao programa = null;
 		try {
 			String sql = "SELECT * FROM VW_INSERCAO WHERE INNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, inncodg);
 			
 			List<BeanInsercao> l = Utils.getObjectsStr(st, BeanInsercao.class); 
@@ -68,7 +67,7 @@ public class ModelInsercao {
 		try {
 			String sql = " INSERT INTO INSERCAO(INNCGCR,INNCGPG,INDDATA,INNDESC,INNQTD)" +
 					     " VALUES(?,?,?,?,?)";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			st.setInt(1, Integer.parseInt(insercao.getInncgcr()));
 			st.setInt(2, Integer.parseInt(insercao.getInncgpg()));
@@ -88,7 +87,7 @@ public class ModelInsercao {
 		try {
 			String sql = " UPDATE INSERCAO SET INNCGCR = ?,INNCGPG = ?,INDDATA = ?,INNDESC = ?,INNQTD = ? " +
 		     			 " WHERE INNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			st.setInt(1, Integer.parseInt(insercao.getInncgcr()));
 			st.setInt(2, Integer.parseInt(insercao.getInncgpg()));
@@ -111,7 +110,7 @@ public class ModelInsercao {
 			String sql = " UPDATE INSERCAO SET INLATIV = 'F'" +
 			 			 " WHERE INNCODG = ? AND INLATIV = 'T'";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			st.setInt(1, inncodg);
 			

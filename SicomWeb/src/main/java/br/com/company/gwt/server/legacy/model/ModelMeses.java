@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanMeses;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelMeses {
+@Named("modelMeses")
+public class ModelMeses extends ModelAbstract{
 
-	public static ModelMeses getInstance(){
-		return new ModelMeses();
-	}
-	
 	public ArrayList<BeanMeses> getMeses(){
 		ArrayList<BeanMeses> dias = new ArrayList<BeanMeses>();
 		try {
 			String sql = " SELECT MSNCODG, MSCDESC FROM MESES ORDER BY MSNCODG";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			dias.addAll(Utils.getObjectsStr(st, BeanMeses.class));
 			
@@ -32,7 +31,7 @@ public class ModelMeses {
 		BeanMeses dia = null;
 		try {
 			String sql = "SELECT MSNCODG, MSCDESC FROM MESES WHERE MSNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, msncodg);
 			
 			List<BeanMeses> l = Utils.getObjectsStr(st, BeanMeses.class); 

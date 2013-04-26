@@ -6,20 +6,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanContrato;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelContrato {
+@Named("modelContrato")
+public class ModelContrato extends ModelAbstract{
 
-	public static ModelContrato getInstance(){
-		return new ModelContrato();
-	}
-	
 	public ArrayList<BeanContrato> getContratosAberto(int epncodg){
 		ArrayList<BeanContrato> contatos = new ArrayList<BeanContrato>();
 		try {
 			String sql = " SELECT * FROM VW_CONTRATO WHERE 'NOW' <= CRDTERM AND CRNCGEP = ? ORDER BY CRDTERM DESC";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, epncodg);
 			
 			contatos.addAll(Utils.getObjectsStr(st, BeanContrato.class));
@@ -35,7 +34,7 @@ public class ModelContrato {
 		BeanContrato contato = null;
 		try {
 			String sql = "SELECT * FROM VW_CONTRATO WHERE CRNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, crncodg);
 			
 			List<BeanContrato> l = Utils.getObjectsStr(st, BeanContrato.class); 
@@ -62,7 +61,7 @@ public class ModelContrato {
 					     " WHERE CRNCODG = ?" +
 					     " GROUP BY CRNVALR";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			st.setInt(1, crncodg);
 			
@@ -90,7 +89,7 @@ public class ModelContrato {
 			String sql = " SELECT * FROM VW_CONTRATO" +
 					     " WHERE CRNCODG = ? AND ? BETWEEN CRDINIC AND CRDTERM";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			st.setInt(1, crncodg);
 			st.setDate(2, new java.sql.Date(data.getTime()));
@@ -110,7 +109,7 @@ public class ModelContrato {
 					     " CRNPERM = ?, CRNCGMD = ?, CRDCADT = ?, CRCNOTA = ?" +
 		     			 " WHERE CRNCODG =  ?";
 
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, Integer.parseInt(contrato.getCrncgcl()));
 			st.setInt(2, Integer.parseInt(contrato.getCrncgag()));
 			st.setString(3, contrato.getCrcpgto().toUpperCase());
@@ -142,7 +141,7 @@ public class ModelContrato {
 					     " CRCNOTA, CRNCGEP)" +
 					     " VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, Integer.parseInt(contrato.getCrncgcl()));
 			st.setInt(2, Integer.parseInt(contrato.getCrncgag()));
 			st.setString(3, contrato.getCrcpgto().toUpperCase());
@@ -171,7 +170,7 @@ public class ModelContrato {
 		try {
 			String sql = " DELETE FROM CONTRATO WHERE CRNCODG = (?)";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			st.setInt(1, Integer.parseInt(contrato.getCrncodg()));
 						
@@ -187,7 +186,7 @@ public class ModelContrato {
 		ArrayList<BeanContrato> contratos = new ArrayList<BeanContrato>();
 		try {
 			String sql = " SELECT * FROM VW_CONTRATO WHERE CRNCGCL = ? ORDER BY CRDTERM DESC";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, clncodg);
 			
 			contratos.addAll(Utils.getObjectsStr(st, BeanContrato.class));

@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanDiaSemana;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelDiaSemana {
+@Named("modelDiaSemana")
+public class ModelDiaSemana extends ModelAbstract{
 
-	public static ModelDiaSemana getInstance(){
-		return new ModelDiaSemana();
-	}
-	
 	public ArrayList<BeanDiaSemana> getDiasDaSemana(){
 		ArrayList<BeanDiaSemana> dias = new ArrayList<BeanDiaSemana>();
 		try {
 			String sql = " SELECT DSNCODG, DSCDESC FROM DIASEMANA ORDER BY DSNCODG";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			dias.addAll(Utils.getObjectsStr(st, BeanDiaSemana.class));
 			
@@ -32,7 +31,7 @@ public class ModelDiaSemana {
 		BeanDiaSemana dia = null;
 		try {
 			String sql = "SELECT DSNCODG, DSCDESC FROM DIASEMANA WHERE DSNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, dsncodg);
 			
 			List<BeanDiaSemana> l = Utils.getObjectsStr(st, BeanDiaSemana.class); 

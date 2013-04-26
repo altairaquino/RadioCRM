@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,14 +15,10 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import br.com.company.gwt.server.legacy.model.ModelAbstract;
 
 @Named("gerarReport")
-public class GerarReport {
-	
-	@Inject
-	private DriverManagerDataSource dataSource;
+public class GerarReport extends ModelAbstract{
 	
 	public String exportToPDF(HttpServletRequest request, Map<String, Object> params) throws Exception {
 		
@@ -37,7 +32,7 @@ public class GerarReport {
 		
 		String reportName = System.currentTimeMillis() + ".pdf";
 
-		JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, params, dataSource.getConnection());
+		JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, params, getConnection());
 		
 		JasperExportManager.exportReportToPdfFile(jasperPrint,params.get("REPORT_OUT").toString() + reportName);
 		
@@ -71,7 +66,6 @@ public class GerarReport {
 		params.put("REPORT_OUT", realPath +"/reports/");
 		params.put("REPORT_LOCALE", new Locale("pt", "BR"));
 		params.put("SUBREPORT_DIR", params.get("JASPER_PATH"));
-//		params.put("IMAGEM_LOGO", params.get("IMAGEM_DIR") + "m2m_logo.jpg");
 	}
 
 }

@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanEmpresa;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelEmpresa {
+@Named("modelEmpresa")
+public class ModelEmpresa extends ModelAbstract{
 
-	public static ModelEmpresa getInstance(){
-		return new ModelEmpresa();
-	}
-	
 	public ArrayList<BeanEmpresa> getEmpresas(){
 		ArrayList<BeanEmpresa> cidades = new ArrayList<BeanEmpresa>();
 		try {
 			String sql = "SELECT * FROM VW_EMPRESA";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			cidades.addAll(Utils.getObjectsStr(st, BeanEmpresa.class));
 			
@@ -32,7 +31,7 @@ public class ModelEmpresa {
 		BeanEmpresa empresa = null;
 		try {
 			String sql = " SELECT * FROM VW_EMPRESA WHERE EPNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, epncodg);
 			
 			List<BeanEmpresa> l = Utils.getObjectsStr(st, BeanEmpresa.class); 

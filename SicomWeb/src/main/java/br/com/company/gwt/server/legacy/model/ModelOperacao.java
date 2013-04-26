@@ -5,21 +5,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanOperacao;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-
-public class ModelOperacao {
-	
-	public static ModelOperacao getInstance(){
-		return new ModelOperacao();
-	}
+@Named
+public class ModelOperacao extends ModelAbstract{
 	
 	public BeanOperacao getOperacao(int opncodg){
 		BeanOperacao operacao = null;
 		try {
 			String sql = "SELECT  OPNCODG, OPNPART, OPCDESC, OPCHINT, OPCLINK FROM VW_OPERACAO WHERE OPNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, opncodg);
 			
 			List<BeanOperacao> l = Utils.getObjectsStr(st,BeanOperacao.class);
@@ -38,7 +36,7 @@ public class ModelOperacao {
 		boolean ret = false;
 		try {
 			String sql = "SELECT OPNCODG, OPNPART, OPCDESC, OPCHINT, OPCLINK FROM VW_OPERACAO_USUARIO WHERE OPNCODG = ? AND OPNCGEN = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, opncodg);
 			st.setInt(2, usncodg);
 			
@@ -54,7 +52,7 @@ public class ModelOperacao {
 		ArrayList<BeanOperacao> operacoes = new ArrayList<BeanOperacao>();
 		try {
 			String sql = "SELECT OPNCODG, OPNPART, OPCDESC, OPCHINT, OPCLINK FROM VW_OPERACAO_USUARIO WHERE OPNPART = 0 AND USNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, usncodg);
 			
 			operacoes.addAll(Utils.getObjectsStr(st,BeanOperacao.class));
@@ -69,7 +67,7 @@ public class ModelOperacao {
 		ArrayList<BeanOperacao> operacoes = new ArrayList<BeanOperacao>();
 		try {
 			String sql = "SELECT OPNCODG, OPNPART, OPCDESC, OPCHINT, OPCLINK FROM VW_OPERACAO_USUARIO WHERE OPNPART = ? AND USNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, opnpart);
 			st.setInt(2, usncodg);
 			

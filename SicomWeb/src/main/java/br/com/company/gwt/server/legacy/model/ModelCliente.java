@@ -5,21 +5,20 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanCliente;
 import br.com.company.gwt.server.legacy.util.Utils;
 import br.com.company.gwt.server.legacy.util.ValidaObjeto;
 
-public class ModelCliente {
+@Named("modelCliente")
+public class ModelCliente extends ModelAbstract{
 
-	public static ModelCliente getInstance(){
-		return new ModelCliente();
-	}
-	
 	public ArrayList<BeanCliente> getClientes(int epncodg){
 		ArrayList<BeanCliente> programas = new ArrayList<BeanCliente>();
 		try {
 			String sql = " SELECT * FROM VW_CLIENTE WHERE CLNCGEP = ? ORDER BY CLCNOME";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			programas.addAll(Utils.getObjectsStr(st, BeanCliente.class));
 			
@@ -33,7 +32,7 @@ public class ModelCliente {
 		ArrayList<BeanCliente> programas = new ArrayList<BeanCliente>();
 		try {
 			String sql = " SELECT * FROM VW_CLIENTE WHERE CLNCGCT = ? ORDER BY CLCNOME";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, ctncodg);
 			
 			programas.addAll(Utils.getObjectsStr(st, BeanCliente.class));
@@ -48,7 +47,7 @@ public class ModelCliente {
 		BeanCliente programa = null;
 		try {
 			String sql = "SELECT * FROM VW_CLIENTE WHERE CLNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, clncodg);
 			
 			List<BeanCliente> l = Utils.getObjectsStr(st, BeanCliente.class); 
@@ -68,7 +67,7 @@ public class ModelCliente {
 		try {
 			String sql = "SELECT * FROM VW_CLIENTE WHERE (UPPER(CLCNOME) LIKE upper('%"+clcnome+"%') OR CLCDOCM = '"+clcnome+"') AND CLNCGEP = ? ORDER BY CLCNOME";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, epncodg);
 						
 			alunos = Utils.getObjectsStr(st, BeanCliente.class);
@@ -86,7 +85,7 @@ public class ModelCliente {
 					     " CLCRG = ?, CLCOERG = ?, CLCUFRG = ?, CLCINES = ?, CLCINMU = ?"+
 					     " WHERE CLNCODG = ?";  
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, Integer.parseInt(cliente.getClncgtp()));
 			st.setString(2, cliente.getClcnome().toUpperCase());
 			st.setString(3, ValidaObjeto.removeCharOfInteger(cliente.getClcdocm()));
@@ -133,7 +132,7 @@ public class ModelCliente {
 					             " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?," +
 					             " ?, ?, ?)";  
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, Integer.parseInt(cliente.getClncgtp()));
 			st.setString(2, cliente.getClcnome().toUpperCase());
 			st.setString(3, ValidaObjeto.removeCharOfInteger(cliente.getClcdocm()));

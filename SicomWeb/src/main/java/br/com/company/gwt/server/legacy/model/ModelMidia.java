@@ -4,10 +4,13 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanMidia;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelMidia {
+@Named("modelMidia")
+public class ModelMidia extends ModelAbstract{
 
 	public static ModelMidia getInstance(){
 		return new ModelMidia();
@@ -17,7 +20,7 @@ public class ModelMidia {
 		ArrayList<BeanMidia> dias = new ArrayList<BeanMidia>();
 		try {
 			String sql = " SELECT * FROM VW_MIDIA WHERE MDNCGEP = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, epncodg);
 			
 			dias.addAll(Utils.getObjectsStr(st, BeanMidia.class));
@@ -32,7 +35,7 @@ public class ModelMidia {
 		BeanMidia dia = null;
 		try {
 			String sql = "SELECT * FROM VW_MIDIA WHERE MDNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, mdncodg);
 			
 			List<BeanMidia> l = Utils.getObjectsStr(st, BeanMidia.class); 
@@ -49,7 +52,7 @@ public class ModelMidia {
 	public void inserir(BeanMidia midia) {
 		try {
 			String sql = "INSERT INTO MIDIA (MDCDESC) VALUES (?)";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, midia.getMdcdesc().toUpperCase());
 			
 			st.executeUpdate();

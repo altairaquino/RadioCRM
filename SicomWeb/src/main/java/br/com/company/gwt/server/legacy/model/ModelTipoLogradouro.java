@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanTipoLogradouro;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelTipoLogradouro {
+@Named
+public class ModelTipoLogradouro extends ModelAbstract{
 
-	public static ModelTipoLogradouro getInstance(){
-		return new ModelTipoLogradouro();
-	}
-	
 	public ArrayList<BeanTipoLogradouro> getTiposLogradouro(){
 		ArrayList<BeanTipoLogradouro> logradouros = new ArrayList<BeanTipoLogradouro>();
 		try {
 			String sql = " SELECT TLNCODG, TLCDESC FROM VW_TIPOLOGRADOURO";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			logradouros.addAll(Utils.getObjectsStr(st, BeanTipoLogradouro.class));
 			
@@ -32,7 +31,7 @@ public class ModelTipoLogradouro {
 		BeanTipoLogradouro logradouro = null;
 		try {
 			String sql = "SELECT TLNCODG, TLCDESC FROM VW_TIPOLOGRADOURO WHERE TLNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, tlncodg);
 			
 			List<BeanTipoLogradouro> l = Utils.getObjectsStr(st, BeanTipoLogradouro.class); 

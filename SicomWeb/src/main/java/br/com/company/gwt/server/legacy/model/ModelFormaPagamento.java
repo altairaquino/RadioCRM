@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanFormaPagamento;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelFormaPagamento {
+@Named("modelFormaPagamento")
+public class ModelFormaPagamento extends ModelAbstract{
 
-	public static ModelFormaPagamento getInstance(){
-		return new ModelFormaPagamento();
-	}
-	
 	public ArrayList<BeanFormaPagamento> getFormasDePagamento(){
 		ArrayList<BeanFormaPagamento> dias = new ArrayList<BeanFormaPagamento>();
 		try {
 			String sql = " SELECT * FROM VW_FORMAPAGAMENTO";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			
 			dias.addAll(Utils.getObjectsStr(st, BeanFormaPagamento.class));
 			
@@ -31,7 +30,7 @@ public class ModelFormaPagamento {
 		BeanFormaPagamento dia = null;
 		try {
 			String sql = "SELECT * FROM VW_FORMAPAGAMENTO WHERE FPNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, fpncodg);
 			
 			List<BeanFormaPagamento> l = Utils.getObjectsStr(st, BeanFormaPagamento.class); 

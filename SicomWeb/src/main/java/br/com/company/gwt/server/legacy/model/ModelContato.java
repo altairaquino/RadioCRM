@@ -4,21 +4,20 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanContato;
 import br.com.company.gwt.server.legacy.util.Utils;
 import br.com.company.gwt.server.legacy.util.ValidaObjeto;
 
-public class ModelContato {
+@Named("modelContato")
+public class ModelContato extends ModelAbstract{
 
-	public static ModelContato getInstance(){
-		return new ModelContato();
-	}
-	
 	public ArrayList<BeanContato> getContatos(int epncodg){
 		ArrayList<BeanContato> contatos = new ArrayList<BeanContato>();
 		try {
 			String sql = " SELECT * FROM VW_CONTATO WHERE CTNCGEP = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, epncodg);
 			
 			contatos.addAll(Utils.getObjectsStr(st, BeanContato.class));
@@ -34,7 +33,7 @@ public class ModelContato {
 		BeanContato contato = null;
 		try {
 			String sql = "SELECT * FROM VW_CONTATO WHERE CTNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, ctncodg);
 			
 			List<BeanContato> l = Utils.getObjectsStr(st, BeanContato.class); 
@@ -56,7 +55,7 @@ public class ModelContato {
 						 ",CTCFONE = ?,CTCCELL = ?,CTCMAIL = ?" +
 						 " WHERE CTNCODG = ?";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, contato.getCtcnome());
 			st.setString(2, contato.getCtcmatr());
 			st.setString(3, contato.getCtcfunc());
@@ -80,7 +79,7 @@ public class ModelContato {
 			String sql = " INSERT INTO  CONTATO(CTCNOME, CTCMATR, CTCFUNC, CTDNASC,CTCSEXO,CTCFONE,CTCCELL,CTCMAIL, CTNCGEP)"+
 						" VALUES(?,?,?, ?, ?, ?, ?, ?, ?)";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, contato.getCtcnome().toUpperCase());
 			st.setString(2, contato.getCtcmatr());
 			st.setString(3, contato.getCtcfunc().toUpperCase());

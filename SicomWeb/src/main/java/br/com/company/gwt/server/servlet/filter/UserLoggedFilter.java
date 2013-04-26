@@ -10,7 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class UserLoggedFilter implements Filter{
 
@@ -19,8 +18,8 @@ public class UserLoggedFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
-		HttpSession session = req.getSession();
 		/*
+		HttpSession session = req.getSession();
 		Usuario user = (Usuario) session.getAttribute("user");
 		
 		if(user == null && !req.getPathInfo().equals("/userService")){

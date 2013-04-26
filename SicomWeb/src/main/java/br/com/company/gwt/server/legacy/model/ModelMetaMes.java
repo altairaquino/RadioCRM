@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanMetaMes;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelMetaMes {
+@Named("modelMetaMes")
+public class ModelMetaMes extends ModelAbstract{
 
-	public static ModelMetaMes getInstance(){
-		return new ModelMetaMes();
-	}
-	
 	public ArrayList<BeanMetaMes> getMetasMensaisDaMeta(int mtncodg){
 		ArrayList<BeanMetaMes> metas = new ArrayList<BeanMetaMes>();
 		try {
 			String sql = " SELECT * FROM VW_METAMES WHERE MMNCGMT = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, mtncodg);
 			
 			metas.addAll(Utils.getObjectsStr(st, BeanMetaMes.class));
@@ -32,7 +31,7 @@ public class ModelMetaMes {
 		BeanMetaMes meta = null;
 		try {
 			String sql = "SELECT * FROM VW_METAMES WHERE MMNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, mmncodg);
 			
 			List<BeanMetaMes> l = Utils.getObjectsStr(st, BeanMetaMes.class); 
@@ -49,7 +48,7 @@ public class ModelMetaMes {
 	public void inserir(BeanMetaMes meta) {
 		try {
 			String sql = "INSERT INTO METAMES (MMNCGMT, MMNCGMS, MMNVALR) VALUES (?,?,?)";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, Integer.parseInt(meta.getMmncgmt()));
 			st.setInt(2, Integer.parseInt(meta.getMmncgms()));
 			st.setFloat(3, Float.parseFloat(Utils.converteFloatBR(meta.getMmnvalr())));
@@ -65,7 +64,7 @@ public class ModelMetaMes {
 	public void update(BeanMetaMes meta) {
 		try {
 			String sql = "UPDATE METAMES SET MMNCGMT = ?, MMNCGMS = ?, MMNVALR = ? WHERE MMNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, Integer.parseInt(meta.getMmncgmt()));
 			st.setInt(2, Integer.parseInt(meta.getMmncgms()));
 			st.setFloat(3, Float.parseFloat(Utils.converteFloatBR(meta.getMmnvalr())));

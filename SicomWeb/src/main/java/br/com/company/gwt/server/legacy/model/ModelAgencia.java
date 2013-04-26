@@ -4,22 +4,21 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanAgencia;
 import br.com.company.gwt.server.legacy.bean.BeanCliente;
 import br.com.company.gwt.server.legacy.util.Utils;
 import br.com.company.gwt.server.legacy.util.ValidaObjeto;
 
-public class ModelAgencia {
+@Named("modelAgencia")
+public class ModelAgencia extends ModelAbstract{
 
-	public static ModelAgencia getInstance(){
-		return new ModelAgencia();
-	}
-	
 	public ArrayList<BeanAgencia> getAgencias(int epncodg){
 		ArrayList<BeanAgencia> programas = new ArrayList<BeanAgencia>();
 		try {
 			String sql = " SELECT * FROM VW_AGENCIA WHERE AGNCGEP = ? ORDER BY AGCNOME";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, epncodg);
 			
 			programas.addAll(Utils.getObjectsStr(st, BeanAgencia.class));
@@ -34,7 +33,7 @@ public class ModelAgencia {
 		BeanAgencia programa = null;
 		try {
 			String sql = "SELECT * FROM VW_AGENCIA WHERE AGNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, agncodg);
 			
 			List<BeanAgencia> l = Utils.getObjectsStr(st, BeanAgencia.class); 
@@ -55,7 +54,7 @@ public class ModelAgencia {
 					     ",AGCNUMR = ?,AGCCOMP = ?,AGNCGCD = ?,AGCCEP = ?,AGCBAIR = ?, AGMOBS = ?, AGNCGTP = ?, AGNCOMS = ? " +
 					     " WHERE AGNCODG = ?";		     
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, agencia.getAgcnome().toUpperCase());
 			st.setString(2, ValidaObjeto.removeCharOfInteger(agencia.getAgccnpj()));
 			st.setString(3, agencia.getAgcrzsc().toUpperCase());
@@ -87,7 +86,7 @@ public class ModelAgencia {
 					     ",AGCNUMR,AGCCOMP,AGNCGCD,AGCCEP,AGCBAIR, AGMOBS, AGNCGTP, AGNCOMS, AGNCGEP) " +
 					     "VALUES( ?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?, ?)";
 			
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, agencia.getAgcnome().toUpperCase());
 			st.setString(2, ValidaObjeto.removeCharOfInteger(agencia.getAgccnpj()));
 			st.setString(3, agencia.getAgcrzsc().toUpperCase());
@@ -120,7 +119,7 @@ public class ModelAgencia {
 					" WHERE EXISTS(SELECT * FROM CONTRATO WHERE CRNCGCL = VW_CLIENTE.CLNCODG" +
 					" AND CRNCGAG = ?) ";
 
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, agncodg);
 			
 			programas.addAll(Utils.getObjectsStr(st, BeanCliente.class));

@@ -4,20 +4,19 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.company.gwt.server.legacy.bean.BeanMeta;
 import br.com.company.gwt.server.legacy.util.Utils;
 
-public class ModelMeta {
+@Named("modelMeta")
+public class ModelMeta extends ModelAbstract{
 
-	public static ModelMeta getInstance(){
-		return new ModelMeta();
-	}
-	
 	public ArrayList<BeanMeta> getMetasDoContato(int ctncodg){
 		ArrayList<BeanMeta> metas = new ArrayList<BeanMeta>();
 		try {
 			String sql = " SELECT * FROM VW_META WHERE MTNCGCT = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, ctncodg);
 			
 			metas.addAll(Utils.getObjectsStr(st, BeanMeta.class));
@@ -33,7 +32,7 @@ public class ModelMeta {
 		BeanMeta meta = null;
 		try {
 			String sql = "SELECT * FROM VW_META WHERE MTNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, mtncodg);
 			
 			List<BeanMeta> l = Utils.getObjectsStr(st, BeanMeta.class); 
@@ -50,7 +49,7 @@ public class ModelMeta {
 	public void inserir(BeanMeta meta) {		
 		try {
 			String sql = "INSERT INTO META (MTNCGCT, MTNANO) VALUES (?,?)";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, Integer.parseInt(meta.getMtncgct()));
 			st.setInt(2, Integer.parseInt(meta.getMtnano()));
 			
@@ -65,7 +64,7 @@ public class ModelMeta {
 	public void update(BeanMeta meta) {
 		try {
 			String sql = "UPDATE META SET MTNCGCT = ?, MTNANO = ? WHERE MTNCODG = ?";
-			PreparedStatement st = Banco.getConnection().prepareStatement(sql);
+			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setInt(1, Integer.parseInt(meta.getMtncgct()));
 			st.setInt(2, Integer.parseInt(meta.getMtnano()));
 			st.setInt(3, Integer.parseInt(meta.getMtncodg()));

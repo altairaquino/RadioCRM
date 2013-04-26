@@ -84,6 +84,7 @@
 			<version>1.4</version>
 		</dependency>
 
+		<!-- 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -95,7 +96,7 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>3.6.10.Final</version>
 		</dependency>
-            
+		 -->            
 
 		<dependency>
 			<groupId>org.firebirdsql.jdbc</groupId>
@@ -109,7 +110,11 @@
 				<exclusion>
 					<groupId>javax.mail</groupId>
 					<artifactId>mail</artifactId>
-				</exclusion>				
+				</exclusion>
+				<exclusion>
+					<groupId>geronimo-spec</groupId>
+					<artifactId>geronimo-spec-j2ee</artifactId>
+				</exclusion>		
 			</exclusions>
 		</dependency>
 
