@@ -1,6 +1,7 @@
 package br.com.company.gwt.server.legacy.model;
 
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
@@ -25,6 +26,19 @@ public class ModelUsuario extends ModelAbstract{
 			e.printStackTrace();
 		}
 		return usuario;
+	}
+	
+	public List<BeanUsuario> getUsuarios(){
+		List<BeanUsuario> usuarios = new ArrayList<BeanUsuario>();
+		try {
+			String sql = " SELECT USNCODG, USCLOGN, USCSENH, USCNOME, USLATIV FROM VW_USUARIO";
+			PreparedStatement st = getConnection().prepareStatement(sql);
+			usuarios.addAll(Utils.getObjectsStr(st, BeanUsuario.class));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuarios;
 	}
 	
 	public void alteraSenha(int usncodg, String novaSenha){
@@ -57,19 +71,24 @@ public class ModelUsuario extends ModelAbstract{
 		return usuario;
 	}
 	
-	public boolean autenticaUsuario(String usclogn, String uscpswd){
-		boolean ret = false;
+	public BeanUsuario autenticaUsuario(String usclogn, String uscpswd){
+		BeanUsuario usuario = null;
 		try {
 			String sql = "SELECT * FROM VW_USUARIO WHERE USCLOGN = UPPER(?) AND USCSENH = ?";
 			PreparedStatement st = getConnection().prepareStatement(sql);
 			st.setString(1, usclogn);
 			st.setString(2, uscpswd);
-			ret = !Utils.getObjectsStr(st, BeanUsuario.class).isEmpty();
+			
+			List<BeanUsuario> usuarios = Utils.getObjectsStr(st, BeanUsuario.class);
+			
+			if (!usuarios.isEmpty()){
+				usuario = usuarios.get(0);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ret;
+		return usuario;
 	}
 	
 

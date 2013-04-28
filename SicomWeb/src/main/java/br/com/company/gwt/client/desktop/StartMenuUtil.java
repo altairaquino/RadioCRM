@@ -4,18 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.company.gwt.client.component.ComponentProvider;
-import br.com.company.gwt.client.mvc.ProviderFacadeManager;
-import br.com.company.gwt.client.resources.ImagensResources;
 import br.com.company.gwt.shared.dto.DTOUsuario;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.Window;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class StartMenuUtil {
 	

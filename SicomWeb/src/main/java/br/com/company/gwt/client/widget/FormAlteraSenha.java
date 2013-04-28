@@ -1,5 +1,6 @@
 package br.com.company.gwt.client.widget;
 
+import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.resources.ImagensResources;
 import br.com.company.gwt.shared.dto.DTOUsuario;
@@ -14,6 +15,7 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class FormAlteraSenha extends Dialog {
@@ -47,7 +49,7 @@ public class FormAlteraSenha extends Dialog {
 		tfUsuario = new TextField<String>();
 		tfUsuario.setFieldLabel("Usuário");
 		tfUsuario.setEnabled(false);
-		//tfUsuario.setValue(user.getUserName());
+		tfUsuario.setValue(user.getUserName());
 		
 		formPanel.add(tfUsuario, new FormData("100%"));
 		
@@ -96,13 +98,12 @@ public class FormAlteraSenha extends Dialog {
 
 	protected void onSubmit() {
 		if (validaCampos()){
-			/*
 			user.setPassword(tfSenhaAtual.getValue());
-			InstanceService.USER_SERVICE.login(user, new AsyncCallback<DTOUser>() {
+			InstanceService.USER_SERVICE.login(user, new AsyncCallback<DTOUsuario>() {
 				
 				@Override
-				public void onSuccess(DTOUser dtoUser) {
-					if (dtoUser.isAutenticado()){
+				public void onSuccess(DTOUsuario dtoUser) {
+					if (dtoUser.getId() != null){
 						confirmaAlteraSenha(dtoUser);
 					}else{
 						WebMessageBox.alert("Senha atual não confere.");
@@ -114,12 +115,11 @@ public class FormAlteraSenha extends Dialog {
 					WebMessageBox.error(caught.getMessage());										
 				}
 			});
-			*/
+			
 		}
 	}
 
 	protected void confirmaAlteraSenha(DTOUsuario dtoUser) {
-		/*
 		dtoUser.setNewPassword(tfNovaSenha.getValue());
 		InstanceService.USER_SERVICE.updateUser(dtoUser, new AsyncCallback<Boolean>() {
 			@Override
@@ -136,7 +136,6 @@ public class FormAlteraSenha extends Dialog {
 				}				
 			}
 		});
-		*/		
 	}
 
 }

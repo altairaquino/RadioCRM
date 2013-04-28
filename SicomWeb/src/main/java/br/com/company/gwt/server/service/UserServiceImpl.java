@@ -1,64 +1,56 @@
 package br.com.company.gwt.server.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import br.com.company.gwt.client.remoteinterface.UserService;
 import br.com.company.gwt.server.InputServletImpl;
+import br.com.company.gwt.server.legacy.bean.BeanUsuario;
+import br.com.company.gwt.server.legacy.model.ModelUsuario;
+import br.com.company.gwt.shared.dto.DTOUsuario;
 
 @Named("userService")
 public class UserServiceImpl extends InputServletImpl implements UserService {
 	
-	
+	@Inject private ModelUsuario modelUsuario;
 
-	/*
 	@Override
-	@Transactional
-	public DTOUser login(DTOUser user) {
-		boolean loginSucess = false;
+	public DTOUsuario login(DTOUsuario user) throws Exception {
 		HttpSession session = getServletRequest().getSession();
 		
-		Usuario usuario = daoUser.login(user.getUserName(), user.getPassword());
-		loginSucess = (usuario != null);
-		user.setAutenticado(loginSucess);
-		if (loginSucess){
+		BeanUsuario usuario = modelUsuario.autenticaUsuario(user.getUserName(), user.getPassword());
+		
+		if (usuario != null){
 			
-			user.setUserId(usuario.getId());
-			user.setAdmin(usuario.getAdmin());
-			user.setFuncionarioId(usuario.getFuncionario().getFuncionarioId());
+			user.setId(Integer.parseInt(usuario.getUsncodg()));
+			
+			if (usuario.getUslativ().equals("F")){
+				throw new Exception("Usuário com acesso inabilitado!");
+			}
 			
 			session.setAttribute("user", usuario);
 			
+			/*
 			List<Operacao> janelas = usuario.getOperacoes();
 			
 			for (Operacao janela: janelas) {
 				user.getJanelas().add(janela.getOperacaoId());
 			}
+			*/
 			
-			LogLogin logLogin = new LogLogin();
-			logLogin.setUsuario(usuario);
-			logLogin.setDataHora(new Date());
-			logLogin.setRequestIP(getServletRequest().getRemoteHost());
-			daoLogLogin.store(logLogin);
-		}else{
-			LogLoginInvalido logLogin = new LogLoginInvalido();
-			logLogin.setUsuario(user.getUserName());
-			logLogin.setSenha(user.getPassword());
-			logLogin.setDataHora(new Date());
-			logLogin.setRequestIP(getServletRequest().getRemoteHost());
-			daoLogLoginInvalido.store(logLogin);
 		}
 		
 		return user;
 	}
 
-	@Transactional
 	@Override
-	public Boolean updateUser(DTOUser user) {
-		try {
-			Usuario usuario = daoUser.findByPrimaryKey(user.getUserId());
-			usuario.setSenha(user.getNewPassword());
-			
-			daoUser.store(usuario);
+	public Boolean updateUser(DTOUsuario user) {
+		try {			
+			modelUsuario.alteraSenha(user.getId(), user.getNewPassword());
 			
 			return true;
 			
@@ -70,14 +62,14 @@ public class UserServiceImpl extends InputServletImpl implements UserService {
 	}
 	
 	@Override
-	public List<DTOUser> lista(){
-		List<DTOUser> lista = new ArrayList<DTOUser>();
+	public List<DTOUsuario> lista(){
+		List<DTOUsuario> lista = new ArrayList<DTOUsuario>();
 		try {
-			List<Usuario> usuarios = daoUser.loadAll();
-			for (Usuario usuario : usuarios) {
-				DTOUser dto = new DTOUser();
-				dto.setUserId(usuario.getId());
-				dto.setUserName(usuario.getLogin());				
+			List<BeanUsuario> usuarios = modelUsuario.getUsuarios();
+			for (BeanUsuario usuario : usuarios) {
+				DTOUsuario dto = new DTOUsuario();
+				dto.setId(Integer.parseInt(usuario.getUsncodg()));
+				dto.setUserName(usuario.getUscnome());
 				lista.add(dto);
 			}
 		} catch (Exception e) {
@@ -86,6 +78,5 @@ public class UserServiceImpl extends InputServletImpl implements UserService {
 		return lista;
 	}
 	
-	*/
 		
 }

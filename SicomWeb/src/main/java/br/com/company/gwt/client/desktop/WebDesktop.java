@@ -21,9 +21,9 @@ public class WebDesktop extends Desktop {
 		startMenu = taskBar.getStartMenu();
 		DTOUsuario dtoUser = Registry.get("user");
 		if(dtoUser != null){
-			setStartMenuHeading("user_icon_man", "Genial Estoque - " /*+ dtoUser.getUserName() */ );
+			setStartMenuHeading("user_icon_man", "Sicom Web - " + dtoUser.getUserName());
 		}else{
-			setStartMenuHeading("contato_window", "Genial Estoque");
+			setStartMenuHeading("contato_window", "Sicom Web");
 		}
 		
 		Button button = (Button)startMenu.getData("parent");

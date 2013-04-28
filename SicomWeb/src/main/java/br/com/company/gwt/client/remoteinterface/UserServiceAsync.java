@@ -1,16 +1,18 @@
 package br.com.company.gwt.client.remoteinterface;
 
+import java.util.List;
 
-public interface UserServiceAsync {	
-	
-	/*
-	
-	void login(DTOUser user, AsyncCallback<DTOUser> callback);
+import br.com.company.gwt.shared.dto.DTOUsuario;
 
-	void updateUser(DTOUser user, AsyncCallback<Boolean> callback);
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-	void lista(AsyncCallback<List<DTOUser>> callback);
+
+public interface UserServiceAsync {
 	
-	*/
+	void login(DTOUsuario user, AsyncCallback<DTOUsuario> callback);
+
+	void updateUser(DTOUsuario user, AsyncCallback<Boolean> callback);
+
+	void lista(AsyncCallback<List<DTOUsuario>> callback);	
 
 }

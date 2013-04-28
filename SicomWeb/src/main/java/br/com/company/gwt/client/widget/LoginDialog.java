@@ -1,9 +1,11 @@
 package br.com.company.gwt.client.widget;
 
 import br.com.company.gwt.client.InstanceService;
+import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.remoteinterface.UserServiceAsync;
 import br.com.company.gwt.shared.dto.DTOUsuario;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.BoxComponentEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -16,6 +18,8 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class LoginDialog extends Dialog {
 
@@ -35,41 +39,29 @@ public class LoginDialog extends Dialog {
 		setButtonAlign(HorizontalAlignment.LEFT);
 		setButtons("");
 		setIconStyle("login_window");
-		setHeading("Genial Loja On-Line - 1.0");
+		setHeading("Sicom Web - 1.0");
 		setModal(true);
 		setBodyBorder(true);
 		setBodyStyle("padding: 8px; background: none");
 		setWidth(300);
 		setResizable(false);
 
-//		KeyListener keyListener = new KeyListener() {
-//			public void componentKeyUp(ComponentEvent event) {
-//				validate();
-//			}
-//		};
-
 		userName = new TextField<String>();
 		userName.setMinLength(4);
-		//userName.setValue("admin");
 		userName.setFieldLabel("Usuário");
 		userName.addListener(Events.KeyPress, keyLogin);
-//		userName.addKeyListener(keyListener);
 		add(userName);
 
 		password = new TextField<String>();
 		password.setMinLength(4);
-		//password.setValue("admin");
 		password.setPassword(true);
 		password.setFieldLabel("Senha");
 		password.addListener(Events.KeyPress, keyLogin);
-//		password.addKeyListener(keyListener);
 		
 		add(password);
 
 		setFocusWidget(userName);
 		
-//		login.fireEvent(Events.Select);
-
 	}
 	
 	Listener<BoxComponentEvent> keyLogin = new Listener<BoxComponentEvent>(){
@@ -105,13 +97,18 @@ public class LoginDialog extends Dialog {
 
 	protected void onSubmit() {
 		final DTOUsuario user = new DTOUsuario();
-		//user.setUserName(userName.getValue());
-		//user.setPassword(password.getValue());
-		/*
+		user.setUserName(userName.getValue());
+		user.setPassword(password.getValue());
+		
 		service.login(user, new AsyncCallback<DTOUsuario>() {
 			
 			@Override
 			public void onSuccess(DTOUsuario dto) {
+				
+				if (dto.getId() == null){
+					WebMessageBox.alert("Usuário ou senha inválidos!");
+					return;
+				}
 				Registry.register("user", dto);
 					status.show();
 					getButtonBar().disable();
@@ -132,7 +129,6 @@ public class LoginDialog extends Dialog {
 			}
 			
 		});
-		*/
 	}
 
 	protected boolean hasValue(TextField<String> field) {
