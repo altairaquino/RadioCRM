@@ -17,8 +17,9 @@ public class ModelCliente extends ModelAbstract{
 	public ArrayList<BeanCliente> getClientes(int epncodg){
 		ArrayList<BeanCliente> programas = new ArrayList<BeanCliente>();
 		try {
-			String sql = " SELECT * FROM VW_CLIENTE WHERE CLNCGEP = ? ORDER BY CLCNOME";
+			String sql = " SELECT FIRST 50 * FROM VW_CLIENTE WHERE CLNCGEP = ? ORDER BY CLCNOME";
 			PreparedStatement st = getConnection().prepareStatement(sql);
+			st.setInt(1, epncodg);
 			
 			programas.addAll(Utils.getObjectsStr(st, BeanCliente.class));
 			

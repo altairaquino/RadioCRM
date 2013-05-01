@@ -63,6 +63,50 @@ public class ModelOperacao extends ModelAbstract{
 		return operacoes;
 	}
 	
+	public ArrayList<BeanOperacao> getOperacoes(){
+		ArrayList<BeanOperacao> operacoes = new ArrayList<BeanOperacao>();
+		try {
+			String sql = "SELECT DISTINCT OPNCODG, OPNPART, OPCDESC, OPCHINT, OPCLINK FROM VW_OPERACAO_USUARIO ORDER BY OPNCODG";
+			PreparedStatement st = getConnection().prepareStatement(sql);
+			
+			operacoes.addAll(Utils.getObjectsStr(st,BeanOperacao.class));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return operacoes;
+	}
+	
+	public void removeOperacao(Integer usuarioId, Integer operacaoId){
+		try {
+
+			String sql = "DELETE FROM USUOPER WHERE UONCGUS = ? AND UONCGOP = ?";
+			PreparedStatement st = getConnection().prepareStatement(sql);
+			st.setInt(1, usuarioId);
+			st.setInt(2, operacaoId);
+			
+			st.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void adicionaOperacao(Integer usuarioId, Integer operacaoId){
+		try {
+			
+			String sql = "INSERT INTO USUOPER (UONCGUS, UONCGOP) VALUES (?,?) ";
+			PreparedStatement st = getConnection().prepareStatement(sql);
+			st.setInt(1, usuarioId);
+			st.setInt(2, operacaoId);
+			
+			st.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<BeanOperacao> getSubOperacoesDoUsuario(int usncodg, int opnpart){
 		ArrayList<BeanOperacao> operacoes = new ArrayList<BeanOperacao>();
 		try {

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.company.gwt.client.component.ComponentProvider;
-import br.com.company.gwt.shared.dto.DTOUsuario;
+import br.com.company.gwt.client.component.WebUtil;
+import br.com.company.gwt.client.mvc.ProviderFacadeManager;
 
 import com.extjs.gxt.desktop.client.Shortcut;
-import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Window;
@@ -30,13 +30,13 @@ public class ShortCutUtil {
 			}
 		};
 		
+		
+		shortCuts.add(WebUtil.createShortcut("Clientes", "cliente-shortcut", ProviderFacadeManager.panelGridCliente));
+		/*
 		DTOUsuario user = Registry.get("user");
 		
 		List<Integer> permis = new ArrayList<Integer>(); // user.getJanelas();
-		
-		/*
 
-		shortCuts.add(WebUtil.createShortcut("Clientes", "cliente-shortcut", ProviderFacadeManager.gridClienteWindow));
 		
 		if (permis.contains(1)){
 			shortCuts.add(WebUtil.createShortcut("Produtos", "produto-shortcut", ProviderFacadeManager.gridProdutoWindow));			
@@ -49,10 +49,10 @@ public class ShortCutUtil {
 			shortCuts.add(WebUtil.createShortcut("Caixa", AbstractImagePrototype.create(ImagensResources.INSTANCE.atalhoCaixa64()) , ProviderFacadeManager.formCaixa));			
 		}
 		
+		 */
 		for (Shortcut shortcut : shortCuts) {
 			shortcut.addSelectionListener(shortcutListener);
 		}
-		*/
 		
 		return shortCuts;
 	}

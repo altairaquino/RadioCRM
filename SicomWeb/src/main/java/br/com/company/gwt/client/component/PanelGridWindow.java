@@ -171,19 +171,14 @@ public abstract class PanelGridWindow<T extends ModelData> extends Window {
 		grid.setBorders(false);
 		grid.setView(new BufferView());
 		grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		grid.addListener(Events.CellDoubleClick, new Listener<GridEvent<T>>() {
-            
-            @Override
-            public void handleEvent(GridEvent<T> be) {
+		grid.addListener(Events.RowDoubleClick, new Listener<GridEvent<T>>(){
+
+			@Override
+			public void handleEvent(GridEvent<T> be) {
 				actionButtonAtualizaClick();   
-            }
-            
-        });
-//		grid.getSelectionModel().addListener(Events.DoubleClick, new Listener<BaseEvent>() {
-//			public void handleEvent(BaseEvent be) {
-//				actionButtonAtualizaClick();
-//			};
-//		});
+			}
+			
+		});
 	}
 	
 	protected void addToToolBar(Component component){

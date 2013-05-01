@@ -21,6 +21,7 @@ import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.CheckBoxListView;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.Window;
@@ -203,10 +204,10 @@ public class FormConfigUserPermissao extends Window {
 	}
 
 	protected void removeOperacao(DTOOperacao dto) {
-		DTOUsuario DTOUsuario = userList.getSelectionModel().getSelectedItem();
+		DTOUsuario usuario = userList.getSelectionModel().getSelectedItem();
 		
-		/*
-		InstanceService.OPERACAO_SERVICE.removeOperacao(DTOUsuario.getUserId(), dto.getOperacaoId(), new AsyncCallback<Boolean>() {
+		
+		InstanceService.OPERACAO_SERVICE.removeOperacao(usuario.getId(), dto.getOperacaoId(), new AsyncCallback<Boolean>() {
 			
 			@Override
 			public void onFailure(Throwable caught) {
@@ -218,15 +219,13 @@ public class FormConfigUserPermissao extends Window {
 				Info.display("Info", "Permissão removida.");				
 			}		
 		});
-		*/
 	}
 
 	protected void adicionaOperacao(DTOOperacao dto) {
 
-		DTOUsuario DTOUsuario = userList.getSelectionModel().getSelectedItem();
+		DTOUsuario usuario = userList.getSelectionModel().getSelectedItem();
 		
-		/*
-		InstanceService.OPERACAO_SERVICE.adicionaOperacao(DTOUsuario.getUserId(), dto.getOperacaoId(), new AsyncCallback<Boolean>() {
+		InstanceService.OPERACAO_SERVICE.adicionaOperacao(usuario.getId(), dto.getOperacaoId(), new AsyncCallback<Boolean>() {
 			
 			@Override
 			public void onFailure(Throwable caught) {
@@ -238,13 +237,11 @@ public class FormConfigUserPermissao extends Window {
 				Info.display("Info", "Permissão concedida.");				
 			}		
 		});
-		*/
 	}
 
 	protected void configureActionEventList(DTOUsuario usuario) {
 		
-		/*
-		InstanceService.OPERACAO_SERVICE.listaOperacaoUsuario(usuario.getUserId(), new AsyncCallback<List<DTOOperacao>>() {
+		InstanceService.OPERACAO_SERVICE.listaOperacaoUsuario(usuario.getId(), new AsyncCallback<List<DTOOperacao>>() {
 			public void onFailure(Throwable caught) {
 				WebMessageBox.error(caught.getMessage());
 			}
@@ -262,7 +259,6 @@ public class FormConfigUserPermissao extends Window {
 				}
 			}
 		});
-		*/
 	}
 
 	private void clearListViewOperacao() {
@@ -277,7 +273,7 @@ public class FormConfigUserPermissao extends Window {
 	}
 
 	private void loadUsuarios() {
-		/*
+		
 		InstanceService.USER_SERVICE.lista(new AsyncCallback<List<DTOUsuario>>() {
 			
 			@Override
@@ -290,7 +286,7 @@ public class FormConfigUserPermissao extends Window {
 				WebMessageBox.error(caught.getMessage());
 			}
 		});
-		*/
+		
 	}
 
 	private void loadOperacoes() {

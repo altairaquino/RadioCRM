@@ -2,6 +2,7 @@ package br.com.company.gwt.client.mvc;
 
 import br.com.company.gwt.client.component.ComponentProvider;
 import br.com.company.gwt.client.form.FormConfigUserPermissao;
+import br.com.company.gwt.client.form.PanelGridCliente;
 import br.com.company.gwt.client.widget.DialogoSobre;
 import br.com.company.gwt.client.widget.FormAlteraSenha;
 
@@ -30,6 +31,15 @@ public class ProviderFacadeManager {
 		@Override
 		public DialogoSobre createInstance() {
 			return new DialogoSobre();
+		}
+		
+	};
+	
+	public static ComponentProvider<PanelGridCliente> panelGridCliente = new ComponentProvider<PanelGridCliente>() {
+		
+		@Override
+		public PanelGridCliente createInstance() {
+			return new PanelGridCliente();
 		}
 		
 	};
