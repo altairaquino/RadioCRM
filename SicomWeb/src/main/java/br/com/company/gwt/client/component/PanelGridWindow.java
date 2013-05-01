@@ -44,8 +44,7 @@ public abstract class PanelGridWindow<T extends ModelData> extends Window {
 	
 	public PanelGridWindow() {
 		
-		setWidth(480);
-		setHeight(360);
+		setSize(650, 420);
 		setLayout(new FitLayout());
 		setMinimizable(true);
 		setResizable(false);
@@ -133,6 +132,11 @@ public abstract class PanelGridWindow<T extends ModelData> extends Window {
 			
 			@Override
 			public void componentSelected(ButtonEvent ce) {
+				String pesquisa = fieldPesquisa.getValue();
+				if (pesquisa != null && pesquisa.length() < 4){
+					WebMessageBox.alert("Informe ao menos 4 letras na pesquisa!");
+					ce.setCancelled(true);
+				}
 				actionPesquisa(fieldPesquisa.getValue());
 			}
 		});

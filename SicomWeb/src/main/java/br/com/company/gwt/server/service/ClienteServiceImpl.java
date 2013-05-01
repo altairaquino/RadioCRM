@@ -25,6 +25,24 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 				DTOCliente cliente = new DTOCliente();
 				cliente.setId(Integer.parseInt(bean.getClncodg()));
 				cliente.setNome(bean.getClcnome());
+				cliente.setDocumento(bean.getClcdocm());
+				clientes.add(cliente);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return clientes;
+	}
+	
+	@Override
+	public List<DTOCliente> pesquisa(String query) {
+		List<DTOCliente> clientes = new ArrayList<DTOCliente>();
+		try {
+			for (BeanCliente bean : modelCliente.getClientesPorNomeDoc(query, 1) ) {
+				DTOCliente cliente = new DTOCliente();
+				cliente.setId(Integer.parseInt(bean.getClncodg()));
+				cliente.setNome(bean.getClcnome());
+				cliente.setDocumento(bean.getClcdocm());
 				clientes.add(cliente);
 			}
 		} catch (Exception e) {

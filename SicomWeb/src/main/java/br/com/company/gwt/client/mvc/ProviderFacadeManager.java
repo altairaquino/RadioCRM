@@ -3,12 +3,11 @@ package br.com.company.gwt.client.mvc;
 import br.com.company.gwt.client.component.ComponentProvider;
 import br.com.company.gwt.client.form.FormConfigUserPermissao;
 import br.com.company.gwt.client.form.PanelGridCliente;
+import br.com.company.gwt.client.form.PanelGridContato;
 import br.com.company.gwt.client.widget.DialogoSobre;
 import br.com.company.gwt.client.widget.FormAlteraSenha;
 
 public class ProviderFacadeManager {
-
-
 	
 	public static ComponentProvider<FormAlteraSenha> formAlteraSenha = new ComponentProvider<FormAlteraSenha>() {
 		
@@ -40,6 +39,15 @@ public class ProviderFacadeManager {
 		@Override
 		public PanelGridCliente createInstance() {
 			return new PanelGridCliente();
+		}
+		
+	};
+	
+	public static ComponentProvider<PanelGridContato> panelGridContato = new ComponentProvider<PanelGridContato>() {
+		
+		@Override
+		public PanelGridContato createInstance() {
+			return new PanelGridContato();
 		}
 		
 	};

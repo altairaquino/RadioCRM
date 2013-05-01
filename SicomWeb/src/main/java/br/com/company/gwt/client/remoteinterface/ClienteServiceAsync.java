@@ -10,4 +10,6 @@ public interface ClienteServiceAsync {
 
 	void listAll(AsyncCallback<List<DTOCliente>> callback);
 
+	void pesquisa(String query, AsyncCallback<List<DTOCliente>> callback);
+
 }

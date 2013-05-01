@@ -1,10 +1,10 @@
 .desktop-link {
 	margin: 15px;
 	float: right;
-	background-image: url('imagens/logo_grfm_gold.png');
+	background-image: url('imagens/logo_grfm_gold_250x100.png');
 	background-repeat: no-repeat;
-	width: 150px;
-	height: 64px;
+	width: 250px;
+	height: 100px;
 }
 
 .app_window {
@@ -87,6 +87,18 @@
 	width: 64px;
 	height: 64px;
 	background: url(imagens/shortcuts/shortcut_produto_64.png);
+}
+
+#contato-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/contato_64.png);
+}
+
+#contrato-shortcut img {
+	width: 64px;
+	height: 64px;
+	background: url(imagens/shortcuts/contrato_64.png);
 }
 
 .icon_about {

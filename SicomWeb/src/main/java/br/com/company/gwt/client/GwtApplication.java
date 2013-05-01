@@ -1,6 +1,5 @@
 package br.com.company.gwt.client;
 
-import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.desktop.DesktopAppEvents;
 import br.com.company.gwt.client.desktop.DesktopController;
 
@@ -22,10 +21,12 @@ public class GwtApplication implements EntryPoint {
 
 		GXT.hideLoadingPanel("loading");
 		
+		/*
 		if (!GXT.isChrome){
 			WebMessageBox.info("Navegador incompatível", "Utilize o Google Chrome para um melhor funcionamento do sistema. " +
 					"Caso não tenha instalado no seu computador faça o download clicando <a href='http://www.google.com/intl/pt-BR/chrome/browser/' target='_blank'>aqui</a>.");
 		}
+		*/
 		
 	}
 	

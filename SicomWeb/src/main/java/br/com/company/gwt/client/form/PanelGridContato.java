@@ -12,49 +12,43 @@ import br.com.company.gwt.client.component.PanelGridWindow;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.shared.dto.DTOCliente;
 
-public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
+public class PanelGridContato extends PanelGridWindow<DTOCliente> {
 	
-	public PanelGridCliente() {
-		setHeadingHtml("Cadastro de Clientes");
+	public PanelGridContato() {
+		setHeadingHtml("Cadastro de Contato");
 		grid.setAutoExpandColumn("nome");
 		loadDados();
 	}
 
 	private void loadDados() {
-		painelPrincipal.mask("Aguarde carregando...");
 		InstanceService.CLIENTE_SERVICE.listAll(new AsyncCallback<List<DTOCliente>>() {
 			
 			@Override
 			public void onSuccess(List<DTOCliente> result) {
 				getStore().removeAll();
 				getStore().add(result);
-				painelPrincipal.unmask();
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
 				WebMessageBox.error(caught.getMessage());
-				painelPrincipal.unmask();
 			}
 		});		
 	}
 
 	@Override
 	protected void actionPesquisa(String consulta) {
-		painelPrincipal.mask("Aguarde carregando consulta...");
 		InstanceService.CLIENTE_SERVICE.pesquisa(consulta, new AsyncCallback<List<DTOCliente>>() {
 			
 			@Override
 			public void onSuccess(List<DTOCliente> result) {
 				getStore().removeAll();
 				getStore().add(result);
-				painelPrincipal.unmask();
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
 				WebMessageBox.error(caught.getMessage());
-				painelPrincipal.unmask();
 			}
 		});
 	}
@@ -94,7 +88,6 @@ public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
 
 	@Override
 	protected void actionButtonAtualizaClick() {
-		loadDados();
 	}
 
 }

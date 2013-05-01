@@ -169,8 +169,6 @@ public class ModelCliente extends ModelAbstract{
 			e.printStackTrace();
 		}
 		
-	}
-
-	
+	}	
 	
 }

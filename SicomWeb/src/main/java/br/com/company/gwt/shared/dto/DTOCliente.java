@@ -22,4 +22,12 @@ public class DTOCliente extends BaseModelData {
 		set("nome", nome);
 	}
 
+	public String getDocumento(){
+		return get("documento");
+	}
+	
+	public void setDocumento(String documento){
+		set("documento", documento);
+	}
+
 }

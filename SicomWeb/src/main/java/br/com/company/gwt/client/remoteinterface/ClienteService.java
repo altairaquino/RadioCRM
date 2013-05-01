@@ -11,5 +11,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface ClienteService extends RemoteService {
 
 	List<DTOCliente> listAll();
+
+	List<DTOCliente> pesquisa(String query);
 	
 }

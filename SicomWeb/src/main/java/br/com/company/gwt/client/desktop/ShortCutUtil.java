@@ -32,6 +32,11 @@ public class ShortCutUtil {
 		
 		
 		shortCuts.add(WebUtil.createShortcut("Clientes", "cliente-shortcut", ProviderFacadeManager.panelGridCliente));
+		shortCuts.add(WebUtil.createShortcut("Contatos", "contato-shortcut", ProviderFacadeManager.panelGridContato));
+		shortCuts.add(WebUtil.createShortcut("Contratos", "contrato-shortcut", ProviderFacadeManager.panelGridContato));
+		shortCuts.add(WebUtil.createShortcut("Agências", "agencia-shortcut", ProviderFacadeManager.panelGridContato));
+		
+		
 		/*
 		DTOUsuario user = Registry.get("user");
 		
