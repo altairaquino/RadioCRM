@@ -18,7 +18,7 @@ public abstract class WebWindow extends Window {
 		setWidth(480);
 		setHeight(360);
 		setLayout(new FitLayout());
-		setHeading("Web Window");
+		setHeadingHtml("Web Window");
 		setResizable(false);
 		setMaximizable(true);
 		setMinimizable(true);

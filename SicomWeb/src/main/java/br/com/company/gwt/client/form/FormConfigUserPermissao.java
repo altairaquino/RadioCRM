@@ -49,7 +49,7 @@ public class FormConfigUserPermissao extends Window {
 	private ToolBar toolBarOperacao;
 
 	public FormConfigUserPermissao() {
-		setHeading("Configuração de Permissões do Usuário");
+		setHeadingHtml("Configuração de Permissões do Usuário");
 		setLayout(new FitLayout());
 		setBodyBorder(false);
 		setBorders(false);
@@ -64,11 +64,11 @@ public class FormConfigUserPermissao extends Window {
 
 		panelActionEvent = new ContentPanel(new FitLayout());
 		panelActionEvent.setBodyBorder(Boolean.FALSE);
-		panelActionEvent.setHeading("Permissões");
+		panelActionEvent.setHeadingHtml("Permissões");
 
 		panelEventCondition = new ContentPanel(new FitLayout());
 		panelEventCondition.setBodyBorder(Boolean.FALSE);
-		panelEventCondition.setHeading("Usuários");
+		panelEventCondition.setHeadingHtml("Usuários");
 
 		mainPanel = new ContentPanel(new BorderLayout());
 		mainPanel.setHeaderVisible(false);

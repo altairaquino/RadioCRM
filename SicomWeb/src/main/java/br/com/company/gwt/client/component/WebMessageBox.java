@@ -11,7 +11,7 @@ public class WebMessageBox extends MessageBox{
 	public static MessageBox error(String title, String msg,
 			Listener<MessageBoxEvent> callback) {
 		MessageBox box = new MessageBox();
-		box.setTitle(title);
+		box.setTitleHtml(title);
 		box.setMessage(msg);
 		box.addCallback(callback);
 		box.setButtons(OK);
@@ -22,7 +22,7 @@ public class WebMessageBox extends MessageBox{
 
 	public static MessageBox confirm(String title, String msg, Listener<MessageBoxEvent> callback) {
 		MessageBox box = new MessageBox();
-		box.setTitle(title);
+		box.setTitleHtml(title);
 		box.setMessage(msg);
 		box.addCallback(callback);
 		box.setButtons(YESNOCANCEL);

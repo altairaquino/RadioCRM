@@ -6,7 +6,6 @@ import br.com.company.gwt.shared.dto.DTOUsuario;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-
 public interface UserServiceAsync {
 	
 	void login(DTOUsuario user, AsyncCallback<DTOUsuario> callback);

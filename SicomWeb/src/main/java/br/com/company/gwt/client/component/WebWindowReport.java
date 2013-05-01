@@ -12,7 +12,7 @@ public class WebWindowReport extends Window{
 		title = (title == null || title.trim().equals(""))?"Relatório":title;
 		
 		this.setSize(640, 480);
-		this.setHeading(title);
+		this.setHeadingHtml(title);
 		this.setResizable(true);
 		this.setMaximizable(true);
 		this.setMinimizable(true);

@@ -65,7 +65,7 @@ public class WebUtil {
 	public static ColumnConfig createColumnEditorComboBox(String columnName, String columnLabel, String valueField, String displayField) {
 		ColumnConfig column = new ColumnConfig();
 		column.setId(columnName);
-		column.setHeader(columnLabel);
+		column.setHeaderHtml(columnLabel);
 		column.setEditor(new CellEditor(createComboBox(columnName, columnLabel,	valueField, displayField)));
 		column.setWidth(200);
 		column.setRenderer(new GridCellRendererProperty(columnName,	displayField));
@@ -410,7 +410,7 @@ public class WebUtil {
 	public static ColumnConfig createColumn(String columnName, String columnLabel,int columnWidth) {
 		ColumnConfig column = new ColumnConfig();
 		column.setId(columnName);
-		column.setHeader(columnLabel);
+		column.setHeaderHtml(columnLabel);
 		column.setWidth(columnWidth);
 		return column;
 	}
@@ -418,7 +418,7 @@ public class WebUtil {
 	public static ColumnConfig createCheckColumn(String columnName, String columnLabel,int columnWidth) {
 		ColumnConfig column = new CheckColumnConfig();
 		column.setId(columnName);
-		column.setHeader(columnLabel);
+		column.setHeaderHtml(columnLabel);
 		column.setWidth(columnWidth);
 		return column;
 	}
@@ -428,7 +428,7 @@ public class WebUtil {
 		TextField<T> field = new TextField<T>();
 		field.setName(columnName);
 		column.setId(columnName);
-		column.setHeader(columnLabel);
+		column.setHeaderHtml(columnLabel);
 		column.setEditor(new CellEditor(field));
 		column.setWidth(columnWidth);
 		return column;
@@ -447,7 +447,7 @@ public class WebUtil {
 		field.setName(columnName);
 		field.setPropertyEditorType(class1);
 		column.setId(columnName);
-		column.setHeader(columnLabel);
+		column.setHeaderHtml(columnLabel);
 		column.setEditor(new CellEditor(field));
 		column.setWidth(columnWidth);
 		return column;
@@ -461,7 +461,7 @@ public class WebUtil {
 		column.setId(columnName);
 
 		column.setNumberFormat(field.getPropertyEditor().getFormat());
-		column.setHeader(columnLabel);
+		column.setHeaderHtml(columnLabel);
 		column.setEditor(new CellEditor(field));
 		column.setWidth(columnWidth);
 		return column;
@@ -472,7 +472,7 @@ public class WebUtil {
 		TextField<String> field = new TextField<String>();
 		field.setName(columnName);
 		column.setId(columnName);
-		column.setHeader(columnLabel);
+		column.setHeaderHtml(columnLabel);
 		column.setEditor(new CellEditor(field));
 		column.setWidth(columnWidth);
 		column.setRenderer(renderer);
@@ -513,7 +513,7 @@ public class WebUtil {
 		panel.setButtonAlign(HorizontalAlignment.RIGHT);
 		panel.setLayout(layout);
 		if(heading != null){
-			panel.setHeading(heading);
+			panel.setHeadingHtml(heading);
 		}else{
 			panel.setHeaderVisible(false);
 		}
@@ -625,16 +625,8 @@ public class WebUtil {
 		return menuItem;
 	}
 
-//	public static void setWindowModal(Window window, String title, Layout layout, int width, int height) {
-//		setWindowModal(window, title, layout, width, height);
-//	}
-//
-//	public static void setWindowModal(Window window, String title, Layout layout, int width, int height) {
-//		setWindowModal(window, title, layout, width, height);
-//	}
-
 	public static void setWindowModal(Window window, String title, AbstractImagePrototype icon, Layout layout, int width, int height) {
-		window.setHeading(title);
+		window.setHeadingHtml(title);
 		window.setIcon(icon);
 
 		window.setLayout(layout);

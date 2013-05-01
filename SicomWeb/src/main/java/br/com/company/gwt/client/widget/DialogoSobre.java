@@ -12,7 +12,7 @@ public class DialogoSobre extends Dialog {
 		setSize(322, 250);
 		setModal(true);
 		setResizable(false);
-		setHeading("Sobre o Sistema");
+		setHeadingHtml("Sobre o Sistema");
 		setButtons("");
 		setLayout(new FitLayout());
 		add(getPanelTemplate());

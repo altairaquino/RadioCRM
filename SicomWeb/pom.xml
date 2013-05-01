@@ -37,11 +37,11 @@
 			<version>${springVersion}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${springVersion}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-orm</artifactId> -->
+<!-- 			<version>${springVersion}</version> -->
+<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -55,21 +55,33 @@
 			<version>${springVersion}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${springVersion}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-tx</artifactId> -->
+<!-- 			<version>${springVersion}</version> -->
+<!-- 		</dependency> -->
 
 		<dependency>
-			<groupId>com.extjs</groupId>
-			<artifactId>gxt</artifactId>
-			<version>2.2.0</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.extjs</groupId>
+		    <artifactId>gxt</artifactId>
+		    <version>2.3.0-gwt2</version>
+		</dependency>
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.extjs</groupId> -->
+<!-- 			<artifactId>gxt</artifactId> -->
+<!-- 			<version>2.2.0</version> -->
 			<!--
 			<scope>system</scope>
     		<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gxt-2.2.4-gwt2.jar</systemPath>
 			 -->
-		</dependency>
+<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -101,7 +113,7 @@
 			<groupId>org.firebirdsql.jdbc</groupId>
 			<artifactId>jaybird-jdk16</artifactId>
 			<version>2.2.0</version>
-		</dependency>            
+		</dependency>    
 
 		<dependency>
 			<groupId>com.google.gwt</groupId>
@@ -171,11 +183,11 @@
 			<artifactId>DynamicJasper-core-fonts</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.barbecue</groupId>
-			<artifactId>barbecue</artifactId>
-			<version>1.5-beta1</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>net.sourceforge.barbecue</groupId> -->
+<!-- 			<artifactId>barbecue</artifactId> -->
+<!-- 			<version>1.5-beta1</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>

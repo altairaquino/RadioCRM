@@ -29,7 +29,7 @@ public class FormAlteraSenha extends Dialog {
 	private DTOUsuario user;
 
 	public FormAlteraSenha() {
-		setHeading("Alteração de Senha");
+		setHeadingHtml("Alteração de Senha");
 		setSize(325, 190);
 		setLayout(new FitLayout());
 		setModal(true);
@@ -44,7 +44,6 @@ public class FormAlteraSenha extends Dialog {
 		formPanel = new FormPanel();
 		formPanel.setLabelWidth(95);
 		formPanel.setHeaderVisible(false);
-		formPanel.setHeading("");
 		
 		tfUsuario = new TextField<String>();
 		tfUsuario.setFieldLabel("Usuário");

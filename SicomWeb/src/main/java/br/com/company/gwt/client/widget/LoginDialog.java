@@ -39,7 +39,7 @@ public class LoginDialog extends Dialog {
 		setButtonAlign(HorizontalAlignment.LEFT);
 		setButtons("");
 		setIconStyle("login_window");
-		setHeading("Sicom Web - 1.0");
+		setHeadingHtml("Sicom Web - 1.0");
 		setModal(true);
 		setBodyBorder(true);
 		setBodyStyle("padding: 8px; background: none");
