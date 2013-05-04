@@ -55,11 +55,11 @@
 			<version>${springVersion}</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework</groupId> -->
-<!-- 			<artifactId>spring-tx</artifactId> -->
-<!-- 			<version>${springVersion}</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -73,15 +73,6 @@
 		    <version>2.3.0-gwt2</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.extjs</groupId> -->
-<!-- 			<artifactId>gxt</artifactId> -->
-<!-- 			<version>2.2.0</version> -->
-			<!--
-			<scope>system</scope>
-    		<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gxt-2.2.4-gwt2.jar</systemPath>
-			 -->
-<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -95,7 +86,6 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -107,7 +97,6 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>3.6.10.Final</version>
 		</dependency>
-		 -->            
 
 		<dependency>
 			<groupId>org.firebirdsql.jdbc</groupId>
