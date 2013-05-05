@@ -1,7 +1,12 @@
 package br.com.company.gwt.server.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Cidade {
 	
+	@Id
 	private Integer id;
 	
 	private String nome;

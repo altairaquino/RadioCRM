@@ -37,11 +37,11 @@
 			<version>${springVersion}</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework</groupId> -->
-<!-- 			<artifactId>spring-orm</artifactId> -->
-<!-- 			<version>${springVersion}</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>8.4-701.jdbc3</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -98,11 +98,13 @@
 			<version>3.6.10.Final</version>
 		</dependency>
 
+		<!-- 
 		<dependency>
 			<groupId>org.firebirdsql.jdbc</groupId>
 			<artifactId>jaybird-jdk16</artifactId>
 			<version>2.2.0</version>
 		</dependency>    
+		 -->
 
 		<dependency>
 			<groupId>com.google.gwt</groupId>

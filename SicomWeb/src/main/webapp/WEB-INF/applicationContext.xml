@@ -3,9 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 				http://www.springframework.org/schema/beans/spring-beans.xsd 
-
+				
+				http://www.springframework.org/schema/util 
+				http://www.springframework.org/schema/util/spring-util-3.0.xsd
+				
+				http://www.springframework.org/schema/tx 
+				http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+				
 				http://www.springframework.org/schema/context				
 				http://www.springframework.org/schema/context/spring-context-3.0.xsd 
 				">
@@ -20,6 +28,32 @@
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />		
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+		scope="singleton">
+		
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="br.com.company.gwt.server.entities" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
+				<prop key="hibernate.connection.driver_class">${jdbc.driver}</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.transaction.flush_before_completion">true</prop>
+				
+			</props>
+		</property>
+		
 	</bean>
 	
 </beans>    

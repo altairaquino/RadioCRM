@@ -1,11 +1,8 @@
 package br.com.company.gwt.server.exception;
 
-/**
- *
- * @author andre
- */
 public class DaoException extends RuntimeException{
-    private static final long serialVersionUID = 2457552904697421443L;
+
+	private static final long serialVersionUID = 2457552904697421443L;
 
     public DaoException(Throwable cause) {
         super(cause);
@@ -19,6 +16,6 @@ public class DaoException extends RuntimeException{
         super(message);
     }
 
-    public DaoException() {
-    }
+    public DaoException() {}
+    
 }

@@ -1,21 +1,33 @@
 package br.com.company.gwt.server.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Usuario {
 	
-	@Id	
+	@Id
 	private Integer id;
 	
+	@Column(length=30)
 	private String nome;
 
+	@Column(length=20)
 	private String login;
 
+	@Column(length=50)
 	private String senha;
 
+	@Column(columnDefinition="boolean defaulta true")	
 	private Boolean ativo;
+	
+	private Boolean admin;
+	
+	public Usuario() {
+		setAtivo(true);
+		setAdmin(false);
+	}
 
 	public Integer getId() {
 		return id;
@@ -49,12 +61,20 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Boolean getAtivo() {
+	public Boolean isAtivo() {
 		return ativo;
 	}
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 	
 }

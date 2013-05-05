@@ -1,9 +1,16 @@
 package br.com.company.gwt.server.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class FormaPagamento {
 	
+	@Id
 	private Integer id;
 	
+	@Column(length=40)
 	private String nome;
 
 	public Integer getId() {
