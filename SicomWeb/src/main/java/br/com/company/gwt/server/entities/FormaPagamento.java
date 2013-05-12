@@ -3,8 +3,10 @@ package br.com.company.gwt.server.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="forma_pagamento")
 public class FormaPagamento {
 	
 	@Id

@@ -7,28 +7,30 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import br.com.company.gwt.client.remoteinterface.UserService;
 import br.com.company.gwt.server.InputServletImpl;
-import br.com.company.gwt.server.legacy.bean.BeanUsuario;
-import br.com.company.gwt.server.legacy.model.ModelUsuario;
+import br.com.company.gwt.server.dao.DaoUsuario;
+import br.com.company.gwt.server.entities.Usuario;
 import br.com.company.gwt.shared.dto.DTOUsuario;
 
 @Named("userService")
 public class UserServiceImpl extends InputServletImpl implements UserService {
 	
-	@Inject private ModelUsuario modelUsuario;
+	@Inject private DaoUsuario daoUsuario;
 
 	@Override
 	public DTOUsuario login(DTOUsuario user) throws Exception {
 		HttpSession session = getServletRequest().getSession();
 		
-		BeanUsuario usuario = modelUsuario.autenticaUsuario(user.getUserName(), user.getPassword());
+		Usuario usuario = daoUsuario.login(user.getUserName(), user.getPassword());
 		
 		if (usuario != null){
 			
-			user.setId(Integer.parseInt(usuario.getUsncodg()));
+			user.setId(usuario.getId());
 			
-			if (usuario.getUslativ().equals("F")){
+			if (!usuario.isAtivo()){
 				throw new Exception("Usuário com acesso inabilitado!");
 			}
 			
@@ -47,10 +49,13 @@ public class UserServiceImpl extends InputServletImpl implements UserService {
 		return user;
 	}
 
+	@Transactional
 	@Override
 	public Boolean updateUser(DTOUsuario user) {
-		try {			
-			modelUsuario.alteraSenha(user.getId(), user.getNewPassword());
+		try {
+			
+			Usuario usuario = daoUsuario.findByPrimaryKey(user.getId());
+			usuario.setSenha(user.getNewPassword());
 			
 			return true;
 			
@@ -65,11 +70,11 @@ public class UserServiceImpl extends InputServletImpl implements UserService {
 	public List<DTOUsuario> lista(){
 		List<DTOUsuario> lista = new ArrayList<DTOUsuario>();
 		try {
-			List<BeanUsuario> usuarios = modelUsuario.getUsuarios();
-			for (BeanUsuario usuario : usuarios) {
+			List<Usuario> usuarios = daoUsuario.loadAll();
+			for (Usuario usuario : usuarios) {
 				DTOUsuario dto = new DTOUsuario();
-				dto.setId(Integer.parseInt(usuario.getUsncodg()));
-				dto.setUserName(usuario.getUscnome());
+				dto.setId(usuario.getId());
+				dto.setUserName(usuario.getNome());
 				lista.add(dto);
 			}
 		} catch (Exception e) {

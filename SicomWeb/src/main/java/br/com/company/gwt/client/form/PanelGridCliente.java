@@ -74,7 +74,9 @@ public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
 
 	@Override
 	protected void actionButtonNovoClick() {
-				
+		FormCliente formCliente = new FormCliente();
+		formCliente.setBlinkModal(true);
+		formCliente.show();		
 	}
 
 	@Override

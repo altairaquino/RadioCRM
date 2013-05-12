@@ -3,8 +3,10 @@ package br.com.company.gwt.server.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="usuario")
 public class Usuario {
 	
 	@Id
@@ -19,9 +21,10 @@ public class Usuario {
 	@Column(length=50)
 	private String senha;
 
-	@Column(columnDefinition="boolean defaulta true")	
+	@Column(columnDefinition="boolean default true")	
 	private Boolean ativo;
 	
+	@Column(columnDefinition="boolean default false")	
 	private Boolean admin;
 	
 	public Usuario() {
