@@ -6,6 +6,8 @@ import br.com.company.gwt.client.remoteinterface.ClienteService;
 import br.com.company.gwt.client.remoteinterface.ClienteServiceAsync;
 import br.com.company.gwt.client.remoteinterface.OperacaoService;
 import br.com.company.gwt.client.remoteinterface.OperacaoServiceAsync;
+import br.com.company.gwt.client.remoteinterface.ProgramaService;
+import br.com.company.gwt.client.remoteinterface.ProgramaServiceAsync;
 import br.com.company.gwt.client.remoteinterface.UserService;
 import br.com.company.gwt.client.remoteinterface.UserServiceAsync;
 
@@ -17,5 +19,6 @@ public class InstanceService {
 	public final static CidadeServiceAsync CIDADE_SERVICE = GWT.create(CidadeService.class);
 	public final static OperacaoServiceAsync OPERACAO_SERVICE = GWT.create(OperacaoService.class);
 	public final static ClienteServiceAsync CLIENTE_SERVICE = GWT.create(ClienteService.class);
+	public final static ProgramaServiceAsync PROGRAMA_SERVICE = GWT.create(ProgramaService.class);
 
 }

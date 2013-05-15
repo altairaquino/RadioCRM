@@ -3,6 +3,7 @@ package br.com.company.gwt.server.entities;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,11 +29,17 @@ public class ProgramacaoPrograma {
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Programa programa;
 	
-	@Temporal(TemporalType.TIME)
-	private Date horario;
-	
+	@Column(name="dia_semana", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private DiaSemana diaSemana;
+	
+	@Column(name="hora_inicio", nullable=false)
+	@Temporal(TemporalType.TIME)
+	private Date horaInicio;
+	
+	@Column(name="hora_termino", nullable=false)
+	@Temporal(TemporalType.TIME)
+	private Date horaTermino;	
 
 	public Integer getId() {
 		return id;
@@ -50,20 +57,28 @@ public class ProgramacaoPrograma {
 		this.programa = programa;
 	}
 
-	public Date getHorario() {
-		return horario;
-	}
-
-	public void setHorario(Date horario) {
-		this.horario = horario;
-	}
-
 	public DiaSemana getDiaSemana() {
 		return diaSemana;
 	}
 
 	public void setDiaSemana(DiaSemana diaSemana) {
 		this.diaSemana = diaSemana;
+	}
+
+	public Date getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(Date horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public Date getHoraTermino() {
+		return horaTermino;
+	}
+
+	public void setHoraTermino(Date horaTermino) {
+		this.horaTermino = horaTermino;
 	}
 
 }

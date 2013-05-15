@@ -197,12 +197,12 @@ public class FormCliente extends Window {
 		fsEndereco.add(comboBoxTipoLogradouro, new AbsoluteData (0, 12));
 		
 		tfLogradouro = new TextFieldUpper();
-		fsEndereco.add(tfLogradouro, new AbsoluteData(74, 12));
 		tfLogradouro.setSize("259px", "22px");
+		fsEndereco.add(tfLogradouro, new AbsoluteData(74, 12));
 		
 		tfComplemento = new TextFieldUpper();
-		fsEndereco.add(tfComplemento, new AbsoluteData(339, 12));
 		tfComplemento.setSize("225px", "22px");
+		fsEndereco.add(tfComplemento, new AbsoluteData(339, 12));
 		
 		fsEndereco.add(new LabelField("Logradouro:"), new AbsoluteData(75, -4));
 		

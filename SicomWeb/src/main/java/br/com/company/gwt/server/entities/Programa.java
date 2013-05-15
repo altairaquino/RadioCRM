@@ -22,8 +22,8 @@ public class Programa {
 	@Column(length=40)
 	private String nome;
 	
-	private Float valorInsercao;
-	private Integer duracaoInsercao;
+	@Column(name="valor_patrocinio")
+	private Float valorPatrocinio;
 	
 	@Column(columnDefinition="boolean default true")
 	private Boolean ativo;
@@ -51,22 +51,6 @@ public class Programa {
 		this.nome = nome;
 	}
 	
-	public Float getValorInsercao() {
-		return valorInsercao;
-	}
-	
-	public void setValorInsercao(Float valorInsercao) {
-		this.valorInsercao = valorInsercao;
-	}
-	
-	public Integer getDuracaoInsercao() {
-		return duracaoInsercao;
-	}
-	
-	public void setDuracaoInsercao(Integer duracaoInsercao) {
-		this.duracaoInsercao = duracaoInsercao;
-	}
-	
 	public Boolean isAtivo() {
 		return ativo;
 	}
@@ -81,6 +65,14 @@ public class Programa {
 
 	public void setProgramacao(List<ProgramacaoPrograma> programacao) {
 		this.programacao = programacao;
+	}
+
+	public Float getValorPatrocinio() {
+		return valorPatrocinio;
+	}
+
+	public void setValorPatrocinio(Float valorPatrocinio) {
+		this.valorPatrocinio = valorPatrocinio;
 	}
 	
 }
