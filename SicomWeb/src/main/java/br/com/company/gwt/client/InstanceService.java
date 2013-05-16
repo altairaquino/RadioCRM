@@ -1,5 +1,7 @@
 package br.com.company.gwt.client;
 
+import br.com.company.gwt.client.remoteinterface.AgenciaService;
+import br.com.company.gwt.client.remoteinterface.AgenciaServiceAsync;
 import br.com.company.gwt.client.remoteinterface.CidadeService;
 import br.com.company.gwt.client.remoteinterface.CidadeServiceAsync;
 import br.com.company.gwt.client.remoteinterface.ClienteService;
@@ -20,5 +22,6 @@ public class InstanceService {
 	public final static OperacaoServiceAsync OPERACAO_SERVICE = GWT.create(OperacaoService.class);
 	public final static ClienteServiceAsync CLIENTE_SERVICE = GWT.create(ClienteService.class);
 	public final static ProgramaServiceAsync PROGRAMA_SERVICE = GWT.create(ProgramaService.class);
+	public final static AgenciaServiceAsync AGENCIA_SERVICE = GWT.create(AgenciaService.class);
 
 }

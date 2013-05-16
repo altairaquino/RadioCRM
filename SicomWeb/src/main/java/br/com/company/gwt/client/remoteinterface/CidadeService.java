@@ -12,6 +12,6 @@ public interface CidadeService extends RemoteService {
 
 	List<DTOCidade> listAll();
 	
-	List<DTOCidade> listCidadesByUF(String uf);
+	List<DTOCidade> listCidadesByUF(String nome, String uf);
 	
 }

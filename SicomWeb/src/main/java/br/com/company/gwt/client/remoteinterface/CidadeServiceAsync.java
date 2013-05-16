@@ -10,6 +10,6 @@ public interface CidadeServiceAsync {
 
 	void listAll(AsyncCallback<List<DTOCidade>> callback);
 
-	void listCidadesByUF(String uf, AsyncCallback<List<DTOCidade>> callback);
+	void listCidadesByUF(String nome, String uf, AsyncCallback<List<DTOCidade>> callback);
 
 }

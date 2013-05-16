@@ -9,23 +9,20 @@ import javax.inject.Named;
 import br.com.company.gwt.client.dto.DTOCidade;
 import br.com.company.gwt.client.remoteinterface.CidadeService;
 import br.com.company.gwt.server.InputServletImpl;
-import br.com.company.gwt.server.legacy.bean.BeanCidade;
-import br.com.company.gwt.server.legacy.model.ModelCidade;
+import br.com.company.gwt.server.dao.DaoCidade;
+import br.com.company.gwt.server.entities.Cidade;
 
 @Named("cidadeService")
 public class CidadeServiceImpl extends InputServletImpl implements CidadeService{
 	
-	@Inject private ModelCidade modelCidade;
+	@Inject private DaoCidade daoCidade;
 
 	@Override
 	public List<DTOCidade> listAll() {
 		List<DTOCidade> cidades = new ArrayList<DTOCidade>();
 		try {
-			for (BeanCidade bean : modelCidade.getCidades()) {
-				DTOCidade cidade = new DTOCidade();
-				cidade.setId(Integer.parseInt(bean.getCdncodg()));
-				cidade.setNome(bean.getCdcdesc());
-				cidades.add(cidade);
+			for (Cidade cidade : daoCidade.loadAll()) {
+				cidades.add(parseToDTOCidade(cidade));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,14 +31,11 @@ public class CidadeServiceImpl extends InputServletImpl implements CidadeService
 	}
 
 	@Override
-	public List<DTOCidade> listCidadesByUF(String uf) {
+	public List<DTOCidade> listCidadesByUF(String nome, String uf) {
 		List<DTOCidade> cidades = new ArrayList<DTOCidade>();
 		try {
-			for (BeanCidade bean : modelCidade.getCidadesDoEstado(uf)) {
-				DTOCidade cidade = new DTOCidade();
-				cidade.setId(Integer.parseInt(bean.getCdncodg()));
-				cidade.setNome(bean.getCdcdesc());
-				cidades.add(cidade);
+			for (Cidade cidade : daoCidade.getCidadeByNome(nome, uf)) {
+				cidades.add(parseToDTOCidade(cidade));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,6 +43,12 @@ public class CidadeServiceImpl extends InputServletImpl implements CidadeService
 		return cidades;
 	}
 
-	
+	private DTOCidade parseToDTOCidade(Cidade cidade){
+		DTOCidade dto = new DTOCidade();
+		dto.setId(cidade.getId());
+		dto.setNome(cidade.getNome());
+		dto.setUF(cidade.getUf());
+		return dto;
+	}
 
 }

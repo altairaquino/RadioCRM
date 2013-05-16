@@ -2,6 +2,7 @@ package br.com.company.gwt.client.mvc;
 
 import br.com.company.gwt.client.component.ComponentProvider;
 import br.com.company.gwt.client.form.FormConfigUserPermissao;
+import br.com.company.gwt.client.form.PanelGridAgencia;
 import br.com.company.gwt.client.form.PanelGridCliente;
 import br.com.company.gwt.client.form.PanelGridPrograma;
 import br.com.company.gwt.client.widget.DialogoSobre;
@@ -48,6 +49,15 @@ public class ProviderFacadeManager {
 		@Override
 		public PanelGridPrograma createInstance() {
 			return new PanelGridPrograma();
+		}
+		
+	};
+	
+	public static ComponentProvider<PanelGridAgencia> panelGridAgencia = new ComponentProvider<PanelGridAgencia>() {
+		
+		@Override
+		public PanelGridAgencia createInstance() {
+			return new PanelGridAgencia();
 		}
 		
 	};
