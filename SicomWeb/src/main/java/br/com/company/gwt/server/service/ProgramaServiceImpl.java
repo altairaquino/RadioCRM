@@ -8,6 +8,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import br.com.company.gwt.client.remoteinterface.ProgramaService;
 import br.com.company.gwt.server.InputServletImpl;
 import br.com.company.gwt.server.dao.DaoPrograma;
@@ -42,13 +44,15 @@ public class ProgramaServiceImpl extends InputServletImpl implements ProgramaSer
 	
 	@Override
 	public List<DTOPrograma> pesquisa(String query) {
-		List<DTOPrograma> clientes = new ArrayList<DTOPrograma>();
+		List<DTOPrograma> programas = new ArrayList<DTOPrograma>();
 		try {
-			
+			for (Programa programa : daoPrograma.getProgramaByNome(query)) {
+				programas.add(parseToDTOPrograma(programa));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return clientes;
+		return programas;
 	}
 	
 	private DTOPrograma parseToDTOPrograma(Programa programa){
@@ -56,6 +60,7 @@ public class ProgramaServiceImpl extends InputServletImpl implements ProgramaSer
 		dto.setId(programa.getId());
 		dto.setNome(programa.getNome());
 		dto.setValorPatrocinio(programa.getValorPatrocinio());
+		dto.setAtivo(programa.isAtivo());
 		
 		ArrayList<DTOProgramacao> listProgramacao = new ArrayList<DTOProgramacao>();
 		for (ProgramacaoPrograma programacao : programa.getProgramacao()) {
@@ -70,6 +75,32 @@ public class ProgramaServiceImpl extends InputServletImpl implements ProgramaSer
 		dto.setProgramacao(listProgramacao);
 		
 		return dto;
+	}
+
+	@Transactional
+	@Override
+	public DTOPrograma salvar(DTOPrograma dtoPrograma) throws Exception {
+		try {
+			Programa programa = null;
+			if (dtoPrograma.getId() == null){
+				programa = new Programa();
+			}else{
+				programa = daoPrograma.findByPrimaryKey(dtoPrograma.getId());
+			}
+			
+			programa.setId(dtoPrograma.getId());
+			programa.setNome(dtoPrograma.getNome());
+			programa.setValorPatrocinio(dtoPrograma.getValorPatrocinio());
+			programa.setAtivo(dtoPrograma.getAtivo());
+			
+			daoPrograma.store(programa);
+			
+			dtoPrograma.setId(programa.getId());
+			
+		} catch (Exception e) {
+			
+		}
+		return null;
 	}
 
 }

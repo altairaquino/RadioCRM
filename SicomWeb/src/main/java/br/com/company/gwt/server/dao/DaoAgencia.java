@@ -4,7 +4,7 @@ import javax.inject.Named;
 
 import br.com.company.gwt.server.entities.Agencia;
 
-@Named(value="daoPrograma")
+@Named(value="daoAgencia")
 public class DaoAgencia extends DaoAbstract<Agencia, Integer> {
 	
 	@Override

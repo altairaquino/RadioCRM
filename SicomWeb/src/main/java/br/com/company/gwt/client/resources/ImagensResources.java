@@ -47,9 +47,6 @@ public interface ImagensResources extends ClientBundle{
 	@Source("br/com/company/gwt/client/resources/icone_impressora_16.png")
 	ImageResource iconeImpressora16();
 	
-	@Source("br/com/company/gwt/client/resources/icone_movimento_16.png")
-	ImageResource iconeMovimento16();
-	
 	@Source("br/com/company/gwt/client/resources/icone_configuracao_16.png")
 	ImageResource iconeConfiguracao16();
 	
@@ -74,13 +71,13 @@ public interface ImagensResources extends ClientBundle{
 	@Source("br/com/company/gwt/client/resources/icone_pesquisa_16.png")
 	ImageResource iconePesquisa16();
 
-	@Source("br/com/company/gwt/client/resources/icone_abrir_caixa_16.png")
-	ImageResource iconeAbrirCaixa16();
-	
-	@Source("br/com/company/gwt/client/resources/icone_fechar_caixa_16.png")
-	ImageResource iconeFecharCaixa16();
-	
 	@Source("br/com/company/gwt/client/resources/icone_cliente_16.png")
 	ImageResource iconeCliente16();
+	
+	@Source("br/com/company/gwt/client/resources/iconeMicrofone_64.png")
+	ImageResource iconeMicrofone64();
+	
+	@Source("br/com/company/gwt/client/resources/iconeMicrofone_16.png")
+	ImageResource iconeMicrofone16();
 	
 }

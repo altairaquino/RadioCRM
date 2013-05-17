@@ -12,4 +12,6 @@ public interface ProgramaServiceAsync {
 
 	void pesquisa(String query, AsyncCallback<List<DTOPrograma>> callback);
 
+	void salvar(DTOPrograma dtoPrograma, AsyncCallback<DTOPrograma> asyncCallback);
+
 }

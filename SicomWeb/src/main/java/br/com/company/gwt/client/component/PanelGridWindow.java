@@ -179,7 +179,7 @@ public abstract class PanelGridWindow<T extends ModelData> extends Window {
 
 			@Override
 			public void handleEvent(GridEvent<T> be) {
-				actionButtonAtualizaClick();   
+				actionButtonEditarClick();   
 			}
 			
 		});

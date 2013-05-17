@@ -13,5 +13,7 @@ public interface ProgramaService extends RemoteService {
 	List<DTOPrograma> listAll();
 
 	List<DTOPrograma> pesquisa(String query);
+
+	DTOPrograma salvar(DTOPrograma dtoPrograma) throws Exception;
 	
 }

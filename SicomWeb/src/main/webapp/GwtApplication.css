@@ -43,22 +43,10 @@
 	background: url(imagens/icones/icone_produto_16.png);
 }
 
-#movimento-shortcut img {
-	width: 64px;
-	height: 64px;
-	background: url(imagens/shortcuts/alliance_64.png);
-}
-
 #venda-shortcut img {
 	width: 64px;
 	height: 64px;
 	background: url(imagens/shortcuts/shortcut_venda_64.png);
-}
-
-#caixa_produto-shortcut img {
-	width: 64px;
-	height: 64px;
-	background: url(imagens/shortcuts/caixa_produto_64.png);
 }
 
 #client-shortcut img {
@@ -66,33 +54,17 @@
 	height: 64px;
 	background: url(imagens/shortcuts/client_64.png);
 }
+
 #agencia-shortcut img {
 	width: 64px;
 	height: 64px;
 	background: url(imagens/shortcuts/agencia_64.png);
 }
+
 #cliente-shortcut img {
 	width: 64px;
 	height: 64px;
 	background: url(imagens/shortcuts/cliente_64.png);
-}
-
-#money-shortcut img {
-	width: 64px;
-	height: 64px;
-	background: url(imagens/shortcuts/money_64.png);
-}
-
-#produto-shortcut img {
-	width: 64px;
-	height: 64px;
-	background: url(imagens/shortcuts/shortcut_produto_64.png);
-}
-
-#contato-shortcut img {
-	width: 64px;
-	height: 64px;
-	background: url(imagens/shortcuts/contato_64.png);
 }
 
 #contrato-shortcut img {
@@ -112,12 +84,15 @@
 	height: 16px;
 	background: url(imagens/icones/icon_logout_16.png);
 }
+
 .user_icon_man {
 	background: url(imagens/icones/user_icon_man_24.png);
 }
+
 .user_icon_female {
 	background: url(imagens/icones/user_icon_female_22.png);
 }
+
 .colums-back {
 	background-color: red;
 }	

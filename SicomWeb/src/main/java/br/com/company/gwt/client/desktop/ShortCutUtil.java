@@ -6,11 +6,13 @@ import java.util.List;
 import br.com.company.gwt.client.component.ComponentProvider;
 import br.com.company.gwt.client.component.WebUtil;
 import br.com.company.gwt.client.mvc.ProviderFacadeManager;
+import br.com.company.gwt.client.resources.ImagensResources;
 
 import com.extjs.gxt.desktop.client.Shortcut;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Window;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class ShortCutUtil {
 
@@ -32,7 +34,7 @@ public class ShortCutUtil {
 		
 		
 		shortCuts.add(WebUtil.createShortcut("Clientes", "cliente-shortcut", ProviderFacadeManager.panelGridCliente));
-		shortCuts.add(WebUtil.createShortcut("Programas", "contato-shortcut", ProviderFacadeManager.panelGridPrograma));
+		shortCuts.add(WebUtil.createShortcut("Programas", AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeMicrofone64()), ProviderFacadeManager.panelGridPrograma));
 		shortCuts.add(WebUtil.createShortcut("Contratos", "contrato-shortcut", ProviderFacadeManager.panelGridPrograma));
 		shortCuts.add(WebUtil.createShortcut("Agências", "agencia-shortcut", ProviderFacadeManager.panelGridAgencia));
 		

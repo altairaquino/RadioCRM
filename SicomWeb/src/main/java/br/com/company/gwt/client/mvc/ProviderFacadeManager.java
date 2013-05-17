@@ -2,6 +2,7 @@ package br.com.company.gwt.client.mvc;
 
 import br.com.company.gwt.client.component.ComponentProvider;
 import br.com.company.gwt.client.form.FormConfigUserPermissao;
+import br.com.company.gwt.client.form.FormPrograma;
 import br.com.company.gwt.client.form.PanelGridAgencia;
 import br.com.company.gwt.client.form.PanelGridCliente;
 import br.com.company.gwt.client.form.PanelGridPrograma;
@@ -15,6 +16,14 @@ public class ProviderFacadeManager {
 		@Override
 		public FormAlteraSenha createInstance() {
 			return new FormAlteraSenha();
+		}
+	};
+	
+	public static ComponentProvider<FormPrograma> formPrograma = new ComponentProvider<FormPrograma>() {
+		
+		@Override
+		public FormPrograma createInstance() {
+			return new FormPrograma();
 		}
 	};
 	
