@@ -1,15 +1,22 @@
 package br.com.company.gwt.client.form;
 
+import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.TextFieldUpper;
+import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.dto.DTOCidade;
 import br.com.company.gwt.client.dto.enums.EnumUF;
+import br.com.company.gwt.client.mvc.ProviderFacadeManager;
 import br.com.company.gwt.client.resources.ImagensResources;
 import br.com.company.gwt.shared.dto.DTOAgencia;
+import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
 
 import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
@@ -23,6 +30,7 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteData;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class FormCliente extends Window {
@@ -30,12 +38,13 @@ public class FormCliente extends Window {
 	private ContentPanel mainPanel;
 	private FieldSet fsDados;
 	private ComboBox<DTOAgencia> comboAgencia;
+	private Button btnAgencia;
 	private RadioGroup radioGroupTipoPessoa;
 	private Radio rdFisica;
 	private Radio rdJuridica;
 	private ListStore<DTOAgencia> storeAgencia;
 	private TextFieldUpper tfRazaoSocial;
-	private TextFieldUpper ftNome;
+	private TextFieldUpper tfNome;
 	private TextFieldUpper tfSegmento;
 	private TextField<String> tfEmail;
 	private TextField<String> tfTelefone;
@@ -45,9 +54,9 @@ public class FormCliente extends Window {
 	private TextField<String> tfCelularContato;
 	private DateField tfAniversarioContato;
 	private FieldSet fsEndereco;
-	private DateField tfAniversarioEmpresa;
+	private DateField tfAniversarioCliente;
 	private ListStore<DTOTipoLogradouro> storeTipoLogradouro;
-	private ComboBox<DTOTipoLogradouro> comboBoxTipoLogradouro;
+	private ComboBox<DTOTipoLogradouro> comboTipoLogradouro;
 	private TextFieldUpper tfLogradouro;
 	private TextFieldUpper tfComplemento;
 	private TextField<String> tfCEP;
@@ -62,6 +71,7 @@ public class FormCliente extends Window {
 	private FieldSet fieldSetDadosDoProprietrio;
 	private ListStore<DTOCidade> storeCidade;
 	private ListStore<BaseModelData> storeEstado;
+	private Integer id;
 
 	public FormCliente() {
 		setResizable(false);
@@ -87,6 +97,7 @@ public class FormCliente extends Window {
 		rdFisica = new Radio();
 		rdFisica.setValue(true);
 		rdFisica.setWidth("60px");
+		rdFisica.setData("tipo", "FISICA");
 		rdFisica.setBoxLabel("Física");
 		rdFisica.setHideLabel(true);
 		
@@ -94,6 +105,7 @@ public class FormCliente extends Window {
 		
 		rdJuridica = new Radio();
 		rdJuridica.setWidth("71px");
+		rdFisica.setData("tipo", "JURIDICA");
 		rdJuridica.setBoxLabel("Jurídica");
 		rdJuridica.setHideLabel(true);
 		radioGroupTipoPessoa.add(rdJuridica);
@@ -107,18 +119,33 @@ public class FormCliente extends Window {
 		
 		comboAgencia = new ComboBox<DTOAgencia>();
 		comboAgencia.setStore(storeAgencia);
-		comboAgencia.setSize("303px", "22px");
+		comboAgencia.setSize("278px", "22px");
 		
 		fsDados.add(comboAgencia, new AbsoluteData(283, 17));
+		
+		btnAgencia = new Button();
+		btnAgencia.setSize("22px", "22px");
+		btnAgencia.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeAdiciona16()));
+		btnAgencia.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				FormAgencia formAgencia = ProviderFacadeManager.formAgencia.createInstance();
+				formAgencia.setModal(true);
+				formAgencia.show();
+			}
+		});
+		
+		fsDados.add(btnAgencia, new AbsoluteData(562, 17));
 		
 		fsDados.add(new LabelField("Agência de Atendimento:"), new AbsoluteData(283, 0));
 		
 		fsDados.add(new LabelField("Nome:"), new AbsoluteData(0, 43));
 		
-		ftNome = new TextFieldUpper();
-		ftNome.setSize("277px", "22px");
+		tfNome = new TextFieldUpper();
+		tfNome.setSize("277px", "22px");
 
-		fsDados.add(ftNome, new AbsoluteData(0, 59));
+		fsDados.add(tfNome, new AbsoluteData(0, 59));
 		
 		fsDados.add(new LabelField("Razão Social:"), new AbsoluteData(283, 43));
 		
@@ -191,10 +218,10 @@ public class FormCliente extends Window {
 		
 		fsEndereco.add(new LabelField("Tipo:"), new AbsoluteData(0, -4));
 		
-		comboBoxTipoLogradouro = new ComboBox<DTOTipoLogradouro>();
-		comboBoxTipoLogradouro.setStore(storeTipoLogradouro);
-		comboBoxTipoLogradouro.setSize("66px", "22px");
-		fsEndereco.add(comboBoxTipoLogradouro, new AbsoluteData (0, 12));
+		comboTipoLogradouro = new ComboBox<DTOTipoLogradouro>();
+		comboTipoLogradouro.setStore(storeTipoLogradouro);
+		comboTipoLogradouro.setSize("66px", "22px");
+		fsEndereco.add(comboTipoLogradouro, new AbsoluteData (0, 12));
 		
 		tfLogradouro = new TextFieldUpper();
 		tfLogradouro.setSize("259px", "22px");
@@ -247,10 +274,10 @@ public class FormCliente extends Window {
 		
 		fsDados.add(new LabelField("Aniversário:"), new AbsoluteData(160, -1));
 		
-		tfAniversarioEmpresa = new DateField();
-		tfAniversarioEmpresa.setSize("117px", "22px");
+		tfAniversarioCliente = new DateField();
+		tfAniversarioCliente.setSize("117px", "22px");
 		
-		fsDados.add(tfAniversarioEmpresa, new AbsoluteData(160, 17));
+		fsDados.add(tfAniversarioCliente, new AbsoluteData(160, 17));
 		
 		mainPanel.add(fsDados, new AbsoluteData(3, 1));
 		
@@ -281,6 +308,15 @@ public class FormCliente extends Window {
 		btnSalvar = new Button("Salvar");
 		btnSalvar.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeConfirma16()));
 		btnSalvar.setSize("114px", "24px");
+		btnSalvar.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (validaCampos()){
+					salvar();					
+				}
+			}
+		});
+		
 		mainPanel.add(btnSalvar, new AbsoluteData(497, 419));
 		
 		checkAtivo = new CheckBox();
@@ -291,6 +327,61 @@ public class FormCliente extends Window {
 		mainPanel.add(checkAtivo, new AbsoluteData(3, 421));
 		
 		add(mainPanel);
+		
+	}
+
+	protected void salvar() {
+		mainPanel.mask("Salvando cliente. Aguarde...");
+		InstanceService.CLIENTE_SERVICE.salvar(getDTOClienteFromForm(), new AsyncCallback<DTOCliente>() {
+			
+			@Override
+			public void onSuccess(DTOCliente result) {
+				Info.display("Sucesso.", "Cliente salvo com sucesso.");
+				mainPanel.unmask();
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				mainPanel.unmask();
+			}
+		});		
+	}
+
+	private DTOCliente getDTOClienteFromForm() {
+		DTOCliente dto = new DTOCliente();
+		dto.setId(id);
+		dto.setNome(tfNome.getValue());
+		dto.setDataNascimento(tfAniversarioCliente.getValue());
+		dto.setRazaoSocial(tfRazaoSocial.getValue());
+		dto.setTipoPessoa(radioGroupTipoPessoa.getValue().<String>getData("tipo"));
+		dto.setAgencia(comboAgencia.getValue());
+		// TODO CRIAR CAMPO DE DOCUMENTO
+		dto.setDocumento("");
+		dto.setSegmento(tfSegmento.getValue());
+		dto.setEmail(tfEmail.getValue());
+		dto.setFone(tfTelefone.getValue());
+		dto.setTipoLogradouro(comboTipoLogradouro.getValue());
+		dto.setLogradouro(tfLogradouro.getValue());
+		dto.setComplemento(tfComplemento.getValue());
+		dto.setCep(tfCEP.getValue());
+		dto.setBairro(tfBairro.getValue());
+		dto.setCidade(comboCidade.getValue());
+		dto.setNomeContato(tfNomeContato.getValue());
+		dto.setFoneContato(tfFoneContato.getValue());
+		dto.setCellContato(tfCelularContato.getValue());
+		dto.setDataNascimentoContato(tfAniversarioContato.getValue());
+		dto.setNomeProprietario(tfNomeProprietario.getValue());
+		dto.setDataNascimentoProprietario(tfAniversarioProprietario.getValue());
+		dto.setAtivo(checkAtivo.getValue());
+		return dto;
+	}
+
+	protected boolean validaCampos() {
+		if (tfNome.getValue() == null){
+			WebMessageBox.alert("Informe o nome do cliente.");
+			return false;
+		}
+		return true;
 	}
 
 	private void carregaEstados() {

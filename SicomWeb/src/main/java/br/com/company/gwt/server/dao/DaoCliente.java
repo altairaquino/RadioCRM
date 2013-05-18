@@ -22,12 +22,12 @@ public class DaoCliente extends DaoAbstract<Cliente, Integer> {
 		try {
 			String hql = " from Cliente c " +
 						 " where (upper(c.nome) like upper(:nome)" +
-						 " or c.documento = :nome ) "+
+						 " or c.documento = :documento ) "+
 						 " order by c.nome";
 			
 			Query query = createQuery(hql);
 			query.setParameter("nome", "%"+nome+"%");
-			query.setParameter("cpf", nome);
+			query.setParameter("documento", nome);
 			query.setMaxResults(20);
 			
 			clientes.addAll(listFromQuery(query));
@@ -42,13 +42,13 @@ public class DaoCliente extends DaoAbstract<Cliente, Integer> {
     	List<Cliente> clientes = new ArrayList<Cliente>();
     	try {
     		String hql = " from Cliente c " +
-						 " where (upper(c.nome) like upper(:nome)" +
-						 " or c.cpf = :cpf ) "+
-						 " order by c.nome";
+    					 " where (upper(c.nome) like upper(:nome)" +
+    					 " or c.documento = :documento ) "+
+    					 " order by c.nome";
 
 			Query qr = createQuery(hql);
 			qr.setParameter("nome", "%"+query+"%");
-			qr.setParameter("cpf", query);
+			qr.setParameter("documento", query);
 			qr.setFirstResult(offSet);
 			qr.setMaxResults(maxResult);
 			

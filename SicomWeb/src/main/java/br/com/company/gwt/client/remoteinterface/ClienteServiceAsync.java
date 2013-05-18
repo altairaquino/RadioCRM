@@ -12,4 +12,6 @@ public interface ClienteServiceAsync {
 
 	void pesquisa(String query, AsyncCallback<List<DTOCliente>> callback);
 
+	void salvar(DTOCliente dtoCliente, AsyncCallback<DTOCliente> callback);
+
 }

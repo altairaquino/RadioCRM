@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.company.gwt.client.component.ComponentProvider;
-import br.com.company.gwt.shared.dto.DTOUsuario;
+import br.com.company.gwt.client.mvc.ProviderFacadeManager;
+import br.com.company.gwt.client.resources.ImagensResources;
 
-import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class StartMenuUtil {
 	
 	public static List<MenuItem> getMenuItems(){
 		
-		DTOUsuario user = Registry.get("user");
+		//DTOUsuario user = Registry.get("user");
 		
 		List<Integer> permis = new ArrayList<Integer>();// user.getJanelas();
 		
@@ -32,34 +34,35 @@ public class StartMenuUtil {
 		menuItem.addSelectionListener(getSelectionListener(ProviderFacadeManager.formVendasLista));
 		menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeVenda16()));
 	    menuItems.add(menuItem);
-
+		*/
+		
+		
 	    menuItem = new MenuItem("Cadastros");
 	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeForm16()));
 
 		    Menu sub = new Menu();
 	
-		    MenuItem item = new MenuItem("Produtos");
-		    item.setIcon(IconHelper.createStyle("icone_produto"));
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.gridProdutoWindow));
+		    MenuItem item = new MenuItem("Clientes");
+		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeCliente16()));
+		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridCliente));
 		   
-		    if (permis.contains(1)){
-		    	sub.add(item);
-		    }
-		    
-		    item = new MenuItem("Clientes");
-		    item.setIcon(IconHelper.createStyle("icone_cliente"));
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.gridClienteWindow));
+		    sub.add(item);
+
+		    item = new MenuItem("Programas");
+		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeMicrofone16()));
+		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridPrograma));
 		    sub.add(item);
 		    
-		    item = new MenuItem("Categorias");
+		    item = new MenuItem("Agências");
 		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeForm16()));
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formCategoriaWindow));
+		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridAgencia));
 		    sub.add(item);
 
 	    menuItem.setSubMenu(sub);
 	    
 	    menuItems.add(menuItem);
 	    
+	    /*
 	    menuItem = new MenuItem("Impressões");
 	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeImpressora16()));
 	    
@@ -95,29 +98,31 @@ public class StartMenuUtil {
 	    	menuItems.add(menuItem);
 	    }
 	    
+	    */
+	    
+	    
 	    menuItem = new MenuItem("Relatórios");
 	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
 	    
 		    sub = new Menu();
 		    
-		    item = new MenuItem("Inventário de Estoque");
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formRelatorioLoja));
+		    item = new MenuItem("Patrocinadores");
+		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridCliente));
 		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
 		    		    
 		    sub.add(item);
 	    
 		    item = new MenuItem("Gerenciais (Período)");
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formRelatorioLojaData));
+		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridAgencia));
 		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
 		    
 		    sub.add(item);
 		    
 	    menuItem.setSubMenu(sub);
 	    
-	    if (permis.contains(2)){
-	    	menuItems.add(menuItem);
-	    }
-	    
+	    menuItems.add(menuItem);
+
+	    /*
 	    menuItem = new MenuItem("Manutenção");
 	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeConfiguracao16()));
 	    

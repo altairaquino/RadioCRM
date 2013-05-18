@@ -13,5 +13,7 @@ public interface ClienteService extends RemoteService {
 	List<DTOCliente> listAll();
 
 	List<DTOCliente> pesquisa(String query);
+
+	DTOCliente salvar(DTOCliente dtoCliente) throws Exception;
 	
 }

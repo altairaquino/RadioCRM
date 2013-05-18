@@ -6,20 +6,20 @@ public class DTOTipoLogradouro extends BaseModelData {
 	
 	private static final long serialVersionUID = 8604973707850497152L;
 
-	public Integer getOperacaoId() {
-		return get("operacaoId");
+	public Integer getId() {
+		return get("id");
 	}
 
-	public void setOperacaoId(Integer operacaoId) {
-		set("operacaoId", operacaoId);
+	public void setId(Integer id) {
+		set("id", id);
 	}
 
-	public String getDescricao() {
-		return get("descricao");
+	public String getNome() {
+		return get("nome");
 	}
 
-	public void setDescricao(String descricao) {
-		set("descricao", descricao);
+	public void setNome(String nome) {
+		set("nome", nome);
 	}	
 
 }

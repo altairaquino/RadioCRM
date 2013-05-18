@@ -606,3 +606,588 @@ Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
          Generating method body for defCurrencyCode()
    Adding '3' new generated units
       Removing invalidated units
+Module location: file:/C:/Users/Altair/git/RadioCRM/SicomWeb/src/main/java/br/com/company/gwt/GwtApplication.gwt.xml
+Loading inherited module 'com.google.gwt.user.User'
+   Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/User.gwt.xml
+   Loading inherited module 'com.google.gwt.core.Core'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/core/Core.gwt.xml
+      Loading inherited module 'com.google.gwt.dev.jjs.intrinsic.Intrinsic'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-dev/2.1.0/gwt-dev-2.1.0.jar!/com/google/gwt/dev/jjs/intrinsic/Intrinsic.gwt.xml
+         Loading inherited module 'com.google.gwt.lang.LongLib'
+            Module location: jar:file:/D:/Ferramentas/IDE%20Java/eclipse_indigo/plugins/com.google.gdt.eclipse.designer.hosted.2_0.super_2.6.0.r37x201206111222.jar!/com/google/gwt/lang/LongLib.gwt.xml
+      Loading inherited module 'com.google.gwt.emul.Emulation'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/emul/Emulation.gwt.xml
+         Loading inherited module 'com.google.gwt.logging.LogImpl'
+            Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/logging/LogImpl.gwt.xml
+      Loading inherited module 'com.google.gwt.xhr.XMLHttpRequest'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/xhr/XMLHttpRequest.gwt.xml
+         Loading inherited module 'com.google.gwt.core.Core'
+            Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.core.CompilerParameters'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/core/CompilerParameters.gwt.xml
+      Loading inherited module 'com.google.gwt.core.EmulateJsStack'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/core/EmulateJsStack.gwt.xml
+         Loading inherited module 'com.google.gwt.core.Core'
+            Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.core.AsyncFragmentLoader'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/core/AsyncFragmentLoader.gwt.xml
+      Loading inherited module 'com.google.gwt.core.XSLinker'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/core/XSLinker.gwt.xml
+      Loading inherited module 'com.google.gwt.core.CrossSiteIframeLinker'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/core/CrossSiteIframeLinker.gwt.xml
+   Loading inherited module 'com.google.gwt.text.Text'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/text/Text.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.event.Event'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/event/Event.gwt.xml
+      Loading inherited module 'com.google.gwt.event.EventBase'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/event/EventBase.gwt.xml
+         Loading inherited module 'com.google.gwt.core.Core'
+            Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.event.dom.DomEvent'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/event/dom/DomEvent.gwt.xml
+         Loading inherited module 'com.google.gwt.event.EventBase'
+            Module 'com.google.gwt.event.EventBase' has already been loaded and will be skipped
+         Loading inherited module 'com.google.gwt.dom.DOM'
+            Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/dom/DOM.gwt.xml
+            Loading inherited module 'com.google.gwt.core.Core'
+               Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+            Loading inherited module 'com.google.gwt.user.UserAgent'
+               Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/UserAgent.gwt.xml
+               Loading inherited module 'com.google.gwt.emul.EmulationWithUserAgent'
+                  Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/emul/EmulationWithUserAgent.gwt.xml
+                  Loading inherited module 'com.google.gwt.emul.Emulation'
+                     Module 'com.google.gwt.emul.Emulation' has already been loaded and will be skipped
+               Loading inherited module 'com.google.gwt.core.CoreWithUserAgent'
+                  Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/core/CoreWithUserAgent.gwt.xml
+                  Loading inherited module 'com.google.gwt.core.Core'
+                     Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.event.logical.LogicalEvent'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/event/logical/LogicalEvent.gwt.xml
+         Loading inherited module 'com.google.gwt.event.EventBase'
+            Module 'com.google.gwt.event.EventBase' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.animation.Animation'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/animation/Animation.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.User'
+         Module 'com.google.gwt.user.User' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.editor.Editor'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/editor/Editor.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.resources.Resources'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/resources/Resources.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.dom.DOM'
+         Module 'com.google.gwt.dom.DOM' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.http.HTTP'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/http/HTTP.gwt.xml
+         Loading inherited module 'com.google.gwt.core.Core'
+            Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+         Loading inherited module 'com.google.gwt.xhr.XMLHttpRequest'
+            Module 'com.google.gwt.xhr.XMLHttpRequest' has already been loaded and will be skipped
+         Loading inherited module 'com.google.gwt.user.User'
+            Module 'com.google.gwt.user.User' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.layout.Layout'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/layout/Layout.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.dom.DOM'
+         Module 'com.google.gwt.dom.DOM' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.animation.Animation'
+         Module 'com.google.gwt.animation.Animation' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.uibinder.UiBinder'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/uibinder/UiBinder.gwt.xml
+      Loading inherited module 'com.google.gwt.resources.Resources'
+         Module 'com.google.gwt.resources.Resources' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.AsyncProxy'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/AsyncProxy.gwt.xml
+   Loading inherited module 'com.google.gwt.user.RemoteService'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/RemoteService.gwt.xml
+      Loading inherited module 'com.google.gwt.http.HTTP'
+         Module 'com.google.gwt.http.HTTP' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.DocumentRoot'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/DocumentRoot.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.DOM'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/DOM.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.dom.DOM'
+         Module 'com.google.gwt.dom.DOM' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.Window'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/Window.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.HTTPRequest'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/HTTPRequest.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.xhr.XMLHttpRequest'
+         Module 'com.google.gwt.xhr.XMLHttpRequest' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.History'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/History.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.i18n.I18N'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/i18n/I18N.gwt.xml
+      Loading inherited module 'com.google.gwt.regexp.RegExp'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/regexp/RegExp.gwt.xml
+      Loading inherited module 'com.google.gwt.safehtml.SafeHtml'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/safehtml/SafeHtml.gwt.xml
+         Loading inherited module 'com.google.gwt.regexp.RegExp'
+            Module 'com.google.gwt.regexp.RegExp' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.Popup'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/Popup.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.Form'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/Form.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.TextBox'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/TextBox.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.Focus'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/Focus.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.ImageBundle'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/ImageBundle.gwt.xml
+      Loading inherited module 'com.google.gwt.user.ClippedImage'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/ClippedImage.gwt.xml
+         Loading inherited module 'com.google.gwt.core.Core'
+            Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+         Loading inherited module 'com.google.gwt.user.UserAgent'
+            Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.ClippedImage'
+      Module 'com.google.gwt.user.ClippedImage' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.RichText'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/RichText.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.SplitPanel'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/SplitPanel.gwt.xml
+      Loading inherited module 'com.google.gwt.user.User'
+         Module 'com.google.gwt.user.User' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.CaptionPanel'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/CaptionPanel.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.Window'
+      Module 'com.google.gwt.user.Window' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.Tree'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/Tree.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.Hyperlink'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/Hyperlink.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.FileUpload'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/FileUpload.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.datepicker.DatePicker'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/datepicker/DatePicker.gwt.xml
+   Loading inherited module 'com.google.gwt.user.cellview.CellView'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/user/cellview/CellView.gwt.xml
+      Loading inherited module 'com.google.gwt.user.User'
+         Module 'com.google.gwt.user.User' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.cell.Cell'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/cell/Cell.gwt.xml
+         Loading inherited module 'com.google.gwt.dom.DOM'
+            Module 'com.google.gwt.dom.DOM' has already been loaded and will be skipped
+         Loading inherited module 'com.google.gwt.safehtml.SafeHtml'
+            Module 'com.google.gwt.safehtml.SafeHtml' has already been loaded and will be skipped
+         Loading inherited module 'com.google.gwt.text.Text'
+            Module 'com.google.gwt.text.Text' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.view.View'
+         Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/view/View.gwt.xml
+         Loading inherited module 'com.google.gwt.core.Core'
+            Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.safehtml.SafeHtml'
+      Module 'com.google.gwt.safehtml.SafeHtml' has already been loaded and will be skipped
+Loading inherited module 'com.google.gwt.i18n.I18N'
+   Module 'com.google.gwt.i18n.I18N' has already been loaded and will be skipped
+Loading inherited module 'com.extjs.gxt.ui.GXT'
+   Module location: jar:file:/C:/Users/Altair/.m2/repository/com/extjs/gxt/2.3.0-gwt2/gxt-2.3.0-gwt2.jar!/com/extjs/gxt/ui/GXT.gwt.xml
+   Loading inherited module 'com.google.gwt.i18n.I18N'
+      Module 'com.google.gwt.i18n.I18N' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.http.HTTP'
+      Module 'com.google.gwt.http.HTTP' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.xml.XML'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/xml/XML.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+      Loading inherited module 'com.google.gwt.user.UserAgent'
+         Module 'com.google.gwt.user.UserAgent' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.json.JSON'
+      Module location: jar:file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar!/com/google/gwt/json/JSON.gwt.xml
+      Loading inherited module 'com.google.gwt.core.Core'
+         Module 'com.google.gwt.core.Core' has already been loaded and will be skipped
+   Loading inherited module 'com.google.gwt.user.User'
+      Module 'com.google.gwt.user.User' has already been loaded and will be skipped
+Loading inherited module 'com.extjs.gxt.desktop.WebDesktop'
+   Module location: jar:file:/C:/Users/Altair/.m2/repository/com/extjs/gxt/2.3.0-gwt2/gxt-2.3.0-gwt2.jar!/com/extjs/gxt/desktop/WebDesktop.gwt.xml
+   Loading inherited module 'com.extjs.gxt.ui.GXT'
+      Module 'com.extjs.gxt.ui.GXT' has already been loaded and will be skipped
+Loading inherited module 'com.extjs.gxt.charts.Chart'
+   Module location: jar:file:/C:/Users/Altair/.m2/repository/com/extjs/gxt/2.3.0-gwt2/gxt-2.3.0-gwt2.jar!/com/extjs/gxt/charts/Chart.gwt.xml
+   Loading inherited module 'com.extjs.gxt.ui.GXT'
+      Module 'com.extjs.gxt.ui.GXT' has already been loaded and will be skipped
+Public resources found in...
+   Refreshing resources
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/resources.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\resources.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/rt.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\rt.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/jsse.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\jsse.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/jce.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\jce.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/charsets.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\charsets.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/jfr.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\jfr.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/access-bridge-32.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\access-bridge-32.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/dnsns.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\dnsns.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/jaccess.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\jaccess.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/localedata.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\localedata.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/sunec.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\sunec.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/sunjce_provider.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\sunjce_provider.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/sunmscapi.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\sunmscapi.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/sunpkcs11.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\sunpkcs11.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/zipfs.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\zipfs.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\xml\bind\jaxb-api\2.1\jaxb-api-2.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\transaction\jta\1.1\jta-1.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\xml\stream\stax-api\1.0-2\stax-api-1.0-2.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA-sources.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/antlr/antlr/2.7.6/antlr-2.7.6.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\antlr\antlr\2.7.6\antlr-2.7.6.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/bouncycastle/bcmail-jdk14/138/bcmail-jdk14-138.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\bouncycastle\bcmail-jdk14\138\bcmail-jdk14-138.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/bouncycastle/bcmail-jdk14/1.38/bcmail-jdk14-1.38.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\bouncycastle\bcmail-jdk14\1.38\bcmail-jdk14-1.38.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/bouncycastle/bcprov-jdk14/138/bcprov-jdk14-138.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\bouncycastle\bcprov-jdk14\138\bcprov-jdk14-138.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/bouncycastle/bcprov-jdk14/1.38/bcprov-jdk14-1.38.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\bouncycastle\bcprov-jdk14\1.38\bcprov-jdk14-1.38.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/bouncycastle/bctsp-jdk14/1.38/bctsp-jdk14-1.38.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\bouncycastle\bctsp-jdk14\1.38\bctsp-jdk14-1.38.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/codehaus/castor/castor/1.2/castor-1.2.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\codehaus\castor\castor\1.2\castor-1.2.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-beanutils\commons-beanutils\1.8.0\commons-beanutils-1.8.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-collections/commons-collections/2.1/commons-collections-2.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-collections\commons-collections\2.1\commons-collections-2.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-dbcp\commons-dbcp\1.4\commons-dbcp-1.4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-digester\commons-digester\2.1\commons-digester-2.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-fileupload/commons-fileupload/1.2.2/commons-fileupload-1.2.2.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-fileupload\commons-fileupload\1.2.2\commons-fileupload-1.2.2.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-pool\commons-pool\1.5.4\commons-pool-1.5.4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/ar/com/fdvs/DynamicJasper-core-fonts/1.0/DynamicJasper-core-fonts-1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\ar\com\fdvs\DynamicJasper-core-fonts\1.0\DynamicJasper-core-fonts-1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/geronimo/specs/geronimo-stax-api_1.0_spec/1.0/geronimo-stax-api_1.0_spec-1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\geronimo\specs\geronimo-stax-api_1.0_spec\1.0\geronimo-stax-api_1.0_spec-1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-dev/2.1.0/gwt-dev-2.1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\google\gwt\gwt-dev\2.1.0\gwt-dev-2.1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-servlet/2.1.0/gwt-servlet-2.1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\google\gwt\gwt-servlet\2.1.0\gwt-servlet-2.1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\google\gwt\gwt-user\2.1.0\gwt-user-2.1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/extjs/gxt/2.3.0-gwt2/gxt-2.3.0-gwt2.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\extjs\gxt\2.3.0-gwt2\gxt-2.3.0-gwt2.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/hibernate/hibernate-commons-annotations/3.2.0.Final/hibernate-commons-annotations-3.2.0.Final.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\hibernate\hibernate-commons-annotations\3.2.0.Final\hibernate-commons-annotations-3.2.0.Final.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/hibernate/hibernate-core/3.6.10.Final/hibernate-core-3.6.10.Final.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\hibernate\hibernate-core\3.6.10.Final\hibernate-core-3.6.10.Final.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.0-api\1.0.1.Final\hibernate-jpa-2.0-api-1.0.1.Final.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/hibernate/hibernate-validator/4.0.0.GA/hibernate-validator-4.0.0.GA.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\hibernate\hibernate-validator\4.0.0.GA\hibernate-validator-4.0.0.GA.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/lowagie/itext/2.1.7/itext-2.1.7.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\lowagie\itext\2.1.7\itext-2.1.7.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.4/jackson-core-asl-1.9.4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\codehaus\jackson\jackson-core-asl\1.9.4\jackson-core-asl-1.9.4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.4/jackson-mapper-asl-1.9.4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\codehaus\jackson\jackson-mapper-asl\1.9.4\jackson-mapper-asl-1.9.4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/net/sf/jasperreports/jasperreports/4.7.0/jasperreports-4.7.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\net\sf\jasperreports\jasperreports\4.7.0\jasperreports-4.7.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/javassist/javassist/3.16.1-GA/javassist-3.16.1-GA.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\javassist\javassist\3.16.1-GA\javassist-3.16.1-GA.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/sun/xml/bind/jaxb-impl/2.1.3/jaxb-impl-2.1.3.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\sun\xml\bind\jaxb-impl\2.1.3\jaxb-impl-2.1.3.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/jfree/jcommon/1.0.15/jcommon-1.0.15.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\jfree\jcommon\1.0.15\jcommon-1.0.15.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/eclipse/jdtcore/3.1.0/jdtcore-3.1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\eclipse\jdtcore\3.1.0\jdtcore-3.1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/jfree/jfreechart/1.0.12/jfreechart-1.0.12.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\jfree\jfreechart\1.0.12\jfreechart-1.0.12.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/junit/junit/4.8.1/junit-4.8.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\junit\junit\4.8.1\junit-4.8.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/poi/poi/3.7/poi-3.7.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\poi\poi\3.7\poi-3.7.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/poi/poi-ooxml/3.7/poi-ooxml-3.7.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\poi\poi-ooxml\3.7\poi-ooxml-3.7.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/poi/poi-ooxml-schemas/3.7/poi-ooxml-schemas-3.7.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\poi\poi-ooxml-schemas\3.7\poi-ooxml-schemas-3.7.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/postgresql/postgresql/9.2-1002-jdbc4/postgresql-9.2-1002-jdbc4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\postgresql\postgresql\9.2-1002-jdbc4\postgresql-9.2-1002-jdbc4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/slf4j/slf4j-api/1.6.6/slf4j-api-1.6.6.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\slf4j\slf4j-api\1.6.6\slf4j-api-1.6.6.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/slf4j/slf4j-log4j12/1.6.6/slf4j-log4j12-1.6.6.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\slf4j\slf4j-log4j12\1.6.6\slf4j-log4j12-1.6.6.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-aop/3.1.2.RELEASE/spring-aop-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-aop\3.1.2.RELEASE\spring-aop-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-asm/3.1.2.RELEASE/spring-asm-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-asm\3.1.2.RELEASE\spring-asm-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-beans/3.1.2.RELEASE/spring-beans-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-beans\3.1.2.RELEASE\spring-beans-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-context/3.1.2.RELEASE/spring-context-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-context\3.1.2.RELEASE\spring-context-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-context-support/3.1.2.RELEASE/spring-context-support-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-context-support\3.1.2.RELEASE\spring-context-support-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-core/3.1.2.RELEASE/spring-core-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-core\3.1.2.RELEASE\spring-core-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-expression/3.1.2.RELEASE/spring-expression-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-expression\3.1.2.RELEASE\spring-expression-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-jdbc/3.1.2.RELEASE/spring-jdbc-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-jdbc\3.1.2.RELEASE\spring-jdbc-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-tx/3.1.2.RELEASE/spring-tx-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-tx\3.1.2.RELEASE\spring-tx-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-web/3.1.2.RELEASE/spring-web-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-web\3.1.2.RELEASE\spring-web-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-webmvc/3.1.2.RELEASE/spring-webmvc-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-webmvc\3.1.2.RELEASE\spring-webmvc-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/xml-apis/xml-apis/1.3.02/xml-apis-1.3.02.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\xml-apis\xml-apis\1.3.02\xml-apis-1.3.02.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/xmlbeans/xmlbeans/2.3.0/xmlbeans-2.3.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\xmlbeans\xmlbeans\2.3.0\xmlbeans-2.3.0.jar
+Translatable source found in...
+   Refreshing resources
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/resources.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\resources.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/rt.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\rt.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/jsse.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\jsse.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/jce.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\jce.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/charsets.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\charsets.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/jfr.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\jfr.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/access-bridge-32.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\access-bridge-32.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/dnsns.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\dnsns.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/jaccess.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\jaccess.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/localedata.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\localedata.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/sunec.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\sunec.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/sunjce_provider.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\sunjce_provider.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/sunmscapi.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\sunmscapi.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/sunpkcs11.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\sunpkcs11.jar
+      Searching for resources within file:/C:/Program%20Files%20(x86)/Java/jre7/lib/ext/zipfs.jar
+         Indexing zip file: C:\Program Files (x86)\Java\jre7\lib\ext\zipfs.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\xml\bind\jaxb-api\2.1\jaxb-api-2.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\transaction\jta\1.1\jta-1.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\xml\stream\stax-api\1.0-2\stax-api-1.0-2.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA-sources.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/antlr/antlr/2.7.6/antlr-2.7.6.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\antlr\antlr\2.7.6\antlr-2.7.6.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/bouncycastle/bcmail-jdk14/138/bcmail-jdk14-138.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\bouncycastle\bcmail-jdk14\138\bcmail-jdk14-138.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/bouncycastle/bcmail-jdk14/1.38/bcmail-jdk14-1.38.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\bouncycastle\bcmail-jdk14\1.38\bcmail-jdk14-1.38.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/bouncycastle/bcprov-jdk14/138/bcprov-jdk14-138.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\bouncycastle\bcprov-jdk14\138\bcprov-jdk14-138.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/bouncycastle/bcprov-jdk14/1.38/bcprov-jdk14-1.38.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\bouncycastle\bcprov-jdk14\1.38\bcprov-jdk14-1.38.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/bouncycastle/bctsp-jdk14/1.38/bctsp-jdk14-1.38.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\bouncycastle\bctsp-jdk14\1.38\bctsp-jdk14-1.38.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/codehaus/castor/castor/1.2/castor-1.2.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\codehaus\castor\castor\1.2\castor-1.2.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-beanutils\commons-beanutils\1.8.0\commons-beanutils-1.8.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-collections/commons-collections/2.1/commons-collections-2.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-collections\commons-collections\2.1\commons-collections-2.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-dbcp\commons-dbcp\1.4\commons-dbcp-1.4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-digester\commons-digester\2.1\commons-digester-2.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-fileupload/commons-fileupload/1.2.2/commons-fileupload-1.2.2.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-fileupload\commons-fileupload\1.2.2\commons-fileupload-1.2.2.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\commons-pool\commons-pool\1.5.4\commons-pool-1.5.4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/ar/com/fdvs/DynamicJasper-core-fonts/1.0/DynamicJasper-core-fonts-1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\ar\com\fdvs\DynamicJasper-core-fonts\1.0\DynamicJasper-core-fonts-1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/geronimo/specs/geronimo-stax-api_1.0_spec/1.0/geronimo-stax-api_1.0_spec-1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\geronimo\specs\geronimo-stax-api_1.0_spec\1.0\geronimo-stax-api_1.0_spec-1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-dev/2.1.0/gwt-dev-2.1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\google\gwt\gwt-dev\2.1.0\gwt-dev-2.1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-servlet/2.1.0/gwt-servlet-2.1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\google\gwt\gwt-servlet\2.1.0\gwt-servlet-2.1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\google\gwt\gwt-user\2.1.0\gwt-user-2.1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/extjs/gxt/2.3.0-gwt2/gxt-2.3.0-gwt2.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\extjs\gxt\2.3.0-gwt2\gxt-2.3.0-gwt2.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/hibernate/hibernate-commons-annotations/3.2.0.Final/hibernate-commons-annotations-3.2.0.Final.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\hibernate\hibernate-commons-annotations\3.2.0.Final\hibernate-commons-annotations-3.2.0.Final.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/hibernate/hibernate-core/3.6.10.Final/hibernate-core-3.6.10.Final.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\hibernate\hibernate-core\3.6.10.Final\hibernate-core-3.6.10.Final.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.0-api\1.0.1.Final\hibernate-jpa-2.0-api-1.0.1.Final.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/hibernate/hibernate-validator/4.0.0.GA/hibernate-validator-4.0.0.GA.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\hibernate\hibernate-validator\4.0.0.GA\hibernate-validator-4.0.0.GA.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/lowagie/itext/2.1.7/itext-2.1.7.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\lowagie\itext\2.1.7\itext-2.1.7.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.4/jackson-core-asl-1.9.4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\codehaus\jackson\jackson-core-asl\1.9.4\jackson-core-asl-1.9.4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.4/jackson-mapper-asl-1.9.4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\codehaus\jackson\jackson-mapper-asl\1.9.4\jackson-mapper-asl-1.9.4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/net/sf/jasperreports/jasperreports/4.7.0/jasperreports-4.7.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\net\sf\jasperreports\jasperreports\4.7.0\jasperreports-4.7.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/javassist/javassist/3.16.1-GA/javassist-3.16.1-GA.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\javassist\javassist\3.16.1-GA\javassist-3.16.1-GA.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/com/sun/xml/bind/jaxb-impl/2.1.3/jaxb-impl-2.1.3.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\com\sun\xml\bind\jaxb-impl\2.1.3\jaxb-impl-2.1.3.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/jfree/jcommon/1.0.15/jcommon-1.0.15.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\jfree\jcommon\1.0.15\jcommon-1.0.15.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/eclipse/jdtcore/3.1.0/jdtcore-3.1.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\eclipse\jdtcore\3.1.0\jdtcore-3.1.0.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/jfree/jfreechart/1.0.12/jfreechart-1.0.12.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\jfree\jfreechart\1.0.12\jfreechart-1.0.12.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/junit/junit/4.8.1/junit-4.8.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\junit\junit\4.8.1\junit-4.8.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/poi/poi/3.7/poi-3.7.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\poi\poi\3.7\poi-3.7.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/poi/poi-ooxml/3.7/poi-ooxml-3.7.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\poi\poi-ooxml\3.7\poi-ooxml-3.7.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/poi/poi-ooxml-schemas/3.7/poi-ooxml-schemas-3.7.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\poi\poi-ooxml-schemas\3.7\poi-ooxml-schemas-3.7.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/postgresql/postgresql/9.2-1002-jdbc4/postgresql-9.2-1002-jdbc4.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\postgresql\postgresql\9.2-1002-jdbc4\postgresql-9.2-1002-jdbc4.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/slf4j/slf4j-api/1.6.6/slf4j-api-1.6.6.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\slf4j\slf4j-api\1.6.6\slf4j-api-1.6.6.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/slf4j/slf4j-log4j12/1.6.6/slf4j-log4j12-1.6.6.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\slf4j\slf4j-log4j12\1.6.6\slf4j-log4j12-1.6.6.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-aop/3.1.2.RELEASE/spring-aop-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-aop\3.1.2.RELEASE\spring-aop-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-asm/3.1.2.RELEASE/spring-asm-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-asm\3.1.2.RELEASE\spring-asm-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-beans/3.1.2.RELEASE/spring-beans-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-beans\3.1.2.RELEASE\spring-beans-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-context/3.1.2.RELEASE/spring-context-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-context\3.1.2.RELEASE\spring-context-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-context-support/3.1.2.RELEASE/spring-context-support-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-context-support\3.1.2.RELEASE\spring-context-support-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-core/3.1.2.RELEASE/spring-core-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-core\3.1.2.RELEASE\spring-core-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-expression/3.1.2.RELEASE/spring-expression-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-expression\3.1.2.RELEASE\spring-expression-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-jdbc/3.1.2.RELEASE/spring-jdbc-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-jdbc\3.1.2.RELEASE\spring-jdbc-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-tx/3.1.2.RELEASE/spring-tx-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-tx\3.1.2.RELEASE\spring-tx-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-web/3.1.2.RELEASE/spring-web-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-web\3.1.2.RELEASE\spring-web-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/springframework/spring-webmvc/3.1.2.RELEASE/spring-webmvc-3.1.2.RELEASE.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\springframework\spring-webmvc\3.1.2.RELEASE\spring-webmvc-3.1.2.RELEASE.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/xml-apis/xml-apis/1.3.02/xml-apis-1.3.02.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\xml-apis\xml-apis\1.3.02\xml-apis-1.3.02.jar
+      Searching for resources within file:/C:/Users/Altair/.m2/repository/org/apache/xmlbeans/xmlbeans/2.3.0/xmlbeans-2.3.0.jar
+         Indexing zip file: C:\Users\Altair\.m2\repository\org\apache\xmlbeans\xmlbeans\2.3.0\xmlbeans-2.3.0.jar
