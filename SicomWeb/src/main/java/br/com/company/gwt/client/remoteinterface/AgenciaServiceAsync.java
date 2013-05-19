@@ -12,4 +12,6 @@ public interface AgenciaServiceAsync {
 
 	void pesquisa(String query, AsyncCallback<List<DTOAgencia>> callback);
 
+	void salvar(DTOAgencia dtoAgencia, AsyncCallback<DTOAgencia> asyncCallback);
+
 }

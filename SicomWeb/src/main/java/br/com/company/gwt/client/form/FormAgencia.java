@@ -1,10 +1,17 @@
 package br.com.company.gwt.client.form;
 
+import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.TextFieldUpper;
+import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.dto.DTOCidade;
+import br.com.company.gwt.shared.dto.DTOAgencia;
 import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -13,15 +20,18 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class FormAgencia extends Window {
 
+	private ContentPanel mainPanel;
 	private TextFieldUpper tfNome;
 	private TextFieldUpper tfRazaoSocial;
 	private TextField<String> tfDocumento;
@@ -31,8 +41,9 @@ public class FormAgencia extends Window {
 	private TextField<String> tfTelefone;
 	private TextField<String> tfCelular;
 	private TextField<String> tfEmail;
-	private MultiField<Field<?>> mfdTelefone;
+	private MultiField<Field<?>> multiFieldNome;
 	private MultiField<Field<?>> multiField;
+	private MultiField<Field<?>> mfdTelefone;
 	private FieldSet fsEndereco;
 	private MultiField<Field<?>> mfdLogradouro;
 	private ComboBox<DTOTipoLogradouro> comboTipoLogradouro;
@@ -48,25 +59,39 @@ public class FormAgencia extends Window {
 	private ToolBar toolBar;
 	private Button btSalvar;
 	private ListStore<DTOTipoLogradouro> storeTipoLogradouro;
+	private Integer id;
 
 	public FormAgencia() {
 		setResizable(false);
 		setMinimizable(true);
 		setHeadingHtml("Cadastro da Agência");
-		setSize(640, 521);
-		setLayout(new FormLayout(LabelAlign.TOP));
+		setSize(640, 515);
+		setLayout(new FitLayout());
+		
+		mainPanel = new ContentPanel();
+		mainPanel.setLayout(new FormLayout(LabelAlign.TOP));
+		mainPanel.setHeaderVisible(false);
+		mainPanel.setFrame(true);
+		
+		multiFieldNome = new MultiField<Field<?>>();
+		multiFieldNome.setSpacing(10);
+		multiFieldNome.setFieldLabel("Nome / Razão Social");
 		
 		fsDadosDaAgencia = new FieldSet();
 		fsDadosDaAgencia.setLayout(new FormLayout(LabelAlign.TOP));
 		fsDadosDaAgencia.setHeadingHtml("Dados da Agência");
 		
 		tfNome = new TextFieldUpper();
-		tfNome.setFieldLabel("Nome");
-		fsDadosDaAgencia.add(tfNome, new FormData("100%"));
+		tfNome.setWidth(307);
+
+		multiFieldNome.add(tfNome);
 		
 		tfRazaoSocial = new TextFieldUpper();
-		tfRazaoSocial.setFieldLabel("Razão Social");
-		fsDadosDaAgencia.add(tfRazaoSocial, new FormData("100%"));
+		tfRazaoSocial.setWidth(280);
+		
+		multiFieldNome.add(tfRazaoSocial);
+
+		fsDadosDaAgencia.add(multiFieldNome, new FormData("100%"));
 		
 		multiField = new MultiField<Field<?>>();
 		multiField.setSpacing(10);
@@ -85,14 +110,15 @@ public class FormAgencia extends Window {
 
 		fsDadosDaAgencia.add(multiField, new FormData("100%"));
 
-		add(fsDadosDaAgencia, new FormData("100%"));
+		mainPanel.add(fsDadosDaAgencia, new FormData("100%"));
 		
 		fsContatos = new FieldSet();
 		fsContatos.setHeadingHtml("<b>Contatos</b>");
 		fsContatos.setLayout(new FormLayout(LabelAlign.TOP));
 		
 		mfdTelefone = new MultiField<Field<?>>();
-		mfdTelefone.setFieldLabel("Telefone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Celular:");
+		mfdTelefone.setFieldLabel("Telefone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Celular:" +
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-mail");
 		mfdTelefone.setSpacing(10);
 		
 		tfTelefone = new TextField<String>();
@@ -103,13 +129,14 @@ public class FormAgencia extends Window {
 		tfCelular.setWidth("101px");
 		mfdTelefone.add(tfCelular);
 		
-		fsContatos.add(mfdTelefone, new FormData("100%"));
-		
 		tfEmail = new TextField<String>();
 		tfEmail.setFieldLabel("E-mail");
-		fsContatos.add(tfEmail, new FormData("100%"));
-
-		add(fsContatos, new FormData("100%"));		
+		tfEmail.setWidth("250px");
+		mfdTelefone.add(tfEmail);
+		
+		fsContatos.add(mfdTelefone, new FormData("100%"));
+		
+		mainPanel.add(fsContatos, new FormData("100%"));		
 		
 		fsEndereco = new FieldSet();
 		fsEndereco.setLayout(new FormLayout(LabelAlign.TOP));
@@ -128,11 +155,11 @@ public class FormAgencia extends Window {
 		mfdLogradouro.add(comboTipoLogradouro);
 		
 		tfLogradouro = new TextFieldUpper();
-		mfdLogradouro.add(tfLogradouro);
 		tfLogradouro.setWidth("356px");
+		mfdLogradouro.add(tfLogradouro);
 		
 		tfNumeroLogradouro = new TextField<String>();
-		tfNumeroLogradouro.setWidth("95px");
+		tfNumeroLogradouro.setWidth("92px");
 		mfdLogradouro.add(tfNumeroLogradouro);
 
 		fsEndereco.add(mfdLogradouro, new FormData("100%"));
@@ -142,13 +169,13 @@ public class FormAgencia extends Window {
 		mfdComplemento.setFieldLabel("Complemento / Bairro");
 		
 		tfComplemento = new TextFieldUpper();
-		tfComplemento.setWidth("287px");
+		tfComplemento.setWidth("284px");
 		tfComplemento.setFieldLabel("complemento");
 		
 		mfdComplemento.add(tfComplemento);
 		
 		tfBairro = new TextFieldUpper();
-		tfBairro.setWidth("305px");
+		tfBairro.setWidth("301px");
 		tfBairro.setFieldLabel("bairro");
 		
 		mfdComplemento.add(tfBairro);
@@ -165,7 +192,7 @@ public class FormAgencia extends Window {
 		mfdCepEstado.add(tfCep);
 		
 		comboEstado = new SimpleComboBox<String>();
-		comboEstado.setWidth("74px");
+		comboEstado.setWidth("70px");
 		comboEstado.setFieldLabel("estado");
 		mfdCepEstado.add(comboEstado);
 		
@@ -179,17 +206,72 @@ public class FormAgencia extends Window {
 		
 		fsEndereco.add(mfdCepEstado, new FormData("100%"));
 
-		add(fsEndereco, new FormData("100%"));
+		mainPanel.add(fsEndereco, new FormData("100%"));
 		
 		toolBar = new ToolBar();
 		toolBar.setAlignment(HorizontalAlignment.RIGHT);
 		
 		btSalvar = new Button("Salvar");
 		btSalvar.setWidth("102px");
+		btSalvar.setBorders(true);
+		btSalvar.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (validaCampos()){
+					salvar();
+				}
+				
+			}
+		});
 		toolBar.add(btSalvar);
 		
 		setBottomComponent(toolBar);
 		
+		add(mainPanel);
+		
+	}
+
+	protected void salvar() {
+		InstanceService.AGENCIA_SERVICE.salvar(getDTOAgenciaFromForm(), new AsyncCallback<DTOAgencia>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());
+			}
+			
+			@Override
+			public void onSuccess(DTOAgencia result) {
+				Info.display("Sucesso", "Agência salva com sucesso.");
+			}
+			
+		});
+		
+	}
+
+	private DTOAgencia getDTOAgenciaFromForm() {
+		DTOAgencia dtoAgencia = new DTOAgencia();
+		dtoAgencia.setId(id);
+		dtoAgencia.setNome(tfNome.getValue());
+		dtoAgencia.setRazaoSocial(tfRazaoSocial.getValue());
+		dtoAgencia.setDocumento(tfDocumento.getValue());
+		dtoAgencia.setComissao(tfComissao.getValue().floatValue());
+		dtoAgencia.setTelefone(tfTelefone.getValue());
+		dtoAgencia.setCelular(tfCelular.getValue());
+		dtoAgencia.setTipoLogradouro(comboTipoLogradouro.getValue());
+		dtoAgencia.setLogradouro(tfLogradouro.getValue());
+		dtoAgencia.setComplemento(tfComplemento.getValue());
+		dtoAgencia.setBairro(tfBairro.getValue());
+		dtoAgencia.setCep(tfCep.getValue());
+		dtoAgencia.setCidade(comboCidade.getValue());
+		return dtoAgencia;
+	}
+
+	protected boolean validaCampos() {
+		if (tfNome.getValue() == null){
+			WebMessageBox.alert("Nome é obrigatório.");
+			return false;
+		}
+		return true;
 	}
 
 }

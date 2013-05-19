@@ -13,5 +13,7 @@ public interface AgenciaService extends RemoteService {
 	List<DTOAgencia> listAll();
 
 	List<DTOAgencia> pesquisa(String query);
+
+	DTOAgencia salvar(DTOAgencia dtoAgencia) throws Exception;
 	
 }
