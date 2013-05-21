@@ -9,6 +9,7 @@ import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.resources.ImagensResources;
 import br.com.company.gwt.shared.dto.DTOPrograma;
 import br.com.company.gwt.shared.dto.DTOProgramacao;
+import br.com.company.gwt.shared.enums.DiaSemana;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
@@ -26,8 +27,10 @@ import com.extjs.gxt.ui.client.widget.form.LabelField;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteData;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
@@ -36,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -56,7 +60,7 @@ public class FormPrograma extends Window {
 	private SimpleComboBox<String> comboHoraInicio;
 	private SimpleComboBox<String> comboHoraFinal;
 	private Button btnAdiciona;
-	private Integer codigo;
+	private Integer id;
 
 	public FormPrograma() {
 		
@@ -65,6 +69,7 @@ public class FormPrograma extends Window {
 		setMinimizable(true);
 		setSize(700, 340);
 		setLayout(new BorderLayout());
+		id = null;
 		
 		centerPanel = new ContentPanel();
 		centerPanel.setFrame(true);
@@ -109,6 +114,7 @@ public class FormPrograma extends Window {
 		
 		tfValor = new NumberField();
 		tfValor.setFieldLabel("Valor do Patrocinio");
+		tfValor.setFormat(NumberFormat.getFormat("0.00"));
 
 		fsDadosDoPrograma.add(tfValor, new FormData("50%"));
 		
@@ -126,19 +132,33 @@ public class FormPrograma extends Window {
 		
 		comboDiaSemana = new SimpleComboBox<String>();
 		comboDiaSemana.setSize("112px", "22px");
+		comboDiaSemana.setEditable(false);
+		for (DiaSemana dia : DiaSemana.values()) {
+			comboDiaSemana.add(dia.name());
+		}
 		fsProgramacao.add(comboDiaSemana, new AbsoluteData(0, 17));
 		
 		comboHoraInicio = new SimpleComboBox<String>();
 		comboHoraInicio.setSize("61px", "22px");
+		comboHoraInicio.add(getHorasCombo());
+		comboHoraInicio.setEditable(false);
 		fsProgramacao.add(comboHoraInicio, new AbsoluteData(118, 17));
 		
 		comboHoraFinal = new SimpleComboBox<String>();
 		comboHoraFinal.setSize("61px", "22px");
+		comboHoraFinal.add(getHorasCombo());
+		comboHoraFinal.setEditable(false);
 		fsProgramacao.add(comboHoraFinal, new AbsoluteData(185, 17));
 		
 		btnAdiciona = new Button();
 		btnAdiciona.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeAdiciona16()));
 		btnAdiciona.setSize("23px", "23px");
+		btnAdiciona.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				adicionaProgramacao();
+			}
+		});
 		
 		fsProgramacao.add(btnAdiciona, new AbsoluteData(252, 16));
 		
@@ -153,6 +173,7 @@ public class FormPrograma extends Window {
 		gridProgramacao = new Grid<DTOProgramacao>(storeProgramacao, getColumnModel());
 		gridProgramacao.setSize("300px", "180px");
 		gridProgramacao.setBorders(true);
+		gridProgramacao.setAutoExpandColumn("diaSemana");
 
 		fsProgramacao.add(gridProgramacao, new AbsoluteData(0, 45));
 		
@@ -164,17 +185,34 @@ public class FormPrograma extends Window {
 		setBottomComponent(toolBar);
 	}
 	
+	protected void adicionaProgramacao() {
+		DTOProgramacao dto = new DTOProgramacao();
+		dto.setDiaSemana(comboDiaSemana.getRawValue());
+		dto.setHoraInicio(comboHoraInicio.getRawValue());
+		dto.setHoraTermino(comboHoraFinal.getRawValue());
+		storeProgramacao.add(dto);		
+	}
+
 	private ColumnModel getColumnModel() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 		
-		ColumnConfig columnConfig = new ColumnConfig("id", "Dia da Semana", 150);
+		ColumnConfig columnConfig = new ColumnConfig("diaSemana", "Dia da Semana", 120);
+		columnConfig.setAlignment(HorizontalAlignment.CENTER);
 		configs.add(columnConfig);
 		
-		columnConfig = new ColumnConfig("id", "Inicio", 60);
+		columnConfig = new ColumnConfig("horaInicio", "Inicio", 60);
+		columnConfig.setAlignment(HorizontalAlignment.CENTER);
 		configs.add(columnConfig);
 		
-		columnConfig = new ColumnConfig("id", "Término", 60);
+		columnConfig = new ColumnConfig("horaTermino", "Término", 60);
+		columnConfig.setAlignment(HorizontalAlignment.CENTER);
 		configs.add(columnConfig);
+		
+		columnConfig = new ColumnConfig("button", "-", 30);
+		columnConfig.setAlignment(HorizontalAlignment.CENTER);
+		columnConfig.setRenderer(buttonRenderer);
+		configs.add(columnConfig);
+		
 		
 		return new ColumnModel(configs);
 
@@ -213,18 +251,55 @@ public class FormPrograma extends Window {
 	
 	private DTOPrograma getDTOPrograma(){
 		DTOPrograma dto = new DTOPrograma();
-		dto.setId(codigo);
+		dto.setId(id);
 		dto.setNome(tfNome.getValue());
 		dto.setValorPatrocinio(tfValor.getValue().floatValue());
 		dto.setAtivo(checkHabilitado.getValue());
+		dto.setProgramacao(storeProgramacao.getModels());
 		return dto;
 	}
 	
 	public void carregaForm(DTOPrograma dto){
-		codigo = dto.getId();
+		id = dto.getId();
 		tfNome.setValue(dto.getNome());
 		tfValor.setValue(dto.getValorPatrocinio());
 		checkHabilitado.setValue(dto.getAtivo());
+		storeProgramacao.removeAll();
+		storeProgramacao.add(dto.getProgramacao());
+	}
+	
+	private ArrayList<String> getHorasCombo(){
+		ArrayList<String> horas = new ArrayList<String>();
+		NumberFormat format = NumberFormat.getFormat("00");
+		for (int i = 0; i <= 23; i++) {
+			horas.add(format.format(i)+":00");
+		}
+		return horas;
+	}
+	
+	private GridCellRenderer<DTOProgramacao> buttonRenderer = new GridCellRenderer<DTOProgramacao>() {  
+
+		public Object render(final DTOProgramacao model, String property, ColumnData config, final int rowIndex,  
+				final int colIndex, ListStore<DTOProgramacao> store, Grid<DTOProgramacao> grid) {  
+			
+			Button b = new Button();
+			b.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.cancelar16()));
+			b.setWidth(grid.getColumnModel().getColumnWidth(colIndex) - 10);  
+			b.setToolTip("Click para remover");
+			b.addSelectionListener(new SelectionListener<ButtonEvent>() {  
+				@Override  
+				public void componentSelected(ButtonEvent ce) {  
+					removeProgramacao(model);
+				}
+
+			});
+
+			return b;  
+		}  
+	};
+	
+	private void removeProgramacao(DTOProgramacao dtoProgramacao) {
+		storeProgramacao.remove(dtoProgramacao);
 	}
 	
 }

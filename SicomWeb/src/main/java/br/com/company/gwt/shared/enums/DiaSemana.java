@@ -1,4 +1,4 @@
-package br.com.company.gwt.server.entities;
+package br.com.company.gwt.shared.enums;
 
 public enum DiaSemana {
 	

@@ -13,20 +13,23 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.company.gwt.client.remoteinterface.ProgramaService;
 import br.com.company.gwt.server.InputServletImpl;
 import br.com.company.gwt.server.dao.DaoPrograma;
+import br.com.company.gwt.server.dao.DaoProgramacaoPrograma;
 import br.com.company.gwt.server.entities.Programa;
 import br.com.company.gwt.server.entities.ProgramacaoPrograma;
 import br.com.company.gwt.shared.dto.DTOPrograma;
 import br.com.company.gwt.shared.dto.DTOProgramacao;
+import br.com.company.gwt.shared.enums.DiaSemana;
 
 @Named("programaService")
 public class ProgramaServiceImpl extends InputServletImpl implements ProgramaService{
 	
 	@Inject private DaoPrograma daoPrograma;
+	@Inject private DaoProgramacaoPrograma daoProgramacaoPrograma;
 	
 	private static DateFormat timeFormat;
 	
 	static{
-		timeFormat = new SimpleDateFormat("hh:mm");
+		timeFormat = new SimpleDateFormat("kk:mm");
 	}
 
 	@Override
@@ -92,7 +95,27 @@ public class ProgramaServiceImpl extends InputServletImpl implements ProgramaSer
 			programa.setNome(dtoPrograma.getNome());
 			programa.setValorPatrocinio(dtoPrograma.getValorPatrocinio());
 			programa.setAtivo(dtoPrograma.getAtivo());
+			programa.getProgramacao().clear();
 			
+			List<ProgramacaoPrograma> programacoes = new ArrayList<ProgramacaoPrograma>();
+			for (DTOProgramacao dto : dtoPrograma.getProgramacao()) {
+				ProgramacaoPrograma programacao = null;
+				if (dto.getId() == null){
+					programacao = new ProgramacaoPrograma();
+					programacao.setPrograma(programa);
+				}else{
+					programacao = daoProgramacaoPrograma.findByPrimaryKey(dto.getId());
+					programacoes.add(programacao);
+					continue;
+				}
+				
+				programacao.setDiaSemana(DiaSemana.valueOf(dto.getDiaSemana()));
+				programacao.setHoraInicio(timeFormat.parse(dto.getHoraInicio()));
+				programacao.setHoraTermino(timeFormat.parse(dto.getHoraTermino()));
+				programacoes.add(programacao);
+			}
+			
+			programa.setProgramacao(programacoes);
 			daoPrograma.store(programa);
 			
 			dtoPrograma.setId(programa.getId());
@@ -100,7 +123,7 @@ public class ProgramaServiceImpl extends InputServletImpl implements ProgramaSer
 		} catch (Exception e) {
 			
 		}
-		return null;
+		return dtoPrograma;
 	}
 
 }

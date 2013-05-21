@@ -1,5 +1,6 @@
 package br.com.company.gwt.server.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -60,6 +61,9 @@ public class Programa {
 	}
 
 	public List<ProgramacaoPrograma> getProgramacao() {
+		if (this.programacao == null){
+			this.programacao = new ArrayList<ProgramacaoPrograma>();
+		}
 		return programacao;
 	}
 

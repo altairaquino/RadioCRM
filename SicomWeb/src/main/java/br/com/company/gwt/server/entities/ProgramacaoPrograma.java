@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.company.gwt.shared.enums.DiaSemana;
+
 @Entity
 @Table(name="programacao_programa")
 public class ProgramacaoPrograma {
