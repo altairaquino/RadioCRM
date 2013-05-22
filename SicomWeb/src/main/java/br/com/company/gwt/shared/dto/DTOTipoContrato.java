@@ -1,8 +1,8 @@
-package br.com.company.gwt.client.dto;
+package br.com.company.gwt.shared.dto;
 
 import com.extjs.gxt.ui.client.data.BaseModelData;
 
-public class DTOCidade extends BaseModelData{
+public class DTOTipoContrato extends BaseModelData{
 
 	private static final long serialVersionUID = 219207327028169784L;
 	
@@ -22,12 +22,12 @@ public class DTOCidade extends BaseModelData{
 		return get("nome");
 	}
 	
-	public void setUF(String uf) {
-		set("uf", uf);
+	public void setAtivo(Boolean ativo) {
+		set("ativo", ativo);
 	}
 	
-	public String getUF() {
-		return get("uf");
+	public Boolean getAtivo() {
+		return get("ativo");
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class DTOCidade extends BaseModelData{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DTOCidade other = (DTOCidade) obj;
+		DTOTipoContrato other = (DTOTipoContrato) obj;
 		if (get("id") == null) {
 			if (other.get("id") != null)
 				return false;

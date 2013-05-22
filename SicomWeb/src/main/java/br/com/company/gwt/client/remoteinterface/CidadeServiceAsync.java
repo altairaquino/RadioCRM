@@ -2,7 +2,7 @@ package br.com.company.gwt.client.remoteinterface;
 
 import java.util.List;
 
-import br.com.company.gwt.client.dto.DTOCidade;
+import br.com.company.gwt.shared.dto.DTOCidade;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

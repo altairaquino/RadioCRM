@@ -57,6 +57,11 @@ public class StartMenuUtil {
 		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeForm16()));
 		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridAgencia));
 		    sub.add(item);
+		    
+		    item = new MenuItem("Tipo de Contrato");
+		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeForm16()));
+		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formTipoContrato));
+		    sub.add(item);
 
 	    menuItem.setSubMenu(sub);
 	    

@@ -1,4 +1,4 @@
-package br.com.company.gwt.client.dto.enums;
+package br.com.company.gwt.shared.enums;
 
 public enum EnumUF {
 	

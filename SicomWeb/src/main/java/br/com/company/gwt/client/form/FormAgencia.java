@@ -3,8 +3,8 @@ package br.com.company.gwt.client.form;
 import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.TextFieldUpper;
 import br.com.company.gwt.client.component.WebMessageBox;
-import br.com.company.gwt.client.dto.DTOCidade;
 import br.com.company.gwt.shared.dto.DTOAgencia;
+import br.com.company.gwt.shared.dto.DTOCidade;
 import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;

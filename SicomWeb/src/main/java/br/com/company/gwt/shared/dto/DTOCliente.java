@@ -2,7 +2,6 @@ package br.com.company.gwt.shared.dto;
 
 import java.util.Date;
 
-import br.com.company.gwt.client.dto.DTOCidade;
 
 import com.extjs.gxt.ui.client.data.BaseModelData;
 

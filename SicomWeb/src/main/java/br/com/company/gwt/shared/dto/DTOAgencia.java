@@ -5,7 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
-import br.com.company.gwt.client.dto.DTOCidade;
 import br.com.company.gwt.server.entities.Cidade;
 import br.com.company.gwt.server.entities.TipoLogradouro;
 

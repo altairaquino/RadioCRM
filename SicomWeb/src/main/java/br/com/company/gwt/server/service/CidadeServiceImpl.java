@@ -6,11 +6,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.company.gwt.client.dto.DTOCidade;
 import br.com.company.gwt.client.remoteinterface.CidadeService;
 import br.com.company.gwt.server.InputServletImpl;
 import br.com.company.gwt.server.dao.DaoCidade;
 import br.com.company.gwt.server.entities.Cidade;
+import br.com.company.gwt.shared.dto.DTOCidade;
 
 @Named("cidadeService")
 public class CidadeServiceImpl extends InputServletImpl implements CidadeService{
