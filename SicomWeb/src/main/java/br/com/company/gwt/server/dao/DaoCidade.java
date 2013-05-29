@@ -38,15 +38,17 @@ public class DaoCidade extends DaoAbstract<Cidade, Integer> {
 		return cidades;
 	}
 	
-	public List<Cidade> loadSubList(int offSet,int maxResult, String query){
+	public List<Cidade> loadSubList(int offSet,int maxResult, String query, String uf){
     	List<Cidade> cidades = new ArrayList<Cidade>();
     	try {
     		String hql = " from Cidade c " +
 						 " where upper(c.nome) like upper(:nome)" +
+						 " and c.uf = :uf" +
 						 " order by c.nome";
 
 			Query qr = createQuery(hql);
 			qr.setParameter("nome", "%"+query+"%");
+			qr.setParameter("uf", uf);
 			qr.setFirstResult(offSet);
 			qr.setMaxResults(maxResult);
 			

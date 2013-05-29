@@ -56,7 +56,7 @@ public class Agencia {
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Cidade cidade;
 	
-	@Column(nullable=false, columnDefinition="boolean default true")
+	@Column(columnDefinition="boolean default true")
 	private Boolean ativo;
 	
 	public Integer getId() {

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import br.com.company.gwt.client.remoteinterface.AgenciaService;
 import br.com.company.gwt.server.InputServletImpl;
 import br.com.company.gwt.server.dao.DaoAgencia;
@@ -13,6 +15,10 @@ import br.com.company.gwt.server.dao.DaoCidade;
 import br.com.company.gwt.server.dao.DaoTipoLogradouro;
 import br.com.company.gwt.server.entities.Agencia;
 import br.com.company.gwt.shared.dto.DTOAgencia;
+
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 
 @Named("agenciaService")
 public class AgenciaServiceImpl extends InputServletImpl implements AgenciaService{
@@ -52,12 +58,14 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 		return dto;
 	}
 
+	@Transactional
 	@Override
 	public DTOAgencia salvar(DTOAgencia dtoAgencia) throws Exception {
 		try {
 			Agencia agencia = null;
 			if (dtoAgencia.getId() == null){
 				agencia = new Agencia();
+				agencia.setAtivo(true);
 			}else{
 				agencia = daoAgencia.findByPrimaryKey(dtoAgencia.getId());
 			}
@@ -84,7 +92,34 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return dtoAgencia;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public PagingLoadResult<DTOAgencia> loadPagingList(PagingLoadConfig config) {
+		List<DTOAgencia> sublist = new ArrayList<DTOAgencia>();
+		List<Agencia> entities = (ArrayList<Agencia>) loadSubList(config.getOffset(), config.getLimit(), (String)config.get("query"));
+		try {
+			for (Agencia agencia : entities) {	
+				sublist.add(parseToDTOAgencia(agencia));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (PagingLoadResult<DTOAgencia>)new BasePagingLoadResult(sublist);
+	}
+	
+	private List<Agencia> loadSubList(Integer offset, Integer limit, String query) {
+		List<Agencia> agencias = new ArrayList<Agencia>();
+		try {
+			if (query != null){
+				agencias.addAll(daoAgencia.loadSubList(offset, limit, query.toUpperCase()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return agencias;
 	}
 
 }

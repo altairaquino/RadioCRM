@@ -23,15 +23,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class PanelGridPrograma extends PanelGridWindow<DTOPrograma> {
 	
-	final NumberFormat numberFormat = NumberFormat.getFormat("'R$' 0.00");
-	
-	GridCellRenderer<DTOPrograma> gridNumber = new GridCellRenderer<DTOPrograma>() {
-		public String render(DTOPrograma model, String property, ColumnData config, int rowIndex, int colIndex,  
-				ListStore<DTOPrograma> stor, Grid<DTOPrograma> grid) {
-			Number value = model.<Float>get(property);
-			return value == null ? null : numberFormat.format(model.<Float>get(property));
-		}
-	};
+	final NumberFormat numberFormat = NumberFormat.getFormat("R$ 0.00");
 	
 	public PanelGridPrograma() {
 		setHeadingHtml("Cadastro de Programa");
@@ -81,7 +73,17 @@ public class PanelGridPrograma extends PanelGridWindow<DTOPrograma> {
 
 	@Override
 	protected ColumnModel getColumnModel() {
+		
+		GridCellRenderer<DTOPrograma> gridNumber = new GridCellRenderer<DTOPrograma>() {
+			public String render(DTOPrograma model, String property, ColumnData config, int rowIndex, int colIndex,  
+					ListStore<DTOPrograma> stor, Grid<DTOPrograma> grid) {
+				Number value = model.<Float>get(property);
+				return numberFormat.format(value);
+			}
+		};
+		
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+		
 		ColumnConfig config = new ColumnConfig("id", "Codigo", 70);
 		configs.add(config);
 		
@@ -105,12 +107,12 @@ public class PanelGridPrograma extends PanelGridWindow<DTOPrograma> {
 
 	@Override
 	protected void actionButtonRemoveClick() {
-				
+		
 	}
 
 	@Override
 	protected void actionButtonReportClick() {
-				
+		
 	}
 
 	@Override

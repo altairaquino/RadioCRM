@@ -1,19 +1,34 @@
 package br.com.company.gwt.client.form;
 
+import java.util.List;
+
 import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.TextFieldUpper;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.shared.dto.DTOAgencia;
 import br.com.company.gwt.shared.dto.DTOCidade;
 import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
+import br.com.company.gwt.shared.enums.EnumUF;
 
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.data.BasePagingLoader;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoader;
+import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
@@ -23,10 +38,7 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
-import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class FormAgencia extends Window {
@@ -54,18 +66,20 @@ public class FormAgencia extends Window {
 	private TextFieldUpper tfBairro;
 	private MultiField<Field<?>> mfdCepEstado;
 	private TextField<String> tfCep;
-	private SimpleComboBox<String> comboEstado;
+	private ComboBox<BaseModelData> comboEstado;
 	private ComboBox<DTOCidade> comboCidade;
 	private ToolBar toolBar;
 	private Button btSalvar;
 	private ListStore<DTOTipoLogradouro> storeTipoLogradouro;
 	private Integer id;
+	private ListStore<BaseModelData> storeEstado;
+	private ListStore<DTOCidade> storeCidade;
 
 	public FormAgencia() {
 		setResizable(false);
 		setMinimizable(true);
 		setHeadingHtml("Cadastro da Agência");
-		setSize(640, 515);
+		setSize(640, 472);
 		setLayout(new FitLayout());
 		
 		mainPanel = new ContentPanel();
@@ -151,6 +165,12 @@ public class FormAgencia extends Window {
 		comboTipoLogradouro = new ComboBox<DTOTipoLogradouro>();
 		comboTipoLogradouro.setStore(storeTipoLogradouro);
 		comboTipoLogradouro.setWidth("130px");
+		comboTipoLogradouro.setDisplayField("nome");
+		comboTipoLogradouro.setValueField("id");
+		comboTipoLogradouro.setTriggerAction(TriggerAction.ALL);
+		comboTipoLogradouro.setEditable(false);
+		
+		carregaTipoLogradouro();
 		
 		mfdLogradouro.add(comboTipoLogradouro);
 		
@@ -191,17 +211,53 @@ public class FormAgencia extends Window {
 		tfCep.setFieldLabel("cep");
 		mfdCepEstado.add(tfCep);
 		
-		comboEstado = new SimpleComboBox<String>();
+		storeEstado = new ListStore<BaseModelData>();
+		
+		comboEstado = new ComboBox<BaseModelData>();
 		comboEstado.setWidth("70px");
-		comboEstado.setFieldLabel("estado");
+		comboEstado.setDisplayField("uf");
+		comboEstado.setTriggerAction(TriggerAction.ALL);
+		comboEstado.setEditable(false);
+		comboEstado.setStore(storeEstado);
+		comboEstado.setSize("52px", "22px");
+		comboEstado.addSelectionChangedListener(new SelectionChangedListener<BaseModelData>() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModelData> se) {
+				if (se.getSelectedItem() != null){
+					comboCidade.setEnabled(true);
+				}
+			}
+		});
+		
 		mfdCepEstado.add(comboEstado);
 		
+		carregaEstados();
+		
+		RpcProxy<PagingLoadResult<DTOCidade>> proxyCidade = new RpcProxy<PagingLoadResult<DTOCidade>>() {
+			@Override
+			public void load(Object loadConfig, AsyncCallback<PagingLoadResult<DTOCidade>> callback) {
+				InstanceService.CIDADE_SERVICE.loadPagingList(comboEstado.getRawValue(),(PagingLoadConfig) loadConfig, callback);
+			}
+		};
+
+	    PagingLoader<PagingLoadResult<ModelData>> loaderCidade = new BasePagingLoader<PagingLoadResult<ModelData>>(proxyCidade);
+		
+		storeCidade = new ListStore<DTOCidade>(loaderCidade);
+		
 		comboCidade = new ComboBox<DTOCidade>();
-		comboCidade.setDisplayField("nome");
-		comboCidade.setForceSelection(true);
-		comboCidade.setStore(new ListStore<DTOCidade>());
+		comboCidade.setStore(storeCidade);
+		comboCidade.setTemplate(getTemplateNome());
+		comboCidade.setEnabled(false);
+		comboCidade.setStore(storeCidade);
 		comboCidade.setWidth("380px");
-		comboCidade.setFieldLabel("cidade");
+		comboCidade.setValueField("id");
+		comboCidade.setDisplayField("nome");
+		comboCidade.setItemSelector("div.search-item");
+		comboCidade.setHideTrigger(true);
+		comboCidade.setLoadingText("Carregando cidades...");
+		comboCidade.setPageSize(10);		
+		
 		mfdCepEstado.add(comboCidade);
 		
 		fsEndereco.add(mfdCepEstado, new FormData("100%"));
@@ -229,6 +285,21 @@ public class FormAgencia extends Window {
 		setBottomComponent(toolBar);
 		
 		add(mainPanel);
+		
+	}
+
+	private void carregaTipoLogradouro() {
+		InstanceService.TIPOLOGRADOURO_SERVICE.listAll(new AsyncCallback<List<DTOTipoLogradouro>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());			
+			}
+			
+			public void onSuccess(List<DTOTipoLogradouro> result) {
+				storeTipoLogradouro.removeAll();
+				storeTipoLogradouro.add(result);
+			};
+		});
 		
 	}
 
@@ -273,5 +344,21 @@ public class FormAgencia extends Window {
 		}
 		return true;
 	}
+	
+	private void carregaEstados() {
+		for (EnumUF enumUF : EnumUF.values()) {
+			BaseModelData bmd = new BaseModelData();
+			bmd.set("uf", enumUF.name());
+			storeEstado.add(bmd);
+		}		
+	}
+	
+	private native String getTemplateNome() /*-{
+	return [ 
+    	'<tpl for="."><div class="search-item">', 
+    	'<span>{nome}</span>', 
+    	'</div></tpl>' 
+    ].join(""); 
+	}-*/;
 
 }

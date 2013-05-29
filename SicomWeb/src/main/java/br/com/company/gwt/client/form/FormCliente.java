@@ -1,5 +1,7 @@
 package br.com.company.gwt.client.form;
 
+import java.util.List;
+
 import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.TextFieldUpper;
 import br.com.company.gwt.client.component.WebMessageBox;
@@ -12,7 +14,15 @@ import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
 import br.com.company.gwt.shared.enums.EnumUF;
 
 import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.data.BasePagingLoader;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoader;
+import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
@@ -21,6 +31,7 @@ import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.LabelField;
@@ -115,11 +126,26 @@ public class FormCliente extends Window {
 		
 		fsDados.add(new LabelField("Tipo de pessoa:"), new AbsoluteData(0, 0));
 		
-		storeAgencia = new ListStore<DTOAgencia>();
+		RpcProxy<PagingLoadResult<DTOAgencia>> proxyAgencia = new RpcProxy<PagingLoadResult<DTOAgencia>>() {
+			@Override
+			public void load(Object loadConfig, AsyncCallback<PagingLoadResult<DTOAgencia>> callback) {
+				InstanceService.AGENCIA_SERVICE.loadPagingList((PagingLoadConfig) loadConfig, callback);
+			}
+		};
+		
+		PagingLoader<PagingLoadResult<ModelData>> loaderAgencia = new BasePagingLoader<PagingLoadResult<ModelData>>(proxyAgencia);
+		
+		storeAgencia = new ListStore<DTOAgencia>(loaderAgencia);
 		
 		comboAgencia = new ComboBox<DTOAgencia>();
 		comboAgencia.setStore(storeAgencia);
 		comboAgencia.setSize("278px", "22px");
+		comboAgencia.setTemplate(getTemplateNome());
+		comboAgencia.setValueField("id");
+		comboAgencia.setDisplayField("nome");
+		comboAgencia.setItemSelector("div.search-item");
+		comboAgencia.setHideTrigger(true);
+		comboAgencia.setLoadingText("Carregando agências...");
 		
 		fsDados.add(comboAgencia, new AbsoluteData(283, 17));
 		
@@ -221,6 +247,11 @@ public class FormCliente extends Window {
 		comboTipoLogradouro = new ComboBox<DTOTipoLogradouro>();
 		comboTipoLogradouro.setStore(storeTipoLogradouro);
 		comboTipoLogradouro.setSize("66px", "22px");
+		comboTipoLogradouro.setDisplayField("nome");
+		comboTipoLogradouro.setValueField("id");
+		comboTipoLogradouro.setTriggerAction(TriggerAction.ALL);
+		comboTipoLogradouro.setEditable(false);
+		
 		fsEndereco.add(comboTipoLogradouro, new AbsoluteData (0, 12));
 		
 		tfLogradouro = new TextFieldUpper();
@@ -253,21 +284,48 @@ public class FormCliente extends Window {
 		
 		comboEstado = new ComboBox<BaseModelData>();
 		comboEstado.setDisplayField("uf");
+		comboEstado.setTriggerAction(TriggerAction.ALL);
 		comboEstado.setEditable(false);
-		comboEstado.setMaxHeight(200);
 		comboEstado.setStore(storeEstado);
 		comboEstado.setSize("52px", "22px");
+		comboEstado.addSelectionChangedListener(new SelectionChangedListener<BaseModelData>() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModelData> se) {
+				if (se.getSelectedItem() != null){
+					comboCidade.setEnabled(true);
+				}
+			}
+		});
 		fsEndereco.add(comboEstado, new AbsoluteData(281, 52));		
 		
 		carregaEstados();
 		
 		fsEndereco.add(new LabelField("Cidade:"), new AbsoluteData(339, 36));
 		
-		storeCidade = new ListStore<DTOCidade>();
+		RpcProxy<PagingLoadResult<DTOCidade>> proxyCidade = new RpcProxy<PagingLoadResult<DTOCidade>>() {
+			@Override
+			public void load(Object loadConfig, AsyncCallback<PagingLoadResult<DTOCidade>> callback) {
+				InstanceService.CIDADE_SERVICE.loadPagingList(comboEstado.getRawValue(),(PagingLoadConfig) loadConfig, callback);
+			}
+		};
+
+	    PagingLoader<PagingLoadResult<ModelData>> loaderCidade = new BasePagingLoader<PagingLoadResult<ModelData>>(proxyCidade);
+		
+		storeCidade = new ListStore<DTOCidade>(loaderCidade);
 		
 		comboCidade = new ComboBox<DTOCidade>();
 		comboCidade.setStore(storeCidade);
+		comboCidade.setTemplate(getTemplateNome());
+		comboCidade.setEnabled(false);
 		comboCidade.setSize("225px", "22px");
+		comboCidade.setValueField("id");
+		comboCidade.setDisplayField("nome");
+		comboCidade.setItemSelector("div.search-item");
+		comboCidade.setHideTrigger(true);
+		comboCidade.setLoadingText("Carregando cidades...");
+		comboCidade.setPageSize(10);		
+		
 		fsEndereco.add(comboCidade, new AbsoluteData(339, 52));
 		
 		fsDados.add(fsEndereco, new AbsoluteData(0, 129));
@@ -391,5 +449,28 @@ public class FormCliente extends Window {
 			storeEstado.add(bmd);
 		}		
 	}
+	
+	private void carregaTipoLogradouro() {
+		InstanceService.TIPOLOGRADOURO_SERVICE.listAll(new AsyncCallback<List<DTOTipoLogradouro>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());			
+			}
+			
+			public void onSuccess(List<DTOTipoLogradouro> result) {
+				storeTipoLogradouro.removeAll();
+				storeTipoLogradouro.add(result);
+			};
+		});
+		
+	}
+	
+	private native String getTemplateNome() /*-{
+	return [ 
+    	'<tpl for="."><div class="search-item">', 
+    	'<span>{nome}</span>', 
+    	'</div></tpl>' 
+    ].join(""); 
+	}-*/;
 	
 }

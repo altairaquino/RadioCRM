@@ -12,6 +12,10 @@ import br.com.company.gwt.server.dao.DaoCidade;
 import br.com.company.gwt.server.entities.Cidade;
 import br.com.company.gwt.shared.dto.DTOCidade;
 
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+
 @Named("cidadeService")
 public class CidadeServiceImpl extends InputServletImpl implements CidadeService{
 	
@@ -41,6 +45,34 @@ public class CidadeServiceImpl extends InputServletImpl implements CidadeService
 			e.printStackTrace();
 		}
 		return cidades;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public PagingLoadResult<DTOCidade> loadPagingList(String estado, PagingLoadConfig config) {
+		List<DTOCidade> sublist = new ArrayList<DTOCidade>();
+		List<Cidade> entities = (ArrayList<Cidade>) loadSubList(config.getOffset(), config.getLimit(), (String)config.get("query"), estado);
+		try {
+			for (Cidade cidade : entities) {
+				
+				sublist.add(parseToDTOCidade(cidade));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (PagingLoadResult<DTOCidade>)new BasePagingLoadResult(sublist);
+	}
+	
+	private List<Cidade> loadSubList(Integer offset, Integer limit, String query, String estado) {
+		List<Cidade> produtos = new ArrayList<Cidade>();
+		try {
+			if (query != null){
+				produtos.addAll(daoCidade.loadSubList(offset, limit, query.toUpperCase(), estado));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return produtos;
 	}
 
 	private DTOCidade parseToDTOCidade(Cidade cidade){
