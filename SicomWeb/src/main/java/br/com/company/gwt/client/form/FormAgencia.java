@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class FormAgencia extends Window {
@@ -120,6 +121,7 @@ public class FormAgencia extends Window {
 		tfComissao.setAllowNegative(false);
 		tfComissao.setAllowDecimals(true);
 		tfComissao.setFieldLabel("Comissão");
+		tfComissao.setFormat(NumberFormat.getFormat("0.00"));
 		multiField.add(tfComissao);
 
 		fsDadosDaAgencia.add(multiField, new FormData("100%"));
@@ -132,7 +134,7 @@ public class FormAgencia extends Window {
 		
 		mfdTelefone = new MultiField<Field<?>>();
 		mfdTelefone.setFieldLabel("Telefone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Celular:" +
-				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-mail");
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-mail");
 		mfdTelefone.setSpacing(10);
 		
 		tfTelefone = new TextField<String>();

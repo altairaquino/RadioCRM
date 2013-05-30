@@ -50,7 +50,7 @@ public class Cliente {
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Agencia agencia;
 	
-	@Column(length=20)
+	@Column(unique=true, length=20)
 	private String documento;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)

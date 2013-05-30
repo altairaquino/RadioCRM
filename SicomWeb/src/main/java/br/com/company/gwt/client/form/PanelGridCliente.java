@@ -10,6 +10,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.PanelGridWindow;
 import br.com.company.gwt.client.component.WebMessageBox;
+import br.com.company.gwt.client.mvc.ProviderFacadeManager;
 import br.com.company.gwt.shared.dto.DTOCliente;
 
 public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
@@ -66,7 +67,11 @@ public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
 		configs.add(config);
 		config = new ColumnConfig("nome", "Nome", 250);
 		configs.add(config);
-		config = new ColumnConfig("documento", "Documento", 100);
+		config = new ColumnConfig("tipoPessoa", "Tipo", 70);
+		configs.add(config);
+		config = new ColumnConfig("fone", "Fone", 90);
+		configs.add(config);
+		config = new ColumnConfig("segmento", "Segmento", 120);
 		configs.add(config);
 		
 		return new ColumnModel(configs);
@@ -74,9 +79,9 @@ public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
 
 	@Override
 	protected void actionButtonNovoClick() {
-		FormCliente formCliente = new FormCliente();
+		FormCliente formCliente = ProviderFacadeManager.formCliente.createInstance();
 		formCliente.setBlinkModal(true);
-		formCliente.show();		
+		formCliente.show();
 	}
 
 	@Override
@@ -91,7 +96,15 @@ public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
 
 	@Override
 	protected void actionButtonEditarClick() {
-				
+		DTOCliente cliente = getSelecaoGrid();
+		if (cliente != null){
+			FormCliente formCliente = ProviderFacadeManager.formCliente.createInstance();
+			formCliente.loadDTOCliente(cliente);
+			formCliente.setBlinkModal(true);
+			formCliente.show();
+		}else{
+			WebMessageBox.alert("Selecione o cliente!");
+		}
 	}
 
 	@Override
