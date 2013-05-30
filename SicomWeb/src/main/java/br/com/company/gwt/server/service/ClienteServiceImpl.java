@@ -6,15 +6,23 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import br.com.company.gwt.client.remoteinterface.ClienteService;
 import br.com.company.gwt.server.InputServletImpl;
 import br.com.company.gwt.server.dao.DaoAgencia;
 import br.com.company.gwt.server.dao.DaoCidade;
 import br.com.company.gwt.server.dao.DaoCliente;
 import br.com.company.gwt.server.dao.DaoTipoLogradouro;
+import br.com.company.gwt.server.entities.Agencia;
+import br.com.company.gwt.server.entities.Cidade;
 import br.com.company.gwt.server.entities.Cliente;
+import br.com.company.gwt.server.entities.TipoLogradouro;
 import br.com.company.gwt.server.entities.TipoPessoa;
+import br.com.company.gwt.shared.dto.DTOAgencia;
+import br.com.company.gwt.shared.dto.DTOCidade;
 import br.com.company.gwt.shared.dto.DTOCliente;
+import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
 
 @Named("clienteService")
 public class ClienteServiceImpl extends InputServletImpl implements ClienteService{
@@ -50,6 +58,7 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 		return clientes;
 	}
 	
+	@Transactional
 	@Override
 	public DTOCliente salvar(DTOCliente dtoCliente) throws Exception{
 		try {
@@ -62,6 +71,7 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 			
 			cliente.setNome(dtoCliente.getNome());
 			cliente.setRazaoSocial(dtoCliente.getRazaoSocial());
+			cliente.setSegmento(dtoCliente.getSegmento());
 			cliente.setDocumento(dtoCliente.getDocumento());
 			cliente.setTipoPessoa(TipoPessoa.valueOf(dtoCliente.getTipoPessoa()));
 			cliente.setDataNascimento(dtoCliente.getDataNascimento());
@@ -88,6 +98,7 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new Exception(e.getMessage());
 		}
 		
 		return dtoCliente;
@@ -97,7 +108,47 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 		DTOCliente dto = new DTOCliente();
 		dto.setId(cliente.getId());
 		dto.setNome(cliente.getNome());
+		dto.setRazaoSocial(cliente.getRazaoSocial());
+		dto.setTipoPessoa(cliente.getTipoPessoa().name());
+		dto.setSegmento(cliente.getSegmento());
+		dto.setFone(cliente.getFone());
+		dto.setEmail(cliente.getEmail());
 		dto.setDocumento(cliente.getDocumento());
+		dto.setDataNascimento(cliente.getDataNascimento());
+		Agencia agencia = cliente.getAgencia();
+		if (agencia != null){
+			DTOAgencia dtoAgencia = new DTOAgencia();
+			dtoAgencia.setId(agencia.getId());
+			dtoAgencia.setNome(agencia.getNome());
+			dto.setAgencia(dtoAgencia);
+		}
+		TipoLogradouro tipoLogradouro = cliente.getTipoLogradouro();
+		if (tipoLogradouro != null){
+			DTOTipoLogradouro tipo = new DTOTipoLogradouro();
+			tipo.setId(tipoLogradouro.getId());
+			tipo.setNome(tipoLogradouro.getNome());
+			dto.setTipoLogradouro(tipo);
+		}
+		dto.setLogradouro(cliente.getLogradouro());
+		dto.setComplemento(cliente.getComplemento());
+		dto.setCep(cliente.getCep());
+		dto.setBairro(cliente.getBairro());
+
+		Cidade cidade = cliente.getCidade();
+		if (cidade != null){
+			DTOCidade dtoCidade = new DTOCidade();
+			dtoCidade.setId(cidade.getId());
+			dtoCidade.setNome(cidade.getNome());
+			dto.setCidade(dtoCidade);
+		}
+		dto.setNomeContato(cliente.getNomeContato());
+		dto.setFoneContato(cliente.getFoneContato());
+		dto.setCellContato(cliente.getCellContato());
+		dto.setDataNascimentoContato(cliente.getDataNascimentoContato());
+		dto.setNomeProprietario(cliente.getNomeProprietario());
+		dto.setDataNascimentoProprietario(cliente.getDataNascimentoProprietario());
+		dto.setAtivo(cliente.isAtivo());
+		
 		return dto;
 	}
 

@@ -60,9 +60,13 @@ public class PanelGridAgencia extends PanelGridWindow<DTOAgencia> {
 	@Override
 	protected ColumnModel getColumnModel() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-		ColumnConfig config = new ColumnConfig("id", "Codigo", 70);
+		ColumnConfig config = new ColumnConfig("id", "Codigo", 50);
 		configs.add(config);
 		config = new ColumnConfig("nome", "Nome", 250);
+		configs.add(config);
+		config = new ColumnConfig("telefone", "Fone", 80);
+		configs.add(config);
+		config = new ColumnConfig("celular", "Celular", 80);
 		configs.add(config);
 		config = new ColumnConfig("documento", "Documento", 100);
 		configs.add(config);

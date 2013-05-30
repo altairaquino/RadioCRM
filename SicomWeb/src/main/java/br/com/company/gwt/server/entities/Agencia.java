@@ -24,7 +24,7 @@ public class Agencia {
 	@Column(name="razao_social", length=50)
 	private String razaoSocial;
 
-	@Column(length=20)
+	@Column(length=20, unique=true)
 	private String documento;
 
 	private Float comissao;

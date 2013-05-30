@@ -1,5 +1,6 @@
 package br.com.company.gwt.client.form;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.company.gwt.client.InstanceService;
@@ -41,6 +42,7 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteData;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -91,6 +93,7 @@ public class FormCliente extends Window {
 		setSize(640, 497);
 		setLayout(new FitLayout());
 		setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeCliente16()));
+		id = null;
 		
 		mainPanel = new ContentPanel();
 		mainPanel.setFrame(true);
@@ -106,7 +109,6 @@ public class FormCliente extends Window {
 		radioGroupTipoPessoa.setSize("144px", "20px");
 		
 		rdFisica = new Radio();
-		rdFisica.setValue(true);
 		rdFisica.setWidth("60px");
 		rdFisica.setData("tipo", "FISICA");
 		rdFisica.setBoxLabel("Física");
@@ -120,7 +122,8 @@ public class FormCliente extends Window {
 		rdJuridica.setBoxLabel("Jurídica");
 		rdJuridica.setHideLabel(true);
 		radioGroupTipoPessoa.add(rdJuridica);
-		
+
+		radioGroupTipoPessoa.setValue(rdFisica);
 		
 		fsDados.add(radioGroupTipoPessoa, new AbsoluteData(0, 17));
 		
@@ -231,6 +234,8 @@ public class FormCliente extends Window {
 		
 		tfAniversarioContato = new DateField();
 		tfAniversarioContato.setSize("117px", "22px");
+		tfAniversarioContato.setEditable(false);
+		tfAniversarioContato.getPropertyEditor().setFormat(DateTimeFormat.getFormat("dd/MM/yyyy"));
 		fsContato.add(tfAniversarioContato, new AbsoluteData(447, 16));
 		
 		
@@ -337,6 +342,9 @@ public class FormCliente extends Window {
 		
 		tfAniversarioCliente = new DateField();
 		tfAniversarioCliente.setSize("117px", "22px");
+		tfAniversarioCliente.setEditable(false);
+		tfAniversarioCliente.setValue(new Date());
+		tfAniversarioCliente.getPropertyEditor().setFormat(DateTimeFormat.getFormat("dd/MM/yyyy"));
 		
 		fsDados.add(tfAniversarioCliente, new AbsoluteData(160, 17));
 		
@@ -357,6 +365,8 @@ public class FormCliente extends Window {
 		
 		tfAniversarioProprietario = new DateField();
 		tfAniversarioProprietario.setSize("104px", "22px");
+		tfAniversarioProprietario.setEditable(false);
+		tfAniversarioProprietario.getPropertyEditor().setFormat(DateTimeFormat.getFormat("dd/MM/yyyy"));
 		fieldSetDadosDoProprietrio.add(tfAniversarioProprietario, new AbsoluteData(334, 16));
 		
 		mainPanel.add(fieldSetDadosDoProprietrio, new AbsoluteData(13, 333));
@@ -393,16 +403,25 @@ public class FormCliente extends Window {
 
 	protected void salvar() {
 		mainPanel.mask("Salvando cliente. Aguarde...");
+		
+		if (!validaCampos()){
+			return;
+		}
+		
 		InstanceService.CLIENTE_SERVICE.salvar(getDTOClienteFromForm(), new AsyncCallback<DTOCliente>() {
 			
 			@Override
-			public void onSuccess(DTOCliente result) {
-				Info.display("Sucesso.", "Cliente salvo com sucesso.");
+			public void onSuccess(DTOCliente cliente) {
+				if (cliente.getId() != null){
+					Info.display("Sucesso.", "Cliente salvo com sucesso.");
+					FormCliente.this.hide();					
+				}
 				mainPanel.unmask();
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());
 				mainPanel.unmask();
 			}
 		});		
@@ -414,7 +433,11 @@ public class FormCliente extends Window {
 		dto.setNome(tfNome.getValue());
 		dto.setDataNascimento(tfAniversarioCliente.getValue());
 		dto.setRazaoSocial(tfRazaoSocial.getValue());
-		dto.setTipoPessoa(radioGroupTipoPessoa.getValue().<String>getData("tipo"));
+		if (radioGroupTipoPessoa.getValue().equals(rdFisica)){
+			dto.setTipoPessoa("FISICA");			
+		}else{
+			dto.setTipoPessoa("JURIDICA");
+		}
 		dto.setAgencia(comboAgencia.getValue());
 		// TODO CRIAR CAMPO DE DOCUMENTO
 		dto.setDocumento("");
@@ -436,10 +459,106 @@ public class FormCliente extends Window {
 		dto.setAtivo(checkAtivo.getValue());
 		return dto;
 	}
+	
+	public void loadDTOCliente(DTOCliente dto) {
+		id = dto.getId();
+		tfNome.setValue(dto.getNome());
+		tfAniversarioCliente.setValue(dto.getDataNascimento());
+		tfRazaoSocial.setValue(dto.getRazaoSocial());
+		
+		if (dto.getTipoPessoa().equals("FISICA")){
+			radioGroupTipoPessoa.setValue(rdFisica);
+		}else{
+			radioGroupTipoPessoa.setValue(rdJuridica);
+		}
+		comboAgencia.setValue(dto.getAgencia());
+		// TODO CRIAR CAMPO DE DOCUMENTO
+		// dto.setDocumento("");
+		tfSegmento.setValue(dto.getSegmento());
+		tfEmail.setValue(dto.getEmail());
+		tfTelefone.setValue(dto.getFone());
+		comboTipoLogradouro.setValue(dto.getTipoLogradouro());
+		tfLogradouro.setValue(dto.getLogradouro());
+		tfComplemento.setValue(dto.getComplemento());
+		tfCEP.setValue(dto.getCep());
+		tfBairro.setValue(dto.getBairro());
+		comboCidade.setValue(dto.getCidade());
+		tfNomeContato.setValue(dto.getNomeContato());
+		tfFoneContato.setValue(dto.getFoneContato());
+		tfCelularContato.setValue(dto.getCellContato());
+		tfAniversarioContato.setValue(dto.getDataNascimentoContato());
+		tfNomeProprietario.setValue(dto.getNomeProprietario());
+		tfAniversarioProprietario.setValue(dto.getDataNascimentoProprietario());
+		checkAtivo.setValue(dto.getAtivo());
+	}
 
 	protected boolean validaCampos() {
+		if (comboAgencia.getValue() == null){
+			WebMessageBox.alert("Informe a Agência!");
+			return false;
+		}
 		if (tfNome.getValue() == null){
-			WebMessageBox.alert("Informe o nome do cliente.");
+			WebMessageBox.alert("Informe o nome!");
+			return false;
+		}
+		if (tfRazaoSocial.getValue() == null){
+			WebMessageBox.alert("Informe a razão social!");
+			return false;
+		}
+		if (tfSegmento.getValue() == null){
+			WebMessageBox.alert("Informe o segmento!");
+			return false;
+		}
+		if (tfEmail.getValue() == null){
+			WebMessageBox.alert("Informe o e-mail!");
+			return false;
+		}
+		if (tfTelefone.getValue() == null){
+			WebMessageBox.alert("Informe o telefone!");
+			return false;
+		}
+		if (tfLogradouro.getValue() == null){
+			WebMessageBox.alert("Informe o logradouro!");
+			return false;
+		}
+		if (tfComplemento.getValue() == null){
+			WebMessageBox.alert("Informe o complemento do endereço!");
+			return false;
+		}
+		if (tfCEP.getValue() == null){
+			WebMessageBox.alert("Informe o CEP!");
+			return false;
+		}
+		if (tfBairro.getValue() == null){
+			WebMessageBox.alert("Informe o bairro!");
+			return false;
+		}
+		if (comboCidade.getValue() == null){
+			WebMessageBox.alert("Informe a cidade!");
+			return false;
+		}
+		if (tfNomeContato.getValue() == null){
+			WebMessageBox.alert("Informe o nome do contato!");
+			return false;
+		}
+		if (tfFoneContato.getValue() == null){
+			WebMessageBox.alert("Informe o fone do contato!");
+			return false;
+		}
+		if (tfCelularContato.getValue() == null){
+			WebMessageBox.alert("Informe o celular do contato!");
+			return false;
+		}
+		if (tfAniversarioContato.getValue() == null){
+			WebMessageBox.alert("Informe o aniversário do contato!");
+			return false;
+		}
+		if (tfNomeProprietario.getValue() == null){
+			WebMessageBox.alert("Informe o nome do proprietário!");
+			return false;
+		}
+		if (tfAniversarioProprietario.getValue() == null){
+			WebMessageBox.alert("Informe o aniversário do proprietário!");
 			return false;
 		}
 		return true;

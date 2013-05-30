@@ -43,7 +43,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setRazaoSocial(String razaoSocial) {
-		this.set("razaoSocial", "razaoSocial");
+		this.set("razaoSocial", razaoSocial);
 	}
 
 	public String getSegmento() {
@@ -51,7 +51,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setSegmento(String segmento) {
-		this.set("segmento", "segmento");
+		this.set("segmento", segmento);
 	}
 
 	public String getEmail() {
@@ -59,7 +59,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setEmail(String email) {
-		this.set("email", "email");
+		this.set("email", email);
 	}
 
 	public String getFone() {
@@ -67,7 +67,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setFone(String fone) {
-		this.set("fone", "fone");
+		this.set("fone", fone);
 	}
 
 	public String getTipoPessoa() {
@@ -75,7 +75,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setTipoPessoa(String tipoPessoa) {
-		this.set("tipoPessoa", "tipoPessoa");
+		this.set("tipoPessoa", tipoPessoa);
 	}
 
 	public Date getDataNascimento() {
@@ -83,7 +83,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setDataNascimento(Date dataNascimento) {
-		this.set("dataNascimento", "dataNascimento");
+		this.set("dataNascimento", dataNascimento);
 	}
 
 	public DTOAgencia getAgencia() {
@@ -91,7 +91,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setAgencia(DTOAgencia agencia) {
-		this.set("agencia", "agencia");
+		this.set("agencia", agencia);
 	}
 
 	public DTOTipoLogradouro getTipoLogradouro() {
@@ -99,7 +99,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setTipoLogradouro(DTOTipoLogradouro tipoLogradouro) {
-		this.set("tipoLogradouro", "tipoLogradouro");
+		this.set("tipoLogradouro", tipoLogradouro);
 	}
 
 	public String getLogradouro() {
@@ -107,7 +107,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setLogradouro(String logradouro) {
-		this.set("logradouro", "logradouro");
+		this.set("logradouro", logradouro);
 	}
 
 	public String getComplemento() {
@@ -115,7 +115,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setComplemento(String complemento) {
-		this.set("complemento", "complemento");
+		this.set("complemento", complemento);
 	}
 
 	public String getCep() {
@@ -123,7 +123,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setCep(String cep) {
-		this.set("cep", "cep");
+		this.set("cep", cep);
 	}
 
 	public String getBairro() {
@@ -131,7 +131,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setBairro(String bairro) {
-		this.set("bairro", "bairro");
+		this.set("bairro", bairro);
 	}
 
 	public DTOCidade getCidade() {
@@ -139,7 +139,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setCidade(DTOCidade cidade) {
-		this.set("cidade", "cidade");
+		this.set("cidade", cidade);
 	}
 
 	public String getNomeContato() {
@@ -147,7 +147,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setNomeContato(String nomeContato) {
-		this.set("nomeContato", "nomeContato");
+		this.set("nomeContato", nomeContato);
 	}
 
 	public String getFoneContato() {
@@ -155,7 +155,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setFoneContato(String foneContato) {
-		this.set("foneContato", "foneContato");
+		this.set("foneContato", foneContato);
 	}
 
 	public String getCellContato() {
@@ -163,7 +163,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setCellContato(String cellContato) {
-		this.set("cellContato", "cellContato");
+		this.set("cellContato", cellContato);
 	}
 
 	public Date getDataNascimentoContato() {
@@ -171,7 +171,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setDataNascimentoContato(Date dataNascimentoContato) {
-		this.set("dataNascimentoContato", "dataNascimentoContato");
+		this.set("dataNascimentoContato", dataNascimentoContato);
 	}
 
 	public String getNomeProprietario() {
@@ -179,7 +179,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setNomeProprietario(String nomeProprietario) {
-		this.set("nomeProprietario", "nomeProprietario");
+		this.set("nomeProprietario", nomeProprietario);
 	}
 
 	public Date getDataNascimentoProprietario() {
@@ -187,7 +187,7 @@ public class DTOCliente extends BaseModelData {
 	}
 
 	public void setDataNascimentoProprietario(Date dataNascimentoProprietario) {
-		this.set("dataNascimentoProprietario", "dataNascimentoProprietario");
+		this.set("dataNascimentoProprietario", dataNascimentoProprietario);
 	}
 
 	public Boolean getAtivo() {
