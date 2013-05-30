@@ -44,6 +44,9 @@ public class Agencia {
 	@Column(length=50)
 	private String logradouro;
 	
+	@Column(name="numero_logradouro", length=10)
+	private String numeroLogradouro;
+	
 	@Column(length=50)
 	private String complemento;
 	
@@ -148,6 +151,12 @@ public class Agencia {
 	}
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+	public String getNumeroLogradouro() {
+		return numeroLogradouro;
+	}
+	public void setNumeroLogradouro(String numeroLogradouro) {
+		this.numeroLogradouro = numeroLogradouro;
 	}
 	
 }

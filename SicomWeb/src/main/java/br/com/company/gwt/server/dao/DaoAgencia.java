@@ -25,7 +25,7 @@ public class DaoAgencia extends DaoAbstract<Agencia, Integer> {
 						 " order by a.nome";
 
 			Query qr = createQuery(hql);
-			qr.setParameter("nome", "%"+query+"%");
+			qr.setString("nome", "%"+query+"%");
 			qr.setFirstResult(offSet);
 			qr.setMaxResults(maxResult);
 			

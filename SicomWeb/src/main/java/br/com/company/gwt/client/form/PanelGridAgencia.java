@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.PanelGridWindow;
 import br.com.company.gwt.client.component.WebMessageBox;
+import br.com.company.gwt.client.mvc.ProviderFacadeManager;
 import br.com.company.gwt.shared.dto.DTOAgencia;
 
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -21,17 +22,20 @@ public class PanelGridAgencia extends PanelGridWindow<DTOAgencia> {
 	}
 
 	private void loadDados() {
+		painelPrincipal.mask("Aguarde. Carregando dados..");
 		InstanceService.AGENCIA_SERVICE.listAll(new AsyncCallback<List<DTOAgencia>>() {
 			
 			@Override
 			public void onSuccess(List<DTOAgencia> result) {
 				getStore().removeAll();
 				getStore().add(result);
+				painelPrincipal.unmask();
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
 				WebMessageBox.error(caught.getMessage());
+				painelPrincipal.unmask();
 			}
 		});		
 	}
@@ -60,6 +64,8 @@ public class PanelGridAgencia extends PanelGridWindow<DTOAgencia> {
 		configs.add(config);
 		config = new ColumnConfig("nome", "Nome", 250);
 		configs.add(config);
+		config = new ColumnConfig("documento", "Documento", 100);
+		configs.add(config);
 				
 		return new ColumnModel(configs);
 	}
@@ -73,7 +79,7 @@ public class PanelGridAgencia extends PanelGridWindow<DTOAgencia> {
 
 	@Override
 	protected void actionButtonRemoveClick() {
-				
+		
 	}
 
 	@Override
@@ -83,11 +89,20 @@ public class PanelGridAgencia extends PanelGridWindow<DTOAgencia> {
 
 	@Override
 	protected void actionButtonEditarClick() {
-				
+		DTOAgencia selecao = getSelecaoGrid();
+		if (selecao != null){
+			FormAgencia formAgencia = ProviderFacadeManager.formAgencia.createInstance();
+			formAgencia.loadDTOAgencia(selecao);
+			formAgencia.setModal(true);
+			formAgencia.show();			
+		}else{
+			WebMessageBox.alert("Selecione a agência!");
+		}
 	}
 
 	@Override
 	protected void actionButtonAtualizaClick() {
+		loadDados();
 	}
 
 }

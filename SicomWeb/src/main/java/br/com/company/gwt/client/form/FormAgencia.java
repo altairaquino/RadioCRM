@@ -292,12 +292,15 @@ public class FormAgencia extends Window {
 		InstanceService.TIPOLOGRADOURO_SERVICE.listAll(new AsyncCallback<List<DTOTipoLogradouro>>() {
 			@Override
 			public void onFailure(Throwable caught) {
-				WebMessageBox.error(caught.getMessage());			
+				WebMessageBox.error(caught.getMessage());
 			}
 			
 			public void onSuccess(List<DTOTipoLogradouro> result) {
 				storeTipoLogradouro.removeAll();
 				storeTipoLogradouro.add(result);
+				if (!result.isEmpty()){
+					comboTipoLogradouro.setValue(result.get(0));					
+				}
 			};
 		});
 		
@@ -312,7 +315,10 @@ public class FormAgencia extends Window {
 			
 			@Override
 			public void onSuccess(DTOAgencia result) {
-				Info.display("Sucesso", "Agência salva com sucesso.");
+				if (result.getId() != null){
+					Info.display("Sucesso", "Agência salva com sucesso.");
+					FormAgencia.this.hide();
+				}
 			}
 			
 		});
@@ -342,6 +348,30 @@ public class FormAgencia extends Window {
 			WebMessageBox.alert("Nome é obrigatório.");
 			return false;
 		}
+		if (tfRazaoSocial.getValue() == null){
+			WebMessageBox.alert("Razão social é obrigatório.");
+			return false;
+		}
+		if (tfDocumento.getValue() == null){
+			WebMessageBox.alert("Documento é obrigatório.");
+			return false;
+		}
+		if (tfComissao.getValue() == null){
+			WebMessageBox.alert("Comissão é obrigatória.");
+			return false;
+		}
+		if (tfTelefone.getValue() == null){
+			WebMessageBox.alert("Telefone é obrigatório.");
+			return false;
+		}
+		if (tfLogradouro.getValue() == null){
+			WebMessageBox.alert("Logradouro é obrigatório.");
+			return false;
+		}
+		if (comboCidade.getValue() == null){
+			WebMessageBox.alert("Cidade é obrigatória.");
+			return false;
+		}
 		return true;
 	}
 	
@@ -360,5 +390,26 @@ public class FormAgencia extends Window {
     	'</div></tpl>' 
     ].join(""); 
 	}-*/;
+
+	public void loadDTOAgencia(DTOAgencia dto) {
+		id = dto.getId();
+		tfNome.setValue(dto.getNome());
+		tfRazaoSocial.setValue(dto.getRazaoSocial());
+		tfDocumento.setValue(dto.getDocumento());
+		tfComissao.setValue(dto.getComissao());
+		tfTelefone.setValue(dto.getTelefone());
+		tfCelular.setValue(dto.getCelular());
+		tfEmail.setValue(dto.getEmail());
+		comboTipoLogradouro.setValue(dto.getTipoLogradouro());
+		tfLogradouro.setValue(dto.getLogradouro());
+		tfComplemento.setValue(dto.getComplemento());
+		tfBairro.setValue(dto.getBairro());
+		tfCep.setValue(dto.getCep());
+		DTOCidade dtoCidade = dto.getCidade();
+		BaseModelData bmd = new BaseModelData();
+		bmd.set("uf", EnumUF.valueOf(dtoCidade.getUF()).name());
+		comboEstado.setValue(bmd);
+		comboCidade.setValue(dtoCidade);		
+	}
 
 }

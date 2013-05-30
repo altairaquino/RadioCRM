@@ -14,7 +14,11 @@ import br.com.company.gwt.server.dao.DaoAgencia;
 import br.com.company.gwt.server.dao.DaoCidade;
 import br.com.company.gwt.server.dao.DaoTipoLogradouro;
 import br.com.company.gwt.server.entities.Agencia;
+import br.com.company.gwt.server.entities.Cidade;
+import br.com.company.gwt.server.entities.TipoLogradouro;
 import br.com.company.gwt.shared.dto.DTOAgencia;
+import br.com.company.gwt.shared.dto.DTOCidade;
+import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
@@ -55,6 +59,32 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 		DTOAgencia dto = new DTOAgencia();
 		dto.setId(agencia.getId());
 		dto.setNome(agencia.getNome());
+		dto.setRazaoSocial(agencia.getRazaoSocial());
+		dto.setDocumento(agencia.getDocumento());
+		dto.setComissao(agencia.getComissao());
+		dto.setTelefone(agencia.getTelefone());
+		dto.setCelular(agencia.getCelular());
+		dto.setEmail(agencia.getEmail());
+		TipoLogradouro tipoLogradouro = agencia.getTipoLogradouro(); 
+		if (tipoLogradouro != null){
+			DTOTipoLogradouro dtoTipoLogradouro = new DTOTipoLogradouro();
+			dtoTipoLogradouro.setId(tipoLogradouro.getId());
+			dtoTipoLogradouro.setNome(tipoLogradouro.getNome());
+			dto.setTipoLogradouro(dtoTipoLogradouro);
+		}
+		dto.setLogradouro(agencia.getLogradouro());
+		dto.setComplemento(agencia.getComplemento());
+		dto.setBairro(agencia.getBairro());
+		dto.setCep(agencia.getCep());
+		Cidade cidade = agencia.getCidade(); 
+		if (cidade != null){
+			DTOCidade dtoCidade = new DTOCidade();
+			dtoCidade.setId(cidade.getId());
+			dtoCidade.setNome(cidade.getNome());
+			dtoCidade.setUF(cidade.getUf());
+			dto.setCidade(dtoCidade);
+		}
+		
 		return dto;
 	}
 
@@ -95,19 +125,18 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 		return dtoAgencia;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public PagingLoadResult<DTOAgencia> loadPagingList(PagingLoadConfig config) {
 		List<DTOAgencia> sublist = new ArrayList<DTOAgencia>();
 		List<Agencia> entities = (ArrayList<Agencia>) loadSubList(config.getOffset(), config.getLimit(), (String)config.get("query"));
 		try {
-			for (Agencia agencia : entities) {	
+			for (Agencia agencia : entities) {
 				sublist.add(parseToDTOAgencia(agencia));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return (PagingLoadResult<DTOAgencia>)new BasePagingLoadResult(sublist);
+		return (PagingLoadResult<DTOAgencia>)new BasePagingLoadResult<DTOAgencia>(sublist);
 	}
 	
 	private List<Agencia> loadSubList(Integer offset, Integer limit, String query) {

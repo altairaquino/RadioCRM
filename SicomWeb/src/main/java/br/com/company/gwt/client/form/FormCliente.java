@@ -146,6 +146,7 @@ public class FormCliente extends Window {
 		comboAgencia.setItemSelector("div.search-item");
 		comboAgencia.setHideTrigger(true);
 		comboAgencia.setLoadingText("Carregando agências...");
+		comboAgencia.setPageSize(10);
 		
 		fsDados.add(comboAgencia, new AbsoluteData(283, 17));
 		
@@ -251,6 +252,8 @@ public class FormCliente extends Window {
 		comboTipoLogradouro.setValueField("id");
 		comboTipoLogradouro.setTriggerAction(TriggerAction.ALL);
 		comboTipoLogradouro.setEditable(false);
+		
+		carregaTipoLogradouro();
 		
 		fsEndereco.add(comboTipoLogradouro, new AbsoluteData (0, 12));
 		
@@ -460,6 +463,9 @@ public class FormCliente extends Window {
 			public void onSuccess(List<DTOTipoLogradouro> result) {
 				storeTipoLogradouro.removeAll();
 				storeTipoLogradouro.add(result);
+				if (!result.isEmpty()){
+					comboTipoLogradouro.setValue(result.get(0));
+				}
 			};
 		});
 		
