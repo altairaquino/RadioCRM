@@ -20,6 +20,14 @@ public class DTOFormaPagamento extends BaseModelData {
 
 	public void setNome(String nome) {
 		set("nome", nome);
-	}	
+	}
+	
+	public Boolean getTemPermuta() {
+		return get("temPermuta");
+	}
+
+	public void setTemPermuta(Boolean temPermuta) {
+		this.set("temPermuta", temPermuta);
+	}
 
 }

@@ -14,6 +14,9 @@ public class FormaPagamento {
 	
 	@Column(length=40)
 	private String nome;
+	
+	@Column(name="tem_permuta", columnDefinition="boolean default false")
+	private Boolean temPermuta;
 
 	public Integer getId() {
 		return id;
@@ -30,7 +33,13 @@ public class FormaPagamento {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
 
+	public Boolean getTemPermuta() {
+		return temPermuta;
+	}
+
+	public void setTemPermuta(Boolean temPermuta) {
+		this.temPermuta = temPermuta;
+	}
+	
 }

@@ -25,6 +25,7 @@ public class FormaPagamentoServiceImpl extends InputServletImpl implements Forma
 				DTOFormaPagamento dto = new DTOFormaPagamento();
 				dto.setId(forma.getId());
 				dto.setNome(forma.getNome());
+				dto.setTemPermuta(forma.getTemPermuta());
 				
 				tipos.add(dto);
 			}

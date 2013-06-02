@@ -14,7 +14,7 @@ public class CondicaoPagamento {
 	
 	@Column(length=40)
 	private String nome;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -30,7 +30,5 @@ public class CondicaoPagamento {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
 
 }
