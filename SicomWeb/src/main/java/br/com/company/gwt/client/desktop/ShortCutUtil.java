@@ -35,7 +35,7 @@ public class ShortCutUtil {
 		
 		shortCuts.add(WebUtil.createShortcut("Clientes", "cliente-shortcut", ProviderFacadeManager.panelGridCliente));
 		shortCuts.add(WebUtil.createShortcut("Programas", AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeMicrofone64()), ProviderFacadeManager.panelGridPrograma));
-		shortCuts.add(WebUtil.createShortcut("Contratos", "contrato-shortcut", ProviderFacadeManager.panelGridPrograma));
+		shortCuts.add(WebUtil.createShortcut("Contratos", "contrato-shortcut", ProviderFacadeManager.panelGridContrato));
 		shortCuts.add(WebUtil.createShortcut("Agências", "agencia-shortcut", ProviderFacadeManager.panelGridAgencia));
 		
 		

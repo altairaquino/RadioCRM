@@ -49,6 +49,7 @@ public abstract class PanelGridWindow<T extends ModelData> extends Window {
 		setMinimizable(true);
 		setResizable(false);
 		setFrame(true);
+		setCollapsible(true);
 		
 		iniciaComponentes();
 		

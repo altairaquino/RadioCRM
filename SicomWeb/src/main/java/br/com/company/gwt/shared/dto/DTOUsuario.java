@@ -36,4 +36,12 @@ public class DTOUsuario extends BaseModelData {
 		return get("newPassword");
 	}
 
+	public void setAdmin(Boolean admin) {
+		set("admin", admin);		
+	}
+	
+	public Boolean getAdmin(){
+		return get("admin");
+	}
+
 }

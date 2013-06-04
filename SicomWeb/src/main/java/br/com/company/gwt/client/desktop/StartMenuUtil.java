@@ -6,7 +6,9 @@ import java.util.List;
 import br.com.company.gwt.client.component.ComponentProvider;
 import br.com.company.gwt.client.mvc.ProviderFacadeManager;
 import br.com.company.gwt.client.resources.ImagensResources;
+import br.com.company.gwt.shared.dto.DTOUsuario;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Window;
@@ -18,23 +20,16 @@ public class StartMenuUtil {
 	
 	public static List<MenuItem> getMenuItems(){
 		
-		//DTOUsuario user = Registry.get("user");
+		DTOUsuario user = Registry.get("user");
 		
 		List<Integer> permis = new ArrayList<Integer>();// user.getJanelas();
 		
 		List<MenuItem> menuItems = new ArrayList<MenuItem>();
 		
-		MenuItem menuItem = new MenuItem("Clientes");
-		/*
-		menuItem.addSelectionListener(getSelectionListener(ProviderFacadeManager.gridClienteWindow));
-		menuItem.setIcon(IconHelper.createStyle("tabs"));
-	    menuItems.add(menuItem);
-		
-	    menuItem = new MenuItem("Consulta Vendas");
-		menuItem.addSelectionListener(getSelectionListener(ProviderFacadeManager.formVendasLista));
+		MenuItem menuItem = new MenuItem("Consulta Contratos");
+		menuItem.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridContrato));
 		menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeVenda16()));
-	    menuItems.add(menuItem);
-		*/
+		menuItems.add(menuItem);
 		
 		
 	    menuItem = new MenuItem("Cadastros");
@@ -61,6 +56,14 @@ public class StartMenuUtil {
 		    item = new MenuItem("Tipo de Contrato");
 		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeForm16()));
 		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formTipoContrato));
+		    
+		    if (user.getAdmin()){
+		    	sub.add(item);		    	
+		    }
+		    
+		    item = new MenuItem("Contratos");
+		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeForm16()));
+		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridContrato));
 		    sub.add(item);
 
 	    menuItem.setSubMenu(sub);

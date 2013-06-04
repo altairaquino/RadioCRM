@@ -47,7 +47,6 @@ public class CidadeServiceImpl extends InputServletImpl implements CidadeService
 		return cidades;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public PagingLoadResult<DTOCidade> loadPagingList(String estado, PagingLoadConfig config) {
 		List<DTOCidade> sublist = new ArrayList<DTOCidade>();
@@ -60,7 +59,7 @@ public class CidadeServiceImpl extends InputServletImpl implements CidadeService
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return (PagingLoadResult<DTOCidade>)new BasePagingLoadResult(sublist);
+		return (PagingLoadResult<DTOCidade>)new BasePagingLoadResult<DTOCidade>(sublist);
 	}
 	
 	private List<Cidade> loadSubList(Integer offset, Integer limit, String query, String estado) {

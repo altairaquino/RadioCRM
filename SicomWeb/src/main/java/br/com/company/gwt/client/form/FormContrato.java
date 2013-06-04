@@ -1,9 +1,21 @@
 package br.com.company.gwt.client.form;
 
 import java.util.Date;
+import java.util.List;
 
+import br.com.company.gwt.client.InstanceService;
+import br.com.company.gwt.client.component.WebMessageBox;
+import br.com.company.gwt.shared.dto.DTOCliente;
+import br.com.company.gwt.shared.dto.DTOContrato;
+import br.com.company.gwt.shared.dto.DTOFormaPagamento;
+import br.com.company.gwt.shared.dto.DTOPrograma;
+import br.com.company.gwt.shared.dto.DTOTipoContrato;
+
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -19,14 +31,15 @@ import com.extjs.gxt.ui.client.widget.layout.AbsoluteData;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class FormContrato extends Window {
 	
 	private DateTimeFormat dateFormat = DateTimeFormat.getFormat("dd/MM/yyyy");
 
 	private ContentPanel mainPanel;
-	private ComboBox comboCliente;
-	private ListStore storeCliente;
+	private ComboBox<DTOCliente> comboCliente;
+	private ListStore<DTOCliente> storeCliente;
 	private DateField tfDataCadastro;
 	private FieldSet fsDadosDoContrato;
 	private FieldSet fsVigenciaDoContrato;
@@ -34,13 +47,13 @@ public class FormContrato extends Window {
 	private DateField tfDataTermino;
 	private FieldSet fsInformacoesDeTexto;
 	private TextArea tfTexto;
-	private ComboBox comboFormaPagamento;
-	private ListStore storeFormaPagamento;
+	private ComboBox<DTOFormaPagamento> comboFormaPagamento;
+	private ListStore<DTOFormaPagamento> storeFormaPagamento;
 	private DateField tfDataPagamento;
 	private NumberField tfValor;
 	private NumberField tfPermuta;
-	private ComboBox comboTipoContrato;
-	private ListStore storeTipoContrato;
+	private ComboBox<DTOTipoContrato> comboTipoContrato;
+	private ListStore<DTOTipoContrato> storeTipoContrato;
 	private Integer id;
 
 	private RadioGroup radioGroup;
@@ -49,11 +62,11 @@ public class FormContrato extends Window {
 
 	private Radio rdValorBruto;
 
-	private DualListField tfProgramas;
+	private DualListField<DTOPrograma> tfProgramas;
 
-	private ListStore storeProgramasFrom;
+	private ListStore<DTOPrograma> storeProgramasFrom;
 
-	private ListStore storeProgramasTo;
+	private ListStore<DTOPrograma> storeProgramasTo;
 
 	private Button btnSalvar;
 
@@ -62,7 +75,7 @@ public class FormContrato extends Window {
 	public FormContrato() {
 		setResizable(false);
 		setMinimizable(true);
-		setHeading("Cadastro de Contrato");
+		setHeadingHtml("Cadastro de Contrato");
 		setSize(640, 538);
 		setLayout(new FitLayout());
 		
@@ -75,12 +88,12 @@ public class FormContrato extends Window {
 		
 		fsDadosDoContrato = new FieldSet();
 		fsDadosDoContrato.setSize("602px", "460px");
-		fsDadosDoContrato.setHeading("Dados do Contrato");
+		fsDadosDoContrato.setHeadingHtml("Dados do Contrato");
 		fsDadosDoContrato.setLayout(new AbsoluteLayout());
 		
-		storeCliente = new ListStore();
+		storeCliente = new ListStore<DTOCliente>();
 		
-		comboCliente = new ComboBox();
+		comboCliente = new ComboBox<DTOCliente>();
 		comboCliente.setStore(storeCliente);
 		comboCliente.setSize("456px", "22px");
 		
@@ -100,7 +113,7 @@ public class FormContrato extends Window {
 		fsVigenciaDoContrato = new FieldSet();
 		fsVigenciaDoContrato.setLayout(new AbsoluteLayout());
 		fsVigenciaDoContrato.setSize("580px", "60px");
-		fsVigenciaDoContrato.setHeading("Vigência do Contrato");
+		fsVigenciaDoContrato.setHeadingHtml("Vigência do Contrato");
 		
 		fsVigenciaDoContrato.add(new LabelField("Data de Início:"), new AbsoluteData(0, 0));
 		
@@ -121,7 +134,7 @@ public class FormContrato extends Window {
 		fsInformacoesDeTexto = new FieldSet();
 		fsInformacoesDeTexto.setLayout(new FitLayout());
 		fsInformacoesDeTexto.setSize("580px", "100px");
-		fsInformacoesDeTexto.setHeading("Informações de texto");
+		fsInformacoesDeTexto.setHeadingHtml("Informações de texto");
 		
 		tfTexto = new TextArea();
 		fsInformacoesDeTexto.add(tfTexto);
@@ -130,9 +143,9 @@ public class FormContrato extends Window {
 		
 		fsDadosDoContrato.add(new LabelField("Forma de Pagamento:"), new AbsoluteData(0, 215));
 		
-		storeFormaPagamento = new ListStore();
+		storeFormaPagamento = new ListStore<DTOFormaPagamento>();
 		
-		comboFormaPagamento = new ComboBox();
+		comboFormaPagamento = new ComboBox<DTOFormaPagamento>();
 		comboFormaPagamento.setStore(storeFormaPagamento);
 		comboFormaPagamento.setSize("276px", "22px");
 		fsDadosDoContrato.add(comboFormaPagamento, new AbsoluteData(0, 235));
@@ -159,9 +172,9 @@ public class FormContrato extends Window {
 		
 		fsDadosDoContrato.add(new LabelField("Tipo de Contrato:"), new AbsoluteData(0, 261));
 		
-		storeTipoContrato = new ListStore();
+		storeTipoContrato = new ListStore<DTOTipoContrato>();
 		
-		comboTipoContrato = new ComboBox();
+		comboTipoContrato = new ComboBox<DTOTipoContrato>();
 		comboTipoContrato.setStore(storeTipoContrato);
 		comboTipoContrato.setSize("276px", "22px");
 		fsDadosDoContrato.add(comboTipoContrato, new AbsoluteData(0, 279));
@@ -186,16 +199,14 @@ public class FormContrato extends Window {
 		fsDadosDoContrato.add(new LabelField("Programas:"), new AbsoluteData(0, 307));		
 		fsDadosDoContrato.add(new LabelField("Programas patrocinados:"), new AbsoluteData(305, 306));
 		
-		storeProgramasFrom = new ListStore();
-		storeProgramasTo = new ListStore();
+		storeProgramasFrom = new ListStore<DTOPrograma>();
+		storeProgramasTo = new ListStore<DTOPrograma>();
 		
-		tfProgramas = new DualListField();
-		tfProgramas.getFromList().setStore(new ListStore());
-		tfProgramas.getToList().setStore(new ListStore());
-		tfProgramas.getFromList().setStore(new ListStore());
-		tfProgramas.getToList().setStore(new ListStore());
+		tfProgramas = new DualListField<DTOPrograma>();
 		tfProgramas.getFromList().setStore(storeProgramasFrom);
+		tfProgramas.getFromList().setDisplayField("nome");
 		tfProgramas.getToList().setStore(storeProgramasTo);	
+		tfProgramas.getToList().setDisplayField("nome");
 		tfProgramas.setSize("580px", "93px");
 		
 		fsDadosDoContrato.add(tfProgramas, new AbsoluteData(0, 328));		
@@ -204,6 +215,15 @@ public class FormContrato extends Window {
 		
 		btnSalvar = new Button("Salvar");
 		btnSalvar.setSize("100px", "24px");
+		btnSalvar.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (validaCampos()){
+					salvar();
+				}				
+			}
+		});
 		mainPanel.add(btnSalvar, new AbsoluteData(508, 464));
 		
 		btnCancelar = new Button("Cancelar");
@@ -212,5 +232,54 @@ public class FormContrato extends Window {
 		
 		add(mainPanel);
 		
+		loadProgramas();
+		
+	}
+	
+	private void loadProgramas() {
+		InstanceService.PROGRAMA_SERVICE.listAll(new AsyncCallback<List<DTOPrograma>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());			
+			}
+			@Override
+			public void onSuccess(List<DTOPrograma> programas) {
+				storeProgramasFrom.add(programas);
+			};
+		});
+		
+	}
+
+	protected void salvar() {
+		mainPanel.mask("Salvando. Aguarde...");
+		InstanceService.CONTRATO_SERVICE.salvar(getDTOContratoFromForm(), new AsyncCallback<DTOContrato>() {
+			
+			@Override
+			public void onSuccess(DTOContrato result) {
+				Info.display("Info", "Salvo com sucesso!");
+				mainPanel.unmask();
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());
+				mainPanel.unmask();
+			}
+		});
+	}
+
+	protected Boolean validaCampos(){
+		
+		return true;
+	}
+
+	public void loadDTOContrato(DTOContrato dto) {
+		id = dto.getId();
+	}
+	
+	protected DTOContrato getDTOContratoFromForm(){
+		DTOContrato dto = new DTOContrato();
+		dto.setId(id);
+		return dto;
 	}
 }

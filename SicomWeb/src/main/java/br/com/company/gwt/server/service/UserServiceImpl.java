@@ -29,20 +29,13 @@ public class UserServiceImpl extends InputServletImpl implements UserService {
 		if (usuario != null){
 			
 			user.setId(usuario.getId());
+			user.setAdmin(usuario.isAdmin());
 			
 			if (!usuario.isAtivo()){
 				throw new Exception("Usuário com acesso inabilitado!");
 			}
 			
-			session.setAttribute("user", usuario);
-			
-			/*
-			List<Operacao> janelas = usuario.getOperacoes();
-			
-			for (Operacao janela: janelas) {
-				user.getJanelas().add(janela.getOperacaoId());
-			}
-			*/
+			session.setAttribute("user", usuario);		
 			
 		}
 		
@@ -75,6 +68,7 @@ public class UserServiceImpl extends InputServletImpl implements UserService {
 				DTOUsuario dto = new DTOUsuario();
 				dto.setId(usuario.getId());
 				dto.setUserName(usuario.getNome());
+				dto.setAdmin(usuario.isAdmin());
 				lista.add(dto);
 			}
 		} catch (Exception e) {

@@ -7,6 +7,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.company.gwt.shared.enums.TipoPagamento;
 
 @Entity
 public class Contrato {
@@ -50,6 +54,7 @@ public class Contrato {
 	private Float percentualPermuta;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_cadastro")
 	private Date dataCadastro;
 	
 	@Column(name="data_inicio")
@@ -58,11 +63,19 @@ public class Contrato {
 	
 	@Column(name="data_termino")
 	@Temporal(TemporalType.DATE)
-	private Date dataTermino;	
+	private Date dataTermino;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="data_cancelamento")
 	private Date dataCancelamento;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_pagamento")
+	private Date dataPagamento;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="tipo_pagamento")
+	private TipoPagamento tipoPagamento;
 
 	public Integer getId() {
 		return id;
@@ -166,6 +179,22 @@ public class Contrato {
 
 	public void setProgramas(List<ProgramaContrato> programas) {
 		this.programas = programas;
+	}
+
+	public TipoPagamento getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+	public void setTipoPagamento(TipoPagamento tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+	public Date getDataPagamento() {
+		return dataPagamento;
+	}
+
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
 	}
 	
 }

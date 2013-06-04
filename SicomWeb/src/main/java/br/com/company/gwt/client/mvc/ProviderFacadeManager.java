@@ -4,10 +4,12 @@ import br.com.company.gwt.client.component.ComponentProvider;
 import br.com.company.gwt.client.form.FormAgencia;
 import br.com.company.gwt.client.form.FormCliente;
 import br.com.company.gwt.client.form.FormConfigUserPermissao;
+import br.com.company.gwt.client.form.FormContrato;
 import br.com.company.gwt.client.form.FormPrograma;
 import br.com.company.gwt.client.form.FormTipoContrato;
 import br.com.company.gwt.client.form.PanelGridAgencia;
 import br.com.company.gwt.client.form.PanelGridCliente;
+import br.com.company.gwt.client.form.PanelGridContrato;
 import br.com.company.gwt.client.form.PanelGridPrograma;
 import br.com.company.gwt.client.widget.DialogoSobre;
 import br.com.company.gwt.client.widget.FormAlteraSenha;
@@ -97,6 +99,24 @@ public class ProviderFacadeManager {
 		@Override
 		public FormTipoContrato createInstance() {
 			return new FormTipoContrato();
+		}
+		
+	};
+	
+	public static ComponentProvider<FormContrato> formContrato = new ComponentProvider<FormContrato>() {
+		
+		@Override
+		public FormContrato createInstance() {
+			return new FormContrato();
+		}
+		
+	};
+	
+	public static ComponentProvider<PanelGridContrato> panelGridContrato = new ComponentProvider<PanelGridContrato>() {
+		
+		@Override
+		public PanelGridContrato createInstance() {
+			return new PanelGridContrato();
 		}
 		
 	};
