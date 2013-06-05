@@ -6,11 +6,19 @@ import java.util.List;
 import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.mvc.ProviderFacadeManager;
+import br.com.company.gwt.client.resources.ImagensResources;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOContrato;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.Style.IconAlign;
 import com.extjs.gxt.ui.client.Style.Orientation;
+import com.extjs.gxt.ui.client.data.BasePagingLoader;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoader;
+import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -30,6 +38,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowData;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class PanelGridContrato extends Window {
 
@@ -67,11 +76,16 @@ public class PanelGridContrato extends Window {
 		
 		btnRelatrio = new Button("Relatório");
 		btnRelatrio.setSize("44px", "44px");
+		btnRelatrio.setIconAlign(IconAlign.TOP);
+		btnRelatrio.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.report24()));
+		btnRelatrio.setEnabled(false);
 
 		panelTool.add(btnRelatrio, new AbsoluteData(606, 6));
 		
 		btnEditar = new Button("Editar");
 		btnEditar.setSize("44px", "44px");
+		btnEditar.setIconAlign(IconAlign.TOP);
+		btnEditar.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconEditar24()));
 		btnEditar.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			
 			@Override
@@ -86,6 +100,8 @@ public class PanelGridContrato extends Window {
 		
 		btnNovo = new Button("Novo");
 		btnNovo.setSize("44px", "44px");
+		btnNovo.setIconAlign(IconAlign.TOP);
+		btnNovo.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconAdicionar24()));
 		btnNovo.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			
 			@Override
@@ -99,19 +115,43 @@ public class PanelGridContrato extends Window {
 
 		panelTool.add(new LabelField("Cliente:"), new AbsoluteData(6, 6));
 		
-		storeCliente = new ListStore<DTOCliente>();
+		RpcProxy<PagingLoadResult<DTOCliente>> proxyCliente = new RpcProxy<PagingLoadResult<DTOCliente>>() {
+			@Override
+			public void load(Object loadConfig, AsyncCallback<PagingLoadResult<DTOCliente>> callback) {
+				InstanceService.CLIENTE_SERVICE.loadPagingList((PagingLoadConfig) loadConfig, callback);
+			}
+		};
+
+	    PagingLoader<PagingLoadResult<ModelData>> loaderCliente = new BasePagingLoader<PagingLoadResult<ModelData>>(proxyCliente);
+		
+		storeCliente = new ListStore<DTOCliente>(loaderCliente);
 		
 		comboCliente = new ComboBox<DTOCliente>();
 		comboCliente.setStore(storeCliente);
 		comboCliente.setSize("286px", "22px");
+		comboCliente.setTemplate(getTemplateNome());
+		comboCliente.setValueField("id");
+		comboCliente.setDisplayField("nome");
+		comboCliente.setItemSelector("div.search-item");
+		comboCliente.setHideTrigger(true);
+		comboCliente.setLoadingText("Carregando...");
+		comboCliente.setPageSize(10);
+		
 		panelTool.add(comboCliente, new AbsoluteData(6, 28));
 		
 		tfData = new DateField();
 		tfData.setSize("119px", "22px");
 		panelTool.add(tfData, new AbsoluteData(298, 28));
 		
-		btnPesquisa = new Button("Pesquisa");
+		btnPesquisa = new Button();
 		btnPesquisa.setSize("44px", "44px");
+		btnPesquisa.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconPesquisa24()));
+		btnPesquisa.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				pesquisa();				
+			}
+		});
 		panelTool.add(btnPesquisa, new AbsoluteData(423, 6));
 		
 		panelTool.add(new LabelField("Data:"), new AbsoluteData(300, 6));
@@ -128,6 +168,11 @@ public class PanelGridContrato extends Window {
 		add(mainPanel);
 		
 		loadContratos();
+		
+	}
+
+	protected void pesquisa() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -173,5 +218,13 @@ public class PanelGridContrato extends Window {
 	private DTOContrato getSelecaoGrid(){
 		return gridContratos.getSelectionModel().getSelectedItem();
 	}
+	
+	private native String getTemplateNome() /*-{
+	return [ 
+    	'<tpl for="."><div class="search-item">', 
+    	'<span>{nome}</span>', 
+    	'</div></tpl>' 
+    ].join(""); 
+	}-*/;
 	
 }

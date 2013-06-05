@@ -1,6 +1,8 @@
 package br.com.company.gwt.server.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -115,6 +117,12 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			throw new Exception(e.getMessage());
 		}
 		return dtoContrato;
+	}
+
+
+	@Override
+	public List<DTOContrato> pesquisa(DTOCliente cliente, Date date) {
+		return Collections.<DTOContrato>emptyList();
 	}
 
 }

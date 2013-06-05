@@ -8,6 +8,10 @@ import javax.inject.Named;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+
 import br.com.company.gwt.client.remoteinterface.ClienteService;
 import br.com.company.gwt.server.InputServletImpl;
 import br.com.company.gwt.server.dao.DaoAgencia;
@@ -150,6 +154,33 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 		dto.setAtivo(cliente.isAtivo());
 		
 		return dto;
+	}
+	
+	@Override
+	public PagingLoadResult<DTOCliente> loadPagingList(PagingLoadConfig config) {
+		List<DTOCliente> sublist = new ArrayList<DTOCliente>();
+		List<Cliente> entities = (ArrayList<Cliente>) loadSubList(config.getOffset(), config.getLimit(), (String)config.get("query"));
+		try {
+			for (Cliente cliente : entities) {
+				
+				sublist.add(parseToDTOCliente(cliente));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (PagingLoadResult<DTOCliente>)new BasePagingLoadResult<DTOCliente>(sublist);
+	}
+	
+	private List<Cliente> loadSubList(Integer offset, Integer limit, String query) {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		try {
+			if (query != null){
+				clientes.addAll(daoCliente.loadSubList(offset, limit, query.toUpperCase()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return clientes;
 	}
 
 }
