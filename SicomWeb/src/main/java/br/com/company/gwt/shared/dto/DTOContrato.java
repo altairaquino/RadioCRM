@@ -1,5 +1,6 @@
 package br.com.company.gwt.shared.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +31,14 @@ public class DTOContrato extends BaseModelData {
 	public void setCliente(DTOCliente cliente) {
 		this.set("cliente", cliente);
 	}
+	
+	public String getNomeCliente() {
+		return get("nomeCliente");
+	}
+	
+	public void setNomeCliente(String cliente) {
+		this.set("nomeCliente", cliente);
+	}
 
 	public DTOTipoContrato getTipoContrato() {
 		return get("tipoContrato");
@@ -48,6 +57,9 @@ public class DTOContrato extends BaseModelData {
 	}
 
 	public List<DTOPrograma> getProgramas() {
+		if (get("programas") == null){
+			setProgramas(new ArrayList<DTOPrograma>());
+		}
 		return get("programas");
 	}
 

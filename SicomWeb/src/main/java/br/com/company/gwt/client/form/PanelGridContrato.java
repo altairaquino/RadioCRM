@@ -1,6 +1,7 @@
 package br.com.company.gwt.client.form;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.company.gwt.client.InstanceService;
@@ -11,6 +12,7 @@ import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOContrato;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.IconAlign;
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
@@ -20,6 +22,9 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoader;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
@@ -30,13 +35,17 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.LabelField;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteData;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowData;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -90,10 +99,18 @@ public class PanelGridContrato extends Window {
 			
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				FormContrato formContrato = ProviderFacadeManager.formContrato.createInstance();
-				formContrato.setModal(true);
-				formContrato.loadDTOContrato(getSelecaoGrid());
-				formContrato.show();
+				
+				DTOContrato contrato = getSelecaoGrid();
+				
+				if (contrato != null){
+					FormContrato formContrato = ProviderFacadeManager.formContrato.createInstance();
+					formContrato.setModal(true);
+					formContrato.loadDTOContrato(contrato);
+					formContrato.show();					
+				}else{
+					WebMessageBox.alert("Selecione o contrato para editar!");
+				}
+				
 			}
 		});
 		panelTool.add(btnEditar, new AbsoluteData(556, 6));
@@ -136,11 +153,21 @@ public class PanelGridContrato extends Window {
 		comboCliente.setHideTrigger(true);
 		comboCliente.setLoadingText("Carregando...");
 		comboCliente.setPageSize(10);
+		comboCliente.addListener(Events.OnBlur, new Listener<ComponentEvent>() {
+			public void handleEvent(ComponentEvent evt) {
+				if (comboCliente.getValue() == null){
+					comboCliente.clear();
+				}				
+			};
+		});
 		
 		panelTool.add(comboCliente, new AbsoluteData(6, 28));
 		
 		tfData = new DateField();
 		tfData.setSize("119px", "22px");
+		tfData.setEditable(false);
+		tfData.setValue(new Date());
+		tfData.getPropertyEditor().setFormat(DateTimeFormat.getFormat("dd/MM/yyyy"));
 		panelTool.add(tfData, new AbsoluteData(298, 28));
 		
 		btnPesquisa = new Button();
@@ -157,11 +184,11 @@ public class PanelGridContrato extends Window {
 		panelTool.add(new LabelField("Data:"), new AbsoluteData(300, 6));
 		mainPanel.add(panelTool, new RowData(Style.DEFAULT, 75.0, new Margins(3)));
 		
-		storeContratos = new ListStore<DTOContrato>(); 
+		storeContratos = new ListStore<DTOContrato>();
 		
 		gridContratos = new Grid<DTOContrato>(storeContratos, getColumnModel());
 		gridContratos.setBorders(true);
-		gridContratos.setAutoExpandColumn("cliente");
+		gridContratos.setAutoExpandColumn("nomeCliente");
 		
 		mainPanel.add(gridContratos, new RowData(Style.DEFAULT, 340.0, new Margins(3)));
 		
@@ -172,8 +199,22 @@ public class PanelGridContrato extends Window {
 	}
 
 	protected void pesquisa() {
-		// TODO Auto-generated method stub
-		
+		mainPanel.mask("Carregando dados. Aguarde...");
+		InstanceService.CONTRATO_SERVICE.pesquisa(comboCliente.getValue(), tfData.getValue(), new AsyncCallback<List<DTOContrato>>() {
+			
+			@Override
+			public void onSuccess(List<DTOContrato> contratos) {
+				storeContratos.removeAll();
+				storeContratos.add(contratos);
+				mainPanel.unmask();
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());
+				mainPanel.unmask();
+			}
+		});
 	}
 
 	private void loadContratos() {
@@ -195,21 +236,39 @@ public class PanelGridContrato extends Window {
 	}
 
 	private ColumnModel getColumnModel() {
+		
+		final DateTimeFormat dateFormat = DateTimeFormat.getFormat("dd/MM/yyyy");
+		final NumberFormat number = NumberFormat.getFormat("R$ 0.00");
+		
+		GridCellRenderer<DTOContrato> numberRender = new GridCellRenderer<DTOContrato>() {  
+			public String render(DTOContrato model, String property, ColumnData config, int rowIndex, int colIndex,  
+					ListStore<DTOContrato> store, Grid<DTOContrato> grid) {  
+				float val = (Float) model.get(property);
+				return number.format(val);
+			}
+		};
+		
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 		
 		ColumnConfig columnConfig = new ColumnConfig("id", "Código", 50);
 		configs.add(columnConfig);
 		
-		columnConfig = new ColumnConfig("cliente", "Cliente", 250);
+		columnConfig = new ColumnConfig("nomeCliente", "Cliente", 250);
 		configs.add(columnConfig);
 		
 		columnConfig = new ColumnConfig("dataInicio", "Início", 80);
+		columnConfig.setDateTimeFormat(dateFormat);
+		columnConfig.setAlignment(HorizontalAlignment.CENTER);
 		configs.add(columnConfig);
 		
 		columnConfig = new ColumnConfig("dataTermino", "Término", 80);
+		columnConfig.setDateTimeFormat(dateFormat);
+		columnConfig.setAlignment(HorizontalAlignment.CENTER);
 		configs.add(columnConfig);
 		
 		columnConfig = new ColumnConfig("valor", "Valor", 80);
+		columnConfig.setRenderer(numberRender);
+		columnConfig.setAlignment(HorizontalAlignment.RIGHT);
 		configs.add(columnConfig);
 		
 		return new ColumnModel(configs);

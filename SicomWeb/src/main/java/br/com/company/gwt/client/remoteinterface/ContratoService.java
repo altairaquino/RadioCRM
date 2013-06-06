@@ -16,6 +16,6 @@ public interface ContratoService extends RemoteService {
 
 	DTOContrato salvar(DTOContrato dtoContrato) throws Exception;
 
-	List<DTOContrato> pesquisa(DTOCliente cliente, Date date);
+	List<DTOContrato> pesquisa(DTOCliente cliente, Date date) throws Exception;
 	
 }

@@ -11,6 +11,7 @@ import br.com.company.gwt.shared.dto.DTOContrato;
 import br.com.company.gwt.shared.dto.DTOFormaPagamento;
 import br.com.company.gwt.shared.dto.DTOPrograma;
 import br.com.company.gwt.shared.dto.DTOTipoContrato;
+import br.com.company.gwt.shared.enums.TipoPagamento;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.ModelData;
@@ -19,6 +20,9 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoader;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.DatePickerEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -41,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.layout.AbsoluteData;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -130,6 +135,7 @@ public class FormContrato extends Window {
 		
 		tfDataCadastro = new DateField();
 		tfDataCadastro.setSize("118px", "22px");
+		tfDataCadastro.setEditable(false);
 		tfDataCadastro.setValue(new Date());
 		tfDataCadastro.getPropertyEditor().setFormat(dateFormat);
 
@@ -146,8 +152,16 @@ public class FormContrato extends Window {
 		
 		tfDataInicio = new DateField();
 		tfDataInicio.setSize("124px", "22px");
+		tfDataInicio.setEditable(false);
 		tfDataInicio.setValue(new Date());
 		tfDataInicio.getPropertyEditor().setFormat(dateFormat);
+		tfDataInicio.getDatePicker().addListener(Events.Select, new Listener<DatePickerEvent>() {
+			public void handleEvent(DatePickerEvent evt) {
+				Date value = evt.getDatePicker().getValue();
+				tfDataTermino.setMinValue(value);
+				tfDataTermino.setValue(value);
+			};
+		});
 		fsVigenciaDoContrato.add(tfDataInicio, new AbsoluteData(84, -3));
 		
 		fsVigenciaDoContrato.add(new LabelField("Data de Término:"), new AbsoluteData(222, 0));
@@ -155,6 +169,8 @@ public class FormContrato extends Window {
 		tfDataTermino = new DateField();
 		tfDataTermino.setSize("118px", "22px");
 		tfDataTermino.setValue(new Date());
+		tfDataTermino.setEditable(false);
+		tfDataTermino.setMinValue(new Date());
 		tfDataTermino.getPropertyEditor().setFormat(dateFormat);
 		fsVigenciaDoContrato.add(tfDataTermino, new AbsoluteData(327, -3));
 		
@@ -177,8 +193,9 @@ public class FormContrato extends Window {
 		comboFormaPagamento = new ComboBox<DTOFormaPagamento>();
 		comboFormaPagamento.setStore(storeFormaPagamento);
 		comboFormaPagamento.setValueField("id");
+		comboFormaPagamento.setEditable(false);
 		comboFormaPagamento.setDisplayField("nome");
-		comboFormaPagamento.setTriggerAction(TriggerAction.QUERY);
+		comboFormaPagamento.setTriggerAction(TriggerAction.ALL);
 		comboFormaPagamento.setSize("276px", "22px");
 		comboFormaPagamento.addSelectionChangedListener(new SelectionChangedListener<DTOFormaPagamento>() {
 			@Override
@@ -197,6 +214,7 @@ public class FormContrato extends Window {
 		tfDataPagamento = new DateField();
 		tfDataPagamento.setSize("114px", "22px");
 		tfDataPagamento.setValue(new Date());
+		tfDataPagamento.setEditable(false);
 		tfDataPagamento.getPropertyEditor().setFormat(dateFormat);
 		fsDadosDoContrato.add(tfDataPagamento, new AbsoluteData(379, 279));
 		
@@ -204,12 +222,19 @@ public class FormContrato extends Window {
 		
 		tfValor = new NumberField();
 		tfValor.setSize("92px", "22px");
+		tfValor.setFormat(NumberFormat.getFormat("0.00"));
+		tfValor.setAllowNegative(false);
 		fsDadosDoContrato.add(tfValor, new AbsoluteData(282, 235));
 		
 		fsDadosDoContrato.add(new LabelField("Permuta (%):"), new AbsoluteData(282, 258));
 		
 		tfPermuta = new NumberField();
 		tfPermuta.setEnabled(false);
+		tfPermuta.setValue(0);
+		tfPermuta.setMinValue(0);
+		tfPermuta.setMaxValue(100);
+		tfPermuta.setAllowDecimals(false);
+		tfPermuta.setFormat(NumberFormat.getFormat("0"));
 		tfPermuta.setSize("91px", "22px");
 		fsDadosDoContrato.add(tfPermuta, new AbsoluteData(282, 279));
 		
@@ -220,8 +245,9 @@ public class FormContrato extends Window {
 		comboTipoContrato = new ComboBox<DTOTipoContrato>();
 		comboTipoContrato.setStore(storeTipoContrato);
 		comboTipoContrato.setValueField("id");
+		comboTipoContrato.setEditable(false);
 		comboTipoContrato.setDisplayField("nome");
-		comboTipoContrato.setTriggerAction(TriggerAction.QUERY);
+		comboTipoContrato.setTriggerAction(TriggerAction.ALL);
 		comboTipoContrato.setSize("276px", "22px");
 		
 		fsDadosDoContrato.add(comboTipoContrato, new AbsoluteData(0, 279));
@@ -335,7 +361,10 @@ public class FormContrato extends Window {
 			
 			@Override
 			public void onSuccess(DTOContrato result) {
-				Info.display("Info", "Salvo com sucesso!");
+				if (result.getId() != null){
+					Info.display("Info", "Salvo com sucesso!");
+					FormContrato.this.hide();
+				}
 				mainPanel.unmask();
 			}
 			
@@ -349,16 +378,80 @@ public class FormContrato extends Window {
 
 	protected Boolean validaCampos(){
 		
+		if (comboCliente.getValue() == null){
+			WebMessageBox.alert("Informe o cliente!");
+			return false;
+		}
+		if (comboFormaPagamento.getValue() == null){
+			WebMessageBox.alert("Informe a forma de pagamento!");
+			return false;
+		} else {
+			if (comboFormaPagamento.getValue().getTemPermuta()
+					&& tfPermuta.getValue() == null){
+				WebMessageBox.alert("Informe o percentual de permuta!");
+				return false;				
+			}
+		}
+		if (tfValor.getValue() == null){
+			WebMessageBox.alert("Informe o valor do contrato!");
+			return false;
+		}
+		if (comboTipoContrato.getValue() == null){
+			WebMessageBox.alert("Informe o tipo de contrato!");
+			return false;
+		}
 		return true;
 	}
 
 	public void loadDTOContrato(DTOContrato dto) {
 		id = dto.getId();
+		comboCliente.setValue(dto.getCliente());
+		tfDataCadastro.setValue(dto.getDataCadastro());
+		tfDataInicio.setValue(dto.getDataInicio());
+		tfDataTermino.setValue(dto.getDataTermino());
+		tfDataTermino.setMinValue(dto.getDataTermino());
+		tfTexto.setValue(dto.getInformacoesTexto());
+		comboFormaPagamento.setValue(dto.getFormaPagamento());
+		tfValor.setValue(dto.getValor());
+		if (dto.getTipoPagamento().equals(TipoPagamento.BRUTO.name())){
+			radioGroup.setValue(rdValorBruto);			
+		}else{
+			radioGroup.setValue(rdValorLiquido);
+		}
+		comboTipoContrato.setValue(dto.getTipoContrato());
+		tfPermuta.setValue(dto.getPercentualPermuta());
+		tfDataPagamento.setValue(dto.getDataPagamento());
+		storeProgramasTo.add(dto.getProgramas());
+		for (DTOPrograma programa : dto.getProgramas()) {
+			storeProgramasFrom.remove(programa);			
+		}
 	}
 	
 	protected DTOContrato getDTOContratoFromForm(){
 		DTOContrato dto = new DTOContrato();
 		dto.setId(id);
+		dto.setCliente(comboCliente.getValue());
+		dto.setDataCadastro(tfDataCadastro.getValue());
+		dto.setDataInicio(tfDataInicio.getValue());
+		dto.setDataTermino(tfDataTermino.getValue());
+		dto.setInformacoesTexto(tfTexto.getValue());
+		dto.setFormaPagamento(comboFormaPagamento.getValue());
+		dto.setValor(tfValor.getValue().floatValue());
+		if (radioGroup.getValue().equals(rdValorBruto)){
+			dto.setTipoPagamento(TipoPagamento.BRUTO.name());	
+		}else{
+			dto.setTipoPagamento(TipoPagamento.LIQUIDO.name());
+		}
+		dto.setTipoContrato(comboTipoContrato.getValue());
+		if (comboFormaPagamento.getValue().getTemPermuta()){
+			dto.setPercentualPermuta(tfPermuta.getValue().floatValue());			
+		}else{
+			dto.setPercentualPermuta(0f);
+		}
+		dto.setDataPagamento(tfDataPagamento.getValue());
+		
+		dto.setProgramas(storeProgramasTo.getModels());
+		
 		return dto;
 	}
 	

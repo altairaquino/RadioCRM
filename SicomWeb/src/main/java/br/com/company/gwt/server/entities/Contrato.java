@@ -38,7 +38,7 @@ public class Contrato {
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private FormaPagamento formaPagamento;
 	
-	@OneToMany(mappedBy="contrato")
+	@OneToMany(mappedBy="contrato", cascade=CascadeType.ALL)
 	private List<ProgramaContrato> programas;
 	
 	private Float valor;

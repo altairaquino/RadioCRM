@@ -6,9 +6,7 @@ import java.util.List;
 
 import javax.inject.Named;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 
 import br.com.company.gwt.server.entities.Cliente;
 import br.com.company.gwt.server.entities.Contrato;
@@ -28,11 +26,25 @@ public class DaoContrato extends DaoAbstract<Contrato, Integer> {
 						 " where c.cliente = :cliente " +
 						 " and :data between c.dataInicio and c.dataTermino";
 			
-			Criteria criteria = createCriteria();
-			criteria.add(Restrictions.eq("cliente", cliente));			
-			
 			Query query = createQuery(hql);
 			query.setParameter("cliente", cliente);
+			query.setDate("data", date);
+			
+			contratos.addAll(listFromQuery(query));			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return contratos;
+	}
+	
+	public List<Contrato> pesquisa(Date date){
+		List<Contrato> contratos = new ArrayList<Contrato>();
+		try{
+			String hql = " from Contrato c" +
+					" where :data between c.dataInicio and c.dataTermino";
+			
+			Query query = createQuery(hql);
 			query.setDate("data", date);
 			
 			contratos.addAll(listFromQuery(query));			
