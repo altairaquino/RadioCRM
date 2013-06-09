@@ -42,17 +42,20 @@ public class PanelGridAgencia extends PanelGridWindow<DTOAgencia> {
 
 	@Override
 	protected void actionPesquisa(String consulta) {
+		painelPrincipal.mask("Carregando dados...");
 		InstanceService.AGENCIA_SERVICE.pesquisa(consulta, new AsyncCallback<List<DTOAgencia>>() {
 			
 			@Override
 			public void onSuccess(List<DTOAgencia> result) {
 				getStore().removeAll();
 				getStore().add(result);
+				painelPrincipal.unmask();
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
 				WebMessageBox.error(caught.getMessage());
+				painelPrincipal.unmask();
 			}
 		});
 	}

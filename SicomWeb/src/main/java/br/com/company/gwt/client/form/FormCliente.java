@@ -483,6 +483,12 @@ public class FormCliente extends Window {
 		tfCEP.setValue(dto.getCep());
 		tfBairro.setValue(dto.getBairro());
 		comboCidade.setValue(dto.getCidade());
+		
+		if (dto.getCidade() != null){
+			BaseModelData modelData = new BaseModelData();
+			modelData.set("uf", dto.getCidade().getUF());
+			comboEstado.setValue(modelData);
+		}
 		tfNomeContato.setValue(dto.getNomeContato());
 		tfFoneContato.setValue(dto.getFoneContato());
 		tfCelularContato.setValue(dto.getCellContato());

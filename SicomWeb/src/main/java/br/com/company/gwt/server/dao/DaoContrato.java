@@ -19,6 +19,21 @@ public class DaoContrato extends DaoAbstract<Contrato, Integer> {
 		return contrato.getId();
 	}
 	
+	@Override
+	public List<Contrato> loadAll() {
+		List<Contrato> contratos = new ArrayList<Contrato>();
+		try {
+			Query query = createQuery(getQRAll());
+			query.setMaxResults(40);
+			
+			contratos.addAll(listFromQuery(query));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return contratos;
+	}
+	
 	public List<Contrato> pesquisa(Cliente cliente, Date date){
 		List<Contrato> contratos = new ArrayList<Contrato>();
 		try{

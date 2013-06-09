@@ -14,6 +14,8 @@ import br.com.company.gwt.client.remoteinterface.OperacaoService;
 import br.com.company.gwt.client.remoteinterface.OperacaoServiceAsync;
 import br.com.company.gwt.client.remoteinterface.ProgramaService;
 import br.com.company.gwt.client.remoteinterface.ProgramaServiceAsync;
+import br.com.company.gwt.client.remoteinterface.RelatorioService;
+import br.com.company.gwt.client.remoteinterface.RelatorioServiceAsync;
 import br.com.company.gwt.client.remoteinterface.TipoContratoService;
 import br.com.company.gwt.client.remoteinterface.TipoContratoServiceAsync;
 import br.com.company.gwt.client.remoteinterface.TipoLogradouroService;
@@ -35,5 +37,6 @@ public class InstanceService {
 	public final static TipoLogradouroServiceAsync TIPOLOGRADOURO_SERVICE = GWT.create(TipoLogradouroService.class);
 	public final static FormaPagamentoServiceAsync FORMAPAGAMENTO_SERVICE = GWT.create(FormaPagamentoService.class);
 	public final static ContratoServiceAsync CONTRATO_SERVICE = GWT.create(ContratoService.class);
+	public final static RelatorioServiceAsync RELATORIO_SERVICE = GWT.create(RelatorioService.class);;
 
 }

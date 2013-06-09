@@ -17,6 +17,21 @@ public class DaoCliente extends DaoAbstract<Cliente, Integer> {
 		return cliente.getId();
 	}
 	
+	@Override
+	public List<Cliente> loadAll() {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		try {
+			Query query = createQuery(getQRAll());
+			query.setMaxResults(40);
+			
+			clientes.addAll(listFromQuery(query));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return clientes;
+	}
+	
 	public List<Cliente> getClienteByNome(String nome){
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {

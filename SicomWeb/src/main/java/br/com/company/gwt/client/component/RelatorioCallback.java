@@ -15,8 +15,6 @@ public class RelatorioCallback implements AsyncCallback<String> {
 		if (reportName != null){
 			WebWindowReport windowReport = new WebWindowReport(null, GWT.getHostPageBaseURL()+ "reports/" + reportName);
 			windowReport.setVisible(true);
-//			Window.open(GWT.getHostPageBaseURL()+ "reports/" + reportName, "Relatório", "_blank");
 		}
 	}
-
 }

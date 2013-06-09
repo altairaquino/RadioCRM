@@ -128,6 +128,18 @@ public class FormContrato extends Window {
 		comboCliente.setHideTrigger(true);
 		comboCliente.setLoadingText("Carregando clientes...");
 		comboCliente.setPageSize(10);
+		comboCliente.addSelectionChangedListener(new SelectionChangedListener<DTOCliente>() {
+			@Override
+			public void selectionChanged(SelectionChangedEvent<DTOCliente> se) {
+				DTOCliente dtoCliente = se.getSelectedItem(); 
+				if (dtoCliente != null){
+					if (dtoCliente.getAgencia() == null){
+						WebMessageBox.info("Cliente sem agência. Atualize os dados do cliente!");
+						comboCliente.clear();
+					}
+				}
+			}
+		});
 		
 		fsDadosDoContrato.add(comboCliente, new AbsoluteData(0, 17));
 		

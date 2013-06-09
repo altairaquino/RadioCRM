@@ -11,6 +11,7 @@ import br.com.company.gwt.client.form.PanelGridAgencia;
 import br.com.company.gwt.client.form.PanelGridCliente;
 import br.com.company.gwt.client.form.PanelGridContrato;
 import br.com.company.gwt.client.form.PanelGridPrograma;
+import br.com.company.gwt.client.form.relatorio.FormRelatorioPeriodo;
 import br.com.company.gwt.client.widget.DialogoSobre;
 import br.com.company.gwt.client.widget.FormAlteraSenha;
 
@@ -117,6 +118,15 @@ public class ProviderFacadeManager {
 		@Override
 		public PanelGridContrato createInstance() {
 			return new PanelGridContrato();
+		}
+		
+	};
+	
+	public static ComponentProvider<FormRelatorioPeriodo> formRelatorio = new ComponentProvider<FormRelatorioPeriodo>() {
+		
+		@Override
+		public FormRelatorioPeriodo createInstance() {
+			return new FormRelatorioPeriodo();
 		}
 		
 	};

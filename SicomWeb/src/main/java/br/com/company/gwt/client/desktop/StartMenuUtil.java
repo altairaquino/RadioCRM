@@ -22,7 +22,7 @@ public class StartMenuUtil {
 		
 		DTOUsuario user = Registry.get("user");
 		
-		List<Integer> permis = new ArrayList<Integer>();// user.getJanelas();
+		//List<Integer> permis = new ArrayList<Integer>();// user.getJanelas();
 		
 		List<MenuItem> menuItems = new ArrayList<MenuItem>();
 		
@@ -58,7 +58,7 @@ public class StartMenuUtil {
 		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formTipoContrato));
 		    
 		    if (user.getAdmin()){
-		    	sub.add(item);		    	
+		    	sub.add(item);  	
 		    }
 		    
 		    item = new MenuItem("Contratos");
@@ -108,20 +108,13 @@ public class StartMenuUtil {
 	    
 	    */
 	    
-	    
 	    menuItem = new MenuItem("Relatórios");
 	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
 	    
 		    sub = new Menu();
 		    
-		    item = new MenuItem("Patrocinadores");
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridCliente));
-		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
-		    		    
-		    sub.add(item);
-	    
 		    item = new MenuItem("Gerenciais (Período)");
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridAgencia));
+		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formRelatorio));
 		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
 		    
 		    sub.add(item);
@@ -150,11 +143,11 @@ public class StartMenuUtil {
 		    sub.add(item);
 		    
 	    menuItem.setSubMenu(sub);
-		 */
 	    
 	    if (permis.contains(5)){
 	    	menuItems.add(menuItem);
 	    }
+	     */
 	    
 	    return menuItems;
 	}

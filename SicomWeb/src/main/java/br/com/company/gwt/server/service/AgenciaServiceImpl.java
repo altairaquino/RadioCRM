@@ -48,7 +48,9 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 	public List<DTOAgencia> pesquisa(String query) {
 		List<DTOAgencia> clientes = new ArrayList<DTOAgencia>();
 		try {
-			
+			for (Agencia agencia : daoAgencia.getAgenciaByNome(query)) {
+				clientes.add(parseToDTOAgencia(agencia));				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -96,6 +98,9 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 			if (dtoAgencia.getId() == null){
 				agencia = new Agencia();
 				agencia.setAtivo(true);
+				if (!daoAgencia.getAgenciaByNome(dtoAgencia.getDocumento()).isEmpty()){
+					throw new Exception("Já existe agência cadastrada com este documento: ["+dtoAgencia.getDocumento()+ "].");
+				}
 			}else{
 				agencia = daoAgencia.findByPrimaryKey(dtoAgencia.getId());
 			}
@@ -112,8 +117,7 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 			agencia.setComplemento(dtoAgencia.getComplemento());
 			agencia.setCep(dtoAgencia.getCep());
 			agencia.setBairro(dtoAgencia.getBairro());
-			agencia.setCidade(daoCidade.findByPrimaryKey(dtoAgencia.getCidade().getId()));
-			
+			agencia.setCidade(daoCidade.findByPrimaryKey(dtoAgencia.getCidade().getId()));			
 			
 			daoAgencia.store(agencia);
 			

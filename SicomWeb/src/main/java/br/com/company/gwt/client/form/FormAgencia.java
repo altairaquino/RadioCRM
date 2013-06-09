@@ -407,10 +407,14 @@ public class FormAgencia extends Window {
 		tfComplemento.setValue(dto.getComplemento());
 		tfBairro.setValue(dto.getBairro());
 		tfCep.setValue(dto.getCep());
+		
 		DTOCidade dtoCidade = dto.getCidade();
-		BaseModelData bmd = new BaseModelData();
-		bmd.set("uf", EnumUF.valueOf(dtoCidade.getUF()).name());
-		comboEstado.setValue(bmd);
+		if (dtoCidade != null){
+			BaseModelData bmd = new BaseModelData();
+			bmd.set("uf", dtoCidade.getUF());
+			comboEstado.setValue(bmd);			
+		}
+		
 		comboCidade.setValue(dtoCidade);		
 	}
 
