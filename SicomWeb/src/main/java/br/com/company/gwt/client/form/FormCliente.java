@@ -374,6 +374,12 @@ public class FormCliente extends Window {
 		btnCancelar = new Button("Cancelar");
 		btnCancelar.setSize("114px", "24px");
 		btnCancelar.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.cancelar16()));
+		btnCancelar.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				FormCliente.this.hide();
+			}
+		});
 		mainPanel.add(btnCancelar, new AbsoluteData(361, 419));
 		
 		btnSalvar = new Button("Salvar");

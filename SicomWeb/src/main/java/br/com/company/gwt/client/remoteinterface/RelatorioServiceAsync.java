@@ -9,5 +9,6 @@ public interface RelatorioServiceAsync {
 	void relatorioAgencias(ParametrosReport parametros, AsyncCallback<String> callback);
 	void relatorioClientes(ParametrosReport parametros, AsyncCallback<String> callback);
 	void relatorioProgramas(ParametrosReport parametros, AsyncCallback<String> callback);
+	void relatorio(ParametrosReport parametros, AsyncCallback<String> callback);
 	
 }

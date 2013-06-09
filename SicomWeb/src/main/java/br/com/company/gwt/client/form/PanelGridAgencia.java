@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.company.gwt.client.InstanceService;
+import br.com.company.gwt.client.component.JasperName;
 import br.com.company.gwt.client.component.PanelGridWindow;
+import br.com.company.gwt.client.component.RelatorioCallback;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.mvc.ProviderFacadeManager;
+import br.com.company.gwt.shared.bean.ParametrosReport;
 import br.com.company.gwt.shared.dto.DTOAgencia;
 
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -91,7 +94,10 @@ public class PanelGridAgencia extends PanelGridWindow<DTOAgencia> {
 
 	@Override
 	protected void actionButtonReportClick() {
-				
+		ParametrosReport parametros = new ParametrosReport();
+		parametros.setNomeRelatorio(JasperName.AGENCIAS);
+		
+		InstanceService.RELATORIO_SERVICE.relatorio(parametros, new RelatorioCallback());
 	}
 
 	@Override

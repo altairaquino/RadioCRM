@@ -98,7 +98,9 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 			if (dtoAgencia.getId() == null){
 				agencia = new Agencia();
 				agencia.setAtivo(true);
-				if (!daoAgencia.getAgenciaByNome(dtoAgencia.getDocumento()).isEmpty()){
+				
+				Agencia agenciaTemp = daoAgencia.getAgenciaByDocumento(dtoAgencia.getDocumento()); 
+				if (agenciaTemp != null){
 					throw new Exception("Já existe agência cadastrada com este documento: ["+dtoAgencia.getDocumento()+ "].");
 				}
 			}else{
@@ -124,7 +126,7 @@ public class AgenciaServiceImpl extends InputServletImpl implements AgenciaServi
 			dtoAgencia.setId(agencia.getId());
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new Exception(e.getMessage());
 		}
 		return dtoAgencia;
 	}

@@ -53,6 +53,23 @@ public class DaoCliente extends DaoAbstract<Cliente, Integer> {
 		return clientes;
 	}
 	
+	public Cliente getClienteByDocumento(String documento){
+		try {
+			String hql = " from Cliente c " +
+					" where c.documento = :documento ";
+			
+			Query query = createQuery(hql);
+			query.setParameter("documento", documento);
+			query.setMaxResults(1);
+			
+			return (Cliente) query.uniqueResult();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public List<Cliente> loadSubList(int offSet,int maxResult, String query){
     	List<Cliente> clientes = new ArrayList<Cliente>();
     	try {

@@ -298,21 +298,31 @@ public class FormAgencia extends Window {
 			}
 			
 			public void onSuccess(List<DTOTipoLogradouro> result) {
+				DTOTipoLogradouro tipoLogradouro = null;
+				if (comboTipoLogradouro.getValue() != null){
+					tipoLogradouro = comboTipoLogradouro.getValue(); 
+				}
 				storeTipoLogradouro.removeAll();
 				storeTipoLogradouro.add(result);
 				if (!result.isEmpty()){
-					comboTipoLogradouro.setValue(result.get(0));					
+					comboTipoLogradouro.setValue(result.get(0));				
 				}
+				if (tipoLogradouro != null){
+					comboTipoLogradouro.setValue(tipoLogradouro);
+				}
+				
 			};
 		});
 		
 	}
 
 	protected void salvar() {
+		mainPanel.mask("Salvando dados. Aguarde...");
 		InstanceService.AGENCIA_SERVICE.salvar(getDTOAgenciaFromForm(), new AsyncCallback<DTOAgencia>() {
 			@Override
 			public void onFailure(Throwable caught) {
 				WebMessageBox.error(caught.getMessage());
+				mainPanel.unmask();
 			}
 			
 			@Override
@@ -321,6 +331,7 @@ public class FormAgencia extends Window {
 					Info.display("Sucesso", "Agência salva com sucesso.");
 					FormAgencia.this.hide();
 				}
+				mainPanel.unmask();
 			}
 			
 		});

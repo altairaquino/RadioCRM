@@ -73,4 +73,21 @@ public class DaoAgencia extends DaoAbstract<Agencia, Integer> {
     	return agencias;
     }
 	
+	public Agencia getAgenciaByDocumento(String documento){
+		try {
+			String hql = " from Agencia c " +
+					" where c.documento = :documento ";
+			
+			Query query = createQuery(hql);
+			query.setParameter("documento", documento);
+			query.setMaxResults(1);
+			
+			return (Agencia) query.uniqueResult();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

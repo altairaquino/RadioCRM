@@ -28,6 +28,14 @@ public class RelatorioServiceImpl extends InputServletImpl implements RelatorioS
 		logger.debug("relatorioProdutos()");
 		return gerarReport.exportToPDF(getServletRequest(), params);
 	}
+	
+	@Override
+	public String relatorio(ParametrosReport parametros) throws Exception {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("JASPER_NAME", parametros.getNomeRelatorio());
+		logger.debug("relatorio()");
+		return gerarReport.exportToPDF(getServletRequest(), params);
+	}
 
 	@Override
 	public String relatorioClientes(ParametrosReport parametros) throws Exception {

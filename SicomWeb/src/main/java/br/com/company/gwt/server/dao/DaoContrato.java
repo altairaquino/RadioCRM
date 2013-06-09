@@ -23,7 +23,7 @@ public class DaoContrato extends DaoAbstract<Contrato, Integer> {
 	public List<Contrato> loadAll() {
 		List<Contrato> contratos = new ArrayList<Contrato>();
 		try {
-			Query query = createQuery(getQRAll());
+			Query query = createQuery(getQRAll() + " order by e.dataCadastro desc");
 			query.setMaxResults(40);
 			
 			contratos.addAll(listFromQuery(query));

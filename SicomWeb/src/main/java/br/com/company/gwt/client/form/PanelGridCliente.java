@@ -8,9 +8,12 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import br.com.company.gwt.client.InstanceService;
+import br.com.company.gwt.client.component.JasperName;
 import br.com.company.gwt.client.component.PanelGridWindow;
+import br.com.company.gwt.client.component.RelatorioCallback;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.mvc.ProviderFacadeManager;
+import br.com.company.gwt.shared.bean.ParametrosReport;
 import br.com.company.gwt.shared.dto.DTOCliente;
 
 public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
@@ -91,6 +94,10 @@ public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
 
 	@Override
 	protected void actionButtonReportClick() {
+		ParametrosReport parametros = new ParametrosReport();
+		parametros.setNomeRelatorio(JasperName.CLIENTES);
+		
+		InstanceService.RELATORIO_SERVICE.relatorio(parametros, new RelatorioCallback());
 				
 	}
 

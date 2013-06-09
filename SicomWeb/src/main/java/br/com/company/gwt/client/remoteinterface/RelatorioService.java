@@ -11,5 +11,6 @@ public interface RelatorioService extends RemoteService{
 	String relatorioAgencias(ParametrosReport parametros) throws Exception;
 	String relatorioClientes(ParametrosReport parametros) throws Exception;
 	String relatorioProgramas(ParametrosReport parametros) throws Exception;
+	String relatorio(ParametrosReport parametros) throws Exception;
 	
 }

@@ -131,8 +131,8 @@ public class FormContrato extends Window {
 		comboCliente.addSelectionChangedListener(new SelectionChangedListener<DTOCliente>() {
 			@Override
 			public void selectionChanged(SelectionChangedEvent<DTOCliente> se) {
-				DTOCliente dtoCliente = se.getSelectedItem(); 
-				if (dtoCliente != null){
+				DTOCliente dtoCliente = se.getSelectedItem();
+				if (dtoCliente != null && id == null){
 					if (dtoCliente.getAgencia() == null){
 						WebMessageBox.info("Cliente sem agência. Atualize os dados do cliente!");
 						comboCliente.clear();
@@ -221,6 +221,8 @@ public class FormContrato extends Window {
 		});
 		fsDadosDoContrato.add(comboFormaPagamento, new AbsoluteData(0, 235));
 		
+		loadFormasPagamento();
+		
 		fsDadosDoContrato.add(new LabelField("Data pagamento:"), new AbsoluteData(378, 259));
 		
 		tfDataPagamento = new DateField();
@@ -264,6 +266,8 @@ public class FormContrato extends Window {
 		
 		fsDadosDoContrato.add(comboTipoContrato, new AbsoluteData(0, 279));
 		
+		loadTiposContrato();
+		
 		radioGroup = new RadioGroup();
 		radioGroup.setHeight("20px");
 		
@@ -293,6 +297,8 @@ public class FormContrato extends Window {
 		tfProgramas.getToList().setStore(storeProgramasTo);	
 		tfProgramas.getToList().setDisplayField("nome");
 		tfProgramas.setSize("580px", "93px");
+
+		loadProgramas();
 		
 		fsDadosDoContrato.add(tfProgramas, new AbsoluteData(0, 328));	
 
@@ -319,9 +325,6 @@ public class FormContrato extends Window {
 		
 		add(mainPanel);
 		
-		loadProgramas();
-		loadTiposContrato();
-		loadFormasPagamento();
 		
 	}
 	
@@ -434,9 +437,10 @@ public class FormContrato extends Window {
 		tfPermuta.setValue(dto.getPercentualPermuta());
 		tfDataPagamento.setValue(dto.getDataPagamento());
 		storeProgramasTo.add(dto.getProgramas());
-		for (DTOPrograma programa : dto.getProgramas()) {
-			storeProgramasFrom.remove(programa);			
-		}
+		List<DTOPrograma> list = storeProgramasFrom.getModels();
+		list.removeAll(storeProgramasTo.getModels());
+		storeProgramasFrom.removeAll();
+		storeProgramasFrom.add(list);
 	}
 	
 	protected DTOContrato getDTOContratoFromForm(){

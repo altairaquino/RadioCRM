@@ -69,6 +69,12 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 			Cliente cliente = null;
 			if (dtoCliente.getId() == null) {
 				cliente = new Cliente();
+				/*
+				Cliente clienteTemp = daoCliente.getClienteByDocumento(dtoCliente.getDocumento()); 
+				if (clienteTemp != null){
+					throw new Exception("Já existe cliente cadastrado com este documento: ["+dtoCliente.getDocumento()+ "].");
+				}
+				*/
 			}else{
 				cliente = daoCliente.findByPrimaryKey(dtoCliente.getId());
 			}
