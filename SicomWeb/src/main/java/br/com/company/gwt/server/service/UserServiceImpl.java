@@ -35,7 +35,7 @@ public class UserServiceImpl extends InputServletImpl implements UserService {
 				throw new Exception("Usuário com acesso inabilitado!");
 			}
 			
-			session.setAttribute("user", usuario);		
+			session.setAttribute("user", usuario);
 			
 		}
 		

@@ -150,6 +150,8 @@ public class DesktopAppView extends View {
 		menuItem.addSelectionListener(listenerOpenWindow);
 		webDesktop.getStartMenu().addTool(menuItem);
 		
+		DTOUsuario user = Registry.get("user");
+		
 		menuItem = WebUtil.createMenuItem("Conf. Usuários", "icon_about");
 		menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeConfiguracao16()));
 		listenerOpenWindow = new SelectionListener<ComponentEvent>() {
@@ -160,8 +162,9 @@ public class DesktopAppView extends View {
 			
 		};
 		menuItem.addSelectionListener(listenerOpenWindow);
-		DTOUsuario user = Registry.get("user");
-		webDesktop.getStartMenu().addTool(menuItem);
+		if (user.getAdmin()){
+			webDesktop.getStartMenu().addTool(menuItem);			
+		}
 		
 	}
 

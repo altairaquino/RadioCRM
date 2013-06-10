@@ -42,6 +42,8 @@ public class FormRelatorioPeriodo extends Window {
 	private Radio rdRankingVendas;
 	private Radio rdVendasPorAgencia;
 	private Radio rdRankingVendasAgencia;
+	private Radio rdPatrocionioProgramas;
+	private Radio rdAniversariantes;
 
 	@SuppressWarnings("deprecation")
 	public FormRelatorioPeriodo() {
@@ -125,6 +127,18 @@ public class FormRelatorioPeriodo extends Window {
 		
 		radioGroup.add(rdRankingVendasAgencia);
 		
+		rdPatrocionioProgramas = new Radio();
+		rdPatrocionioProgramas.setBoxLabel("Patrocínio de programas");
+		rdPatrocionioProgramas.setHideLabel(true);
+		
+		radioGroup.add(rdPatrocionioProgramas);
+		
+		rdAniversariantes = new Radio();
+		rdAniversariantes.setBoxLabel("Aniversariantes");
+		rdAniversariantes.setHideLabel(true);
+		
+		radioGroup.add(rdAniversariantes);
+		
 		radioGroup.setValue(rdVendasPeriodo);
 		
 		panelRelatorio.add(radioGroup, new FormData("100%"));
@@ -139,6 +153,7 @@ public class FormRelatorioPeriodo extends Window {
 		btnGerarRelatorio.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
 		btnGerarRelatorio.setWidth("117px");
 		btnGerarRelatorio.setBorders(true);
+		btnGerarRelatorio.setEnabled(false);
 		btnGerarRelatorio.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			
 			@Override
@@ -175,7 +190,7 @@ public class FormRelatorioPeriodo extends Window {
 			parametros.setNomeRelatorio(JasperName.RANKING_VENDAS_AGENCIA);
 		}
 		
-		InstanceService.RELATORIO_SERVICE.relatorioClientes(parametros, new RelatorioCallback());
+		InstanceService.RELATORIO_SERVICE.relatorioPeriodo(parametros, new RelatorioCallback());
 		
 	}
 

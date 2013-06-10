@@ -45,6 +45,11 @@ public class RelatorioServiceImpl extends InputServletImpl implements RelatorioS
 	@Override
 	public String relatorioProgramas(ParametrosReport parametros) throws Exception {
 		return null;
+	}
+
+	@Override
+	public String relatorioPeriodo(ParametrosReport parametros) {
+		return null;
 	}	
 
 }

@@ -1,6 +1,5 @@
 package br.com.company.gwt.client.form;
 
-import java.util.Date;
 import java.util.List;
 
 import br.com.company.gwt.client.InstanceService;
@@ -236,8 +235,7 @@ public class FormCliente extends Window {
 		tfAniversarioContato.setSize("117px", "22px");
 		tfAniversarioContato.setEditable(false);
 		tfAniversarioContato.getPropertyEditor().setFormat(DateTimeFormat.getFormat("dd/MM/yyyy"));
-		fsContato.add(tfAniversarioContato, new AbsoluteData(447, 16));
-		
+		fsContato.add(tfAniversarioContato, new AbsoluteData(447, 16));		
 		
 		fsDados.add(fsContato, new AbsoluteData(0, 238));
 		
@@ -343,7 +341,6 @@ public class FormCliente extends Window {
 		tfAniversarioCliente = new DateField();
 		tfAniversarioCliente.setSize("117px", "22px");
 		tfAniversarioCliente.setEditable(false);
-		tfAniversarioCliente.setValue(new Date());
 		tfAniversarioCliente.getPropertyEditor().setFormat(DateTimeFormat.getFormat("dd/MM/yyyy"));
 		
 		fsDados.add(tfAniversarioCliente, new AbsoluteData(160, 17));
