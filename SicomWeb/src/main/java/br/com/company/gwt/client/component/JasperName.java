@@ -13,5 +13,6 @@ public class JasperName {
 	public static final String RANKING_VENDAS = "";
 	public static final String RANKING_VENDAS_AGENCIA = "";
 	public static final String AGENCIAS = "agencias";
+	public static final String PROGRAMAS = "programas";
 	
 }

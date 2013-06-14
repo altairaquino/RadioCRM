@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="produtos" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78e27ea6-c752-40ea-b06c-5708ea9b2f07">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="93"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select *
+from programa p
+order by p.nome]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="ativo" class="java.lang.Boolean"/>
+	<field name="duracaoinsercao" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="valorinsercao" class="java.lang.Float"/>
+	<field name="valor_patrocinio" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0bcc460f-f11d-49b5-94e6-ab71c0d5903e" x="141" y="3" width="273" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatório de Programas"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<frame>
+				<reportElement uuid="30b0eba8-18cb-492c-9950-b9593f8c1c68" mode="Opaque" x="0" y="0" width="555" height="14" backcolor="#CCCCCC"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<staticText>
+				<reportElement uuid="14c597cf-086a-4ccf-ac45-f00869cf75d6" x="0" y="0" width="63" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="63" y="0" width="248" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="427" y="0" width="127" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Patrocínio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<frame>
+				<reportElement uuid="fc9590c8-bfb9-410c-b9c0-2cb28a62f4da" x="0" y="0" width="555" height="12"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<textField>
+				<reportElement uuid="7e2025d5-27ae-4f89-8fcd-6bedb8617c02" x="0" y="0" width="63" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0a1b9c33-d025-4d93-807c-048aa2c2bc3c" x="63" y="0" width="364" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="R$ 0.00" isBlankWhenNull="true">
+				<reportElement uuid="7e2025d5-27ae-4f89-8fcd-6bedb8617c02" x="427" y="0" width="114" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_patrocinio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="16" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement uuid="6deb5ca0-28ee-4ed4-8b90-692cda1669a2" x="448" y="0" width="76" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="bb0fd572-fb1c-4146-8d70-be8385aa3ec1" x="524" y="0" width="30" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement uuid="c8862f8b-6279-477d-b22f-8251252d1bb5" x="0" y="0" width="199" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

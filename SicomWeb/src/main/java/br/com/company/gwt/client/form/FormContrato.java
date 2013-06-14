@@ -321,6 +321,12 @@ public class FormContrato extends Window {
 		btnCancelar = new Button("Cancelar");
 		btnCancelar.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.cancelar16()));
 		btnCancelar.setSize("100px", "24px");
+		btnCancelar.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				FormContrato.this.hide();
+			}
+		});
 		mainPanel.add(btnCancelar, new AbsoluteData(402, 464));
 		
 		add(mainPanel);
@@ -365,6 +371,9 @@ public class FormContrato extends Window {
 			@Override
 			public void onSuccess(List<DTOPrograma> programas) {
 				storeProgramasFrom.add(programas);
+				for (DTOPrograma programa : storeProgramasTo.getModels()) {
+					storeProgramasFrom.remove(programa);
+				}
 			};
 		});
 		
@@ -437,10 +446,7 @@ public class FormContrato extends Window {
 		tfPermuta.setValue(dto.getPercentualPermuta());
 		tfDataPagamento.setValue(dto.getDataPagamento());
 		storeProgramasTo.add(dto.getProgramas());
-		List<DTOPrograma> list = storeProgramasFrom.getModels();
-		list.removeAll(storeProgramasTo.getModels());
-		storeProgramasFrom.removeAll();
-		storeProgramasFrom.add(list);
+		
 	}
 	
 	protected DTOContrato getDTOContratoFromForm(){
@@ -465,7 +471,6 @@ public class FormContrato extends Window {
 			dto.setPercentualPermuta(0f);
 		}
 		dto.setDataPagamento(tfDataPagamento.getValue());
-		
 		dto.setProgramas(storeProgramasTo.getModels());
 		
 		return dto;

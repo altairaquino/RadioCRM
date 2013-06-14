@@ -20,6 +20,9 @@ public class Usuario {
 
 	@Column(length=50)
 	private String senha;
+	
+	@Column(length=70)
+	private String email;
 
 	@Column(columnDefinition="boolean default true")	
 	private Boolean ativo;
@@ -78,6 +81,14 @@ public class Usuario {
 
 	public void setAdmin(Boolean admin) {
 		this.admin = admin;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }
