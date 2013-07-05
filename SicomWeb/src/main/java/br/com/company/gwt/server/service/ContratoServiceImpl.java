@@ -154,7 +154,11 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			}
 			
 			contrato.setDataUltimaAlteracao(new Date());
-			contrato.setUsuario(usuario);			
+			contrato.setUsuario(usuario);
+			
+			if (contrato.getTipoPagamento() == TipoPagamento.LIQUIDO){
+				contrato.setPercentualComissao(0f);
+			}
 			
 			daoContrato.store(contrato);
 			

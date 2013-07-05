@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vendas_agencia" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78e27ea6-c752-40ea-b06c-5708ea9b2f07">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="106"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="472"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="P_DATA_INICIO" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="P_DATA_FIM" class="java.util.Date"/>
 	<queryString>
-		<![CDATA[select c.id, cl.nome nome_cliente, ag.nome nome_agencia, c.data_cadastro, c.data_inicio, c.data_termino, c.tipo_pagamento, fp.nome nome_formapagamento, c.valor
+		<![CDATA[select c.id, cl.nome nome_cliente, ag.nome nome_agencia, c.data_cadastro, c.data_inicio, c.data_termino,  c.percentual_comissao, tc.nome tipo_contrato, c.valor
 from contrato c
 inner join cliente cl on
 	cl.id = c.cliente_id
+inner join tipo_contrato tc on
+	tc.id = c.tipocontrato_id
 left join agencia ag on
 	cl.agencia_id = ag.id
 inner join forma_pagamento fp on
@@ -25,14 +27,26 @@ order by ag.nome, c.data_cadastro]]>
 	<field name="data_cadastro" class="java.sql.Timestamp"/>
 	<field name="data_inicio" class="java.sql.Date"/>
 	<field name="data_termino" class="java.sql.Date"/>
-	<field name="tipo_pagamento" class="java.lang.String"/>
-	<field name="nome_formapagamento" class="java.lang.String"/>
+	<field name="percentual_comissao" class="java.lang.Float"/>
+	<field name="tipo_contrato" class="java.lang.String"/>
 	<field name="valor" class="java.lang.Float"/>
-	<variable name="SOMA_VALOR" class="java.lang.Float" resetType="Group" resetGroup="AGENCIA_GRUPO" calculation="Sum">
+	<variable name="SOMA_BRUTO" class="java.lang.Float" resetType="Group" resetGroup="AGENCIA_GRUPO" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Float(0)]]></initialValueExpression>
 	</variable>
-	<group name="AGENCIA_GRUPO">
+	<variable name="SOMA_COMISSAO" class="java.lang.Float" resetType="Group" resetGroup="AGENCIA_GRUPO" calculation="Sum">
+		<variableExpression><![CDATA[($F{valor} * $F{percentual_comissao} / 100.0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Float(0)]]></initialValueExpression>
+	</variable>
+	<variable name="SOMA_BRUTO_GERAL" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Float(0)]]></initialValueExpression>
+	</variable>
+	<variable name="SOMA_COMISSAO_GERAL" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[($F{valor} * $F{percentual_comissao} / 100.0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Float(0)]]></initialValueExpression>
+	</variable>
+	<group name="AGENCIA_GRUPO" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{nome_agencia}]]></groupExpression>
 		<groupHeader>
 			<band height="18">
@@ -62,21 +76,35 @@ order by ag.nome, c.data_cadastro]]>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="14">
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="718" y="0" width="79" height="14"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="Verdana" size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{SOMA_VALOR}]]></textFieldExpression>
-				</textField>
+			<band height="12">
 				<staticText>
-					<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="656" y="0" width="62" height="14"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="497" y="0" width="116" height="12"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Verdana" size="9" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Total:]]></text>
+					<text><![CDATA[Total da Agência:]]></text>
 				</staticText>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="676" y="0" width="64" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SOMA_COMISSAO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="740" y="0" width="62" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SOMA_BRUTO} - $V{SOMA_COMISSAO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="613" y="0" width="63" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SOMA_BRUTO}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -125,6 +153,34 @@ order by ag.nome, c.data_cadastro]]>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
+				<staticText>
+					<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="512" y="0" width="101" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="740" y="0" width="62" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Líquido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="678" y="0" width="62" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Comissão]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="613" y="0" width="63" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Bruto]]></text>
+				</staticText>
 			</frame>
 			<staticText>
 				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="123" y="0" width="43" height="14"/>
@@ -153,34 +209,6 @@ order by ag.nome, c.data_cadastro]]>
 					<font fontName="Verdana" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Término]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="512" y="0" width="64" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tipo Pgto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="740" y="0" width="62" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Valor]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="576" y="0" width="101" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Forma Pgto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="677" y="0" width="63" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cadastro]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -222,32 +250,32 @@ order by ag.nome, c.data_cadastro]]>
 					<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="true">
-					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="512" y="0" width="64" height="12"/>
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="512" y="0" width="101" height="12"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{tipo_pagamento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{tipo_contrato}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="740" y="0" width="56" height="12"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="740" y="0" width="62" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valor} - ($F{valor} * $F{percentual_comissao} / 100.0)]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="613" y="0" width="63" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 				</textField>
-				<textField pattern="" isBlankWhenNull="true">
-					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="576" y="0" width="101" height="12"/>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="676" y="0" width="64" height="12"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{nome_formapagamento}]]></textFieldExpression>
-				</textField>
-				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="677" y="0" width="63" height="12"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font fontName="Verdana" size="8" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{data_cadastro}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{valor} * $F{percentual_comissao} / 100.0]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -281,6 +309,35 @@ order by ag.nome, c.data_cadastro]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch"/>
+		<band height="12" splitType="Stretch">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="676" y="0" width="64" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SOMA_COMISSAO_GERAL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="613" y="0" width="63" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SOMA_BRUTO_GERAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="497" y="0" width="116" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Geral:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="740" y="0" width="62" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SOMA_BRUTO_GERAL} - $V{SOMA_COMISSAO_GERAL}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>
