@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ import br.com.company.gwt.server.entities.FormaPagamento;
 import br.com.company.gwt.server.entities.Programa;
 import br.com.company.gwt.server.entities.ProgramaContrato;
 import br.com.company.gwt.server.entities.TipoContrato;
+import br.com.company.gwt.server.entities.Usuario;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOContrato;
 import br.com.company.gwt.shared.dto.DTOFormaPagamento;
@@ -110,6 +112,9 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 	@Transactional
 	@Override
 	public DTOContrato salvar(DTOContrato dtoContrato) throws Exception {
+		
+		HttpSession session = getServletRequest().getSession();
+		Usuario usuario = (Usuario) session.getAttribute("user");
 		try {
 			Contrato contrato = null;
 			if (dtoContrato.getId() == null){
@@ -134,15 +139,17 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			contrato.setPercentualPermuta(dtoContrato.getPercentualPermuta());
 			contrato.setDataPagamento(dtoContrato.getDataPagamento());
 			contrato.setPercentualComissao(cliente.getAgencia().getComissao());
+			contrato.getProgramas().clear();
 			
-			List<ProgramaContrato> programas = new ArrayList<ProgramaContrato>();
 			for (DTOPrograma dtoPrograma : dtoContrato.getProgramas()) {
 				ProgramaContrato programaContrato = new ProgramaContrato();
 				programaContrato.setPrograma(daoPrograma.findByPrimaryKey(dtoPrograma.getId()));
 				programaContrato.setContrato(contrato);
-				programas.add(programaContrato);
+				contrato.getProgramas().add(programaContrato);
 			}
-			contrato.setProgramas(programas);
+			
+			contrato.setDataUltimaAlteracao(new Date());
+			contrato.setUsuario(usuario);			
 			
 			daoContrato.store(contrato);
 			

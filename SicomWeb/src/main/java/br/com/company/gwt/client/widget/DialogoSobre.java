@@ -33,11 +33,11 @@ public class DialogoSobre extends Dialog {
 
 	private native String getTemplate() /*-{ 
     var html = [ 
-    '<p style="">Genial Estoque</p>', 
-    '<p>Company: Genial Sistemas</p>', 
+    '<p style="">Sicom Web</p>', 
+    '<p>Empresa: Sistema Grande Rio de Comunicação</p>', 
     '<p>Versão: 1.0.0</p>', 
-    '<p>Genial Estoque facilitando o gerenciamento de sua empresa.</p>', 
-    '<p>Copyright 2013 Genial Sistemas. Todos os direitos reservados.</p>', 
+    '<p>Controle de Contratos de Mídias.</p>', 
+    '<p>Copyright 2013 Grande Rio. Todos os direitos reservados.</p>', 
     '</tpl>' 
     ]; 
     return html.join(""); 

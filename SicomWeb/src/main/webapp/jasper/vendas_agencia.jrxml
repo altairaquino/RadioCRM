@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vendas_agencia" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78e27ea6-c752-40ea-b06c-5708ea9b2f07">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="106"/>
+	<parameter name="P_DATA_INICIO" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_DATA_FIM" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select c.id, cl.nome nome_cliente, ag.nome nome_agencia, c.data_cadastro, c.data_inicio, c.data_termino, c.tipo_pagamento, fp.nome nome_formapagamento, c.valor
+from contrato c
+inner join cliente cl on
+	cl.id = c.cliente_id
+left join agencia ag on
+	cl.agencia_id = ag.id
+inner join forma_pagamento fp on
+	fp.id = c.formapagamento_id
+where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}
+order by ag.nome, c.data_cadastro]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="nome_cliente" class="java.lang.String"/>
+	<field name="nome_agencia" class="java.lang.String"/>
+	<field name="data_cadastro" class="java.sql.Timestamp"/>
+	<field name="data_inicio" class="java.sql.Date"/>
+	<field name="data_termino" class="java.sql.Date"/>
+	<field name="tipo_pagamento" class="java.lang.String"/>
+	<field name="nome_formapagamento" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Float"/>
+	<variable name="SOMA_VALOR" class="java.lang.Float" resetType="Group" resetGroup="AGENCIA_GRUPO" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Float(0)]]></initialValueExpression>
+	</variable>
+	<group name="AGENCIA_GRUPO">
+		<groupExpression><![CDATA[$F{nome_agencia}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<frame>
+					<reportElement uuid="b8f9feeb-f56b-4c13-b153-5b29d82473ef" x="0" y="0" width="802" height="18"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+				</frame>
+				<staticText>
+					<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="3" y="0" width="107" height="18"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Verdana" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Agência/Corretor:]]></text>
+				</staticText>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="120" y="0" width="311" height="18"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome_agencia}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="718" y="0" width="79" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SOMA_VALOR}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="656" y="0" width="62" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0bcc460f-f11d-49b5-94e6-ab71c0d5903e" x="265" y="3" width="273" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vendas por Agência"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="3" y="23" width="52" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="55" y="23" width="75" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="130" y="23" width="75" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_DATA_FIM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<frame>
+				<reportElement uuid="30b0eba8-18cb-492c-9950-b9593f8c1c68" mode="Opaque" x="0" y="0" width="802" height="14" backcolor="#CCCCCC"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="123" y="0" width="43" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="166" y="0" width="162" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="388" y="0" width="63" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Início]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="451" y="0" width="61" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Término]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="512" y="0" width="64" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Pgto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="740" y="0" width="62" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="576" y="0" width="101" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma Pgto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="677" y="0" width="63" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cadastro]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<frame>
+				<reportElement uuid="fc9590c8-bfb9-410c-b9c0-2cb28a62f4da" x="0" y="0" width="802" height="12"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="120" y="0" width="43" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="388" y="0" width="63" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="166" y="0" width="222" height="12"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome_cliente}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="451" y="0" width="61" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="512" y="0" width="64" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo_pagamento}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="740" y="0" width="56" height="12"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="576" y="0" width="101" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome_formapagamento}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="677" y="0" width="63" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{data_cadastro}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement uuid="6deb5ca0-28ee-4ed4-8b90-692cda1669a2" x="690" y="0" width="76" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="bb0fd572-fb1c-4146-8d70-be8385aa3ec1" x="766" y="0" width="30" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement uuid="c8862f8b-6279-477d-b22f-8251252d1bb5" x="0" y="0" width="199" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

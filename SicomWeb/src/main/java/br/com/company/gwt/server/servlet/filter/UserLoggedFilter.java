@@ -10,6 +10,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import br.com.company.gwt.server.entities.Usuario;
 
 public class UserLoggedFilter implements Filter{
 
@@ -18,7 +21,6 @@ public class UserLoggedFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
-		/*
 		HttpSession session = req.getSession();
 		Usuario user = (Usuario) session.getAttribute("user");
 		
@@ -26,7 +28,6 @@ public class UserLoggedFilter implements Filter{
 			res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			return;
 		}
-		*/
 		filter.doFilter(req, res);
 	}
 

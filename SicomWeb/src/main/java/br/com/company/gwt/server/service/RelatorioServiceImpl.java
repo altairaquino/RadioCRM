@@ -48,8 +48,12 @@ public class RelatorioServiceImpl extends InputServletImpl implements RelatorioS
 	}
 
 	@Override
-	public String relatorioPeriodo(ParametrosReport parametros) {
-		return null;
+	public String relatorioPeriodo(ParametrosReport parametros) throws Exception {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("JASPER_NAME", parametros.getNomeRelatorio());
+		params.put("P_DATA_INICIO", parametros.getDataIncio());
+		params.put("P_DATA_FIM", parametros.getDataFim());
+		return gerarReport.exportToPDF(getServletRequest(), params);
 	}	
 
 }

@@ -8,11 +8,12 @@ package br.com.company.gwt.client.component;
 public class JasperName {
 	
 	public static final String CLIENTES = "clientes";
-	public static final String VENDAS_POR_AGENCIA = "vendas_por_agencia";
-	public static final String VENDAS_PERIODO = "";
+	public static final String VENDAS_AGENCIA_PERIODO = "vendas_agencia";
 	public static final String RANKING_VENDAS = "";
-	public static final String RANKING_VENDAS_AGENCIA = "";
+	public static final String RANKING_VENDAS_AGENCIA = "ranking_vendas_agencia";
 	public static final String AGENCIAS = "agencias";
 	public static final String PROGRAMAS = "programas";
+	public static final String CONTRATO_PERIODO = "contrato_periodo";
+	public static final String ANIVERSARIANTES = "aniversariantes";
 	
 }

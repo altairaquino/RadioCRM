@@ -1,5 +1,6 @@
 package br.com.company.gwt.server.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,9 @@ public class Contrato {
 	@OneToMany(mappedBy="contrato", cascade=CascadeType.ALL)
 	private List<ProgramaContrato> programas;
 	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Usuario usuario;
+	
 	private Float valor;
 	
 	@Basic(optional=false)
@@ -76,6 +80,10 @@ public class Contrato {
 	@Enumerated(EnumType.STRING)
 	@Column(name="tipo_pagamento")
 	private TipoPagamento tipoPagamento;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_ultima_alteracao")
+	private Date dataUltimaAlteracao;
 
 	public Integer getId() {
 		return id;
@@ -178,6 +186,9 @@ public class Contrato {
 	}
 
 	public void setProgramas(List<ProgramaContrato> programas) {
+		if (this.programas == null){
+			this.programas = new ArrayList<ProgramaContrato>();
+		}
 		this.programas = programas;
 	}
 
@@ -195,6 +206,22 @@ public class Contrato {
 
 	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Date getDataUltimaAlteracao() {
+		return dataUltimaAlteracao;
+	}
+
+	public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
+		this.dataUltimaAlteracao = dataUltimaAlteracao;
 	}
 	
 }

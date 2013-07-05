@@ -2,15 +2,37 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="produtos" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78e27ea6-c752-40ea-b06c-5708ea9b2f07">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="112"/>
+	<parameter name="P_CONTRATO_ID" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[select p.id, p.nome, p.valor_patrocinio
-from programa p
-order by p.nome]]>
+		<![CDATA[select c.*, CL.NOME CLIENTE, A.NOME AGENCIA
+from CONTRATO C
+  INNER JOIN CLIENTE CL ON
+    CL.ID = C.CLIENTE_ID
+  INNER JOIN AGENCIA A ON
+    CL.AGENCIA_ID = A.ID
+WHERE c.id = $P{P_CONTRATO_ID}]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
-	<field name="nome" class="java.lang.String"/>
-	<field name="valor_patrocinio" class="java.lang.Float"/>
+	<field name="data_cadastro" class="java.sql.Timestamp"/>
+	<field name="data_cancelamento" class="java.sql.Timestamp"/>
+	<field name="data_inicio" class="java.sql.Date"/>
+	<field name="data_termino" class="java.sql.Date"/>
+	<field name="informacoes_texto" class="java.lang.String"/>
+	<field name="percentual_comissao" class="java.lang.Float"/>
+	<field name="percentual_permuta" class="java.lang.Float"/>
+	<field name="tipo_pagamento" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Float"/>
+	<field name="cliente_id" class="java.lang.Integer"/>
+	<field name="formapagamento_id" class="java.lang.Integer"/>
+	<field name="tipocontrato_id" class="java.lang.Integer"/>
+	<field name="data_pagamento" class="java.sql.Date"/>
+	<field name="data_ultima_alteracao" class="java.sql.Timestamp"/>
+	<field name="usuario_id" class="java.lang.Integer"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="agencia" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -24,7 +46,7 @@ order by p.nome]]>
 				<textElement textAlignment="Center">
 					<font fontName="Verdana" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Relatório de Programas"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Contrato - nº "+$P{P_CONTRATO_ID}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -37,57 +59,24 @@ order by p.nome]]>
 				</box>
 			</frame>
 			<staticText>
-				<reportElement uuid="14c597cf-086a-4ccf-ac45-f00869cf75d6" x="0" y="0" width="63" height="14"/>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="0" y="0" width="554" height="14"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Verdana" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cód.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="63" y="0" width="248" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Verdana" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nome]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="427" y="0" width="127" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Valor Patrocínio]]></text>
+				<text><![CDATA[Dados do Contrato]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="12" splitType="Stretch">
+		<band height="118" splitType="Stretch">
 			<frame>
-				<reportElement uuid="fc9590c8-bfb9-410c-b9c0-2cb28a62f4da" x="0" y="0" width="555" height="12"/>
+				<reportElement uuid="fc9590c8-bfb9-410c-b9c0-2cb28a62f4da" x="0" y="0" width="555" height="118"/>
 				<box>
+					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 			</frame>
-			<textField>
-				<reportElement uuid="7e2025d5-27ae-4f89-8fcd-6bedb8617c02" x="0" y="0" width="63" height="12"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="0a1b9c33-d025-4d93-807c-048aa2c2bc3c" x="63" y="0" width="364" height="12"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Verdana" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-			</textField>
-			<textField pattern="R$ 0.00" isBlankWhenNull="true">
-				<reportElement uuid="7e2025d5-27ae-4f89-8fcd-6bedb8617c02" x="427" y="0" width="114" height="12"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Verdana" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{valor_patrocinio}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 	<columnFooter>

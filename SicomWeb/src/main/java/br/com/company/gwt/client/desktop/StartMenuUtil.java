@@ -40,7 +40,6 @@ public class StartMenuUtil {
 		    MenuItem item = new MenuItem("Clientes");
 		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeCliente16()));
 		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridCliente));
-		   
 		    sub.add(item);
 
 		    item = new MenuItem("Programas");
@@ -48,7 +47,7 @@ public class StartMenuUtil {
 		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridPrograma));
 		    sub.add(item);
 		    
-		    item = new MenuItem("Agências");
+		    item = new MenuItem("Agência/Corretor");
 		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeForm16()));
 		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.panelGridAgencia));
 		    sub.add(item);
@@ -70,44 +69,6 @@ public class StartMenuUtil {
 	    
 	    menuItems.add(menuItem);
 	    
-	    /*
-	    menuItem = new MenuItem("Impressões");
-	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeImpressora16()));
-	    
-		    sub = new Menu();
-		    
-		    item = new MenuItem("Etiquetas de Preço");
-		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeImpressora16()));
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formImprimeEtiqueta));
-		    sub.add(item);
-		    
-		menuItem.setSubMenu(sub);
-	    
-	    menuItems.add(menuItem);
-	    
-	    menuItem = new MenuItem("Movimento");
-	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeMovimento16()));
-
-		    sub = new Menu();
-	
-		    item = new MenuItem("Entrada de Produtos");
-		    item.setIcon(IconHelper.createStyle("tabs"));
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formEntradaProdutoWindow));
-		    sub.add(item);
-		    
-		    item = new MenuItem("Transferência de Produtos");
-		    item.setIcon(IconHelper.createStyle("icon_transferencia"));
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formTransferenciaEstoque));
-		    sub.add(item);
-	    
-	    menuItem.setSubMenu(sub);
-	    
-	    if (permis.contains(3)){
-	    	menuItems.add(menuItem);
-	    }
-	    
-	    */
-	    
 	    menuItem = new MenuItem("Relatórios");
 	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
 	    
@@ -121,33 +82,7 @@ public class StartMenuUtil {
 		    
 	    menuItem.setSubMenu(sub);
 	    
-	    menuItems.add(menuItem);
-
-	    /*
-	    menuItem = new MenuItem("Manutenção");
-	    menuItem.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeConfiguracao16()));
-	    
-		    sub = new Menu();
-		    
-		    item = new MenuItem("Preço e Estoque");
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formAlteraPreco));
-		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeCaixa16()));
-		    		    
-		    sub.add(item);
-	    
-		    /*
-		    item = new MenuItem("Relatórios por Loja (Período)");
-		    item.addSelectionListener(getSelectionListener(ProviderFacadeManager.formRelatorioLojaData));
-		    item.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
-		    
-		    sub.add(item);
-		    
-	    menuItem.setSubMenu(sub);
-	    
-	    if (permis.contains(5)){
-	    	menuItems.add(menuItem);
-	    }
-	     */
+	    menuItems.add(menuItem);	    
 	    
 	    return menuItems;
 	}

@@ -79,7 +79,7 @@ public class FormAgencia extends Window {
 	public FormAgencia() {
 		setResizable(false);
 		setMinimizable(true);
-		setHeadingHtml("Cadastro da Agência");
+		setHeadingHtml("Cadastro da Agência/Corretor");
 		setSize(640, 472);
 		setLayout(new FitLayout());
 		

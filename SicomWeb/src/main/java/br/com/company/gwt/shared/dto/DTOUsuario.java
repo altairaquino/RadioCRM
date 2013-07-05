@@ -44,4 +44,12 @@ public class DTOUsuario extends BaseModelData {
 		return get("admin");
 	}
 
+	public void setNome(String nome) {
+		set("nome", nome);		
+	}
+	
+	public String getNome() {
+		return get("nome");		
+	}
+
 }

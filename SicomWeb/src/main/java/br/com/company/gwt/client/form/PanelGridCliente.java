@@ -45,13 +45,13 @@ public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
 
 	@Override
 	protected void actionPesquisa(String consulta) {
-		painelPrincipal.mask("Aguarde carregando consulta...");
+		painelPrincipal.mask("Aguarde carregando dados...");
 		InstanceService.CLIENTE_SERVICE.pesquisa(consulta, new AsyncCallback<List<DTOCliente>>() {
 			
 			@Override
-			public void onSuccess(List<DTOCliente> result) {
+			public void onSuccess(List<DTOCliente> clientes) {
 				getStore().removeAll();
-				getStore().add(result);
+				getStore().add(clientes);
 				painelPrincipal.unmask();
 			}
 			

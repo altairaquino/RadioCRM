@@ -30,6 +30,7 @@ public class UserServiceImpl extends InputServletImpl implements UserService {
 			
 			user.setId(usuario.getId());
 			user.setAdmin(usuario.isAdmin());
+			user.setNome(usuario.getNome());
 			
 			if (!usuario.isAtivo()){
 				throw new Exception("Usuário com acesso inabilitado!");

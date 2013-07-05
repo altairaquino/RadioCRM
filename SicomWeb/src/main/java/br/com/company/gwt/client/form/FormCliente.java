@@ -104,6 +104,8 @@ public class FormCliente extends Window {
 		fsDados.setHeadingHtml("Dados do Cliente");
 		fsDados.setLayout(new AbsoluteLayout());
 		
+		fsDados.add(new LabelField("Tipo de pessoa:"), new AbsoluteData(0, 0));
+		
 		radioGroupTipoPessoa = new RadioGroup();
 		radioGroupTipoPessoa.setSize("144px", "20px");
 		
@@ -126,7 +128,7 @@ public class FormCliente extends Window {
 		
 		fsDados.add(radioGroupTipoPessoa, new AbsoluteData(0, 17));
 		
-		fsDados.add(new LabelField("Tipo de pessoa:"), new AbsoluteData(0, 0));
+		fsDados.add(new LabelField("Agência/Corretor de atendimento:"), new AbsoluteData(283, 0));
 		
 		RpcProxy<PagingLoadResult<DTOAgencia>> proxyAgencia = new RpcProxy<PagingLoadResult<DTOAgencia>>() {
 			@Override
@@ -147,7 +149,7 @@ public class FormCliente extends Window {
 		comboAgencia.setDisplayField("nome");
 		comboAgencia.setItemSelector("div.search-item");
 		comboAgencia.setHideTrigger(true);
-		comboAgencia.setLoadingText("Carregando agências...");
+		comboAgencia.setLoadingText("Carregando...");
 		comboAgencia.setPageSize(10);
 		
 		fsDados.add(comboAgencia, new AbsoluteData(283, 17));
@@ -166,8 +168,6 @@ public class FormCliente extends Window {
 		});
 		
 		fsDados.add(btnAgencia, new AbsoluteData(562, 17));
-		
-		fsDados.add(new LabelField("Agência de Atendimento:"), new AbsoluteData(283, 0));
 		
 		fsDados.add(new LabelField("Nome:"), new AbsoluteData(0, 43));
 		

@@ -39,7 +39,6 @@ public class FormRelatorioPeriodo extends Window {
 	private FormPanel panelRelatorio;
 	private RadioGroup radioGroup;
 	private Radio rdVendasPeriodo;
-	private Radio rdRankingVendas;
 	private Radio rdVendasPorAgencia;
 	private Radio rdRankingVendasAgencia;
 	private Radio rdPatrocionioProgramas;
@@ -109,18 +108,12 @@ public class FormRelatorioPeriodo extends Window {
 		
 		radioGroup.add(rdVendasPeriodo);
 		
-		rdRankingVendas = new Radio();
-		rdRankingVendas.setBoxLabel("Ranking de Vendas");
-		rdRankingVendas.setHideLabel(true);
-		
-		radioGroup.add(rdRankingVendas);
-		
 		rdVendasPorAgencia = new Radio();
 		rdVendasPorAgencia.setBoxLabel("Vendas por Agência");
 		rdVendasPorAgencia.setHideLabel(true);
 		
 		radioGroup.add(rdVendasPorAgencia);
-
+		
 		rdRankingVendasAgencia = new Radio();
 		rdRankingVendasAgencia.setBoxLabel("Ranking de Vendas (Agência)");
 		rdRankingVendasAgencia.setHideLabel(true);
@@ -130,6 +123,7 @@ public class FormRelatorioPeriodo extends Window {
 		rdPatrocionioProgramas = new Radio();
 		rdPatrocionioProgramas.setBoxLabel("Patrocínio de programas");
 		rdPatrocionioProgramas.setHideLabel(true);
+		rdPatrocionioProgramas.setEnabled(false);
 		
 		radioGroup.add(rdPatrocionioProgramas);
 		
@@ -153,7 +147,6 @@ public class FormRelatorioPeriodo extends Window {
 		btnGerarRelatorio.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.iconeReport16()));
 		btnGerarRelatorio.setWidth("117px");
 		btnGerarRelatorio.setBorders(true);
-		btnGerarRelatorio.setEnabled(false);
 		btnGerarRelatorio.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			
 			@Override
@@ -181,14 +174,15 @@ public class FormRelatorioPeriodo extends Window {
 		parametros.setDataFim(tfDataFinal.getValue());
 		
 		if (radioGroup.getValue().equals(rdVendasPeriodo)){
-			parametros.setNomeRelatorio(JasperName.VENDAS_PERIODO);
-		}else if (radioGroup.getValue().equals(rdRankingVendas)){
-			parametros.setNomeRelatorio(JasperName.RANKING_VENDAS);
+			parametros.setNomeRelatorio(JasperName.CONTRATO_PERIODO);
 		}else if (radioGroup.getValue().equals(rdVendasPorAgencia)){
-			parametros.setNomeRelatorio(JasperName.VENDAS_POR_AGENCIA);
+			parametros.setNomeRelatorio(JasperName.VENDAS_AGENCIA_PERIODO);
 		}else if (radioGroup.getValue().equals(rdRankingVendasAgencia)){
 			parametros.setNomeRelatorio(JasperName.RANKING_VENDAS_AGENCIA);
+		}else if (radioGroup.getValue().equals(rdAniversariantes)){
+			parametros.setNomeRelatorio(JasperName.ANIVERSARIANTES);
 		}
+		
 		
 		InstanceService.RELATORIO_SERVICE.relatorioPeriodo(parametros, new RelatorioCallback());
 		

@@ -137,8 +137,9 @@ public abstract class PanelGridWindow<T extends ModelData> extends Window {
 				if (pesquisa != null && pesquisa.length() < 4){
 					WebMessageBox.alert("Informe ao menos 4 letras na pesquisa!");
 					ce.setCancelled(true);
+				}else{
+					actionPesquisa(fieldPesquisa.getValue());					
 				}
-				actionPesquisa(fieldPesquisa.getValue());
 			}
 		});
 		

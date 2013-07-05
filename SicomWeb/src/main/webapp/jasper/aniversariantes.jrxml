@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="aniversariantes" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78e27ea6-c752-40ea-b06c-5708ea9b2f07">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="426"/>
+	<property name="ireport.y" value="42"/>
+	<parameter name="P_DATA_INICIO" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_DATA_FIM" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[-- aniversariantes
+select ani.nome, to_char(ani.dia, 'dd/MM') dia, ani.tipo, ani.nome_cliente from
+(
+select c.nome nome,
+	   c.data_nascimento dia,
+       'CLIENTE' tipo,
+       c.nome nome_cliente from cliente c
+where c.data_nascimento is not null
+UNION
+select c.nome_contato nome,
+       c.data_nascimento_contato dia,
+       'CONTATO' tipo,
+       c.nome nome_cliente from  cliente c
+where c.data_nascimento_contato is not null
+UNION
+select c.nome_proprietario nome,
+	   c.data_nascimento_proprietario dia,
+       'PROPRIETÁRIO' tipo,
+       c.nome nome_cliente from  cliente c
+where c.data_nascimento_proprietario is not null
+) as ani
+where CAST(EXTRACT(year from CURRENT_DATE) || to_char(ani.dia, '-MM-dd') as date) BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}
+order by dia]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="dia" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="nome_cliente" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0bcc460f-f11d-49b5-94e6-ab71c0d5903e" x="141" y="3" width="273" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Aniversariantes"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="3" y="23" width="52" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="55" y="23" width="75" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="130" y="23" width="75" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_DATA_FIM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<frame>
+				<reportElement uuid="30b0eba8-18cb-492c-9950-b9593f8c1c68" mode="Opaque" x="0" y="0" width="555" height="14" backcolor="#CCCCCC"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="3" y="0" width="52" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="55" y="0" width="221" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do Aniversariante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="276" y="0" width="79" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="355" y="0" width="200" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do Cliente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<frame>
+				<reportElement uuid="fc9590c8-bfb9-410c-b9c0-2cb28a62f4da" x="0" y="0" width="555" height="12"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="0" y="0" width="55" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dia}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="55" y="0" width="221" height="12"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="276" y="0" width="79" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="355" y="0" width="200" height="12"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome_cliente}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement uuid="6deb5ca0-28ee-4ed4-8b90-692cda1669a2" x="444" y="0" width="76" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="bb0fd572-fb1c-4146-8d70-be8385aa3ec1" x="520" y="0" width="30" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement uuid="c8862f8b-6279-477d-b22f-8251252d1bb5" x="0" y="0" width="199" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

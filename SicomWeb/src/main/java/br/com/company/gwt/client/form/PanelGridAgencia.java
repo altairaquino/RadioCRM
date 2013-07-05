@@ -19,7 +19,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class PanelGridAgencia extends PanelGridWindow<DTOAgencia> {
 	
 	public PanelGridAgencia() {
-		setHeadingHtml("Cadastro de Agência");
+		setHeadingHtml("Cadastro de Agência/Corretor");
 		grid.setAutoExpandColumn("nome");
 		loadDados();
 	}
