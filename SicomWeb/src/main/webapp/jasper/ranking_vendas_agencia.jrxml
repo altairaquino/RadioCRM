@@ -16,7 +16,7 @@ left join agencia ag on
 	cl.agencia_id = ag.id
 where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}
 GROUP by ag.nome
-order by sum(c.valor)]]>
+order by sum(c.valor) desc]]>
 	</queryString>
 	<field name="nome_agencia" class="java.lang.String"/>
 	<field name="soma" class="java.lang.Float"/>
@@ -103,7 +103,7 @@ order by sum(c.valor)]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="55" y="0" width="410" height="12"/>

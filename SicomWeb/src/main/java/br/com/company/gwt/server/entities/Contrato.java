@@ -182,13 +182,13 @@ public class Contrato {
 	}
 
 	public List<ProgramaContrato> getProgramas() {
+		if (this.programas == null){
+			this.programas = new ArrayList<ProgramaContrato>();
+		}
 		return programas;
 	}
 
 	public void setProgramas(List<ProgramaContrato> programas) {
-		if (this.programas == null){
-			this.programas = new ArrayList<ProgramaContrato>();
-		}
 		this.programas = programas;
 	}
 

@@ -17,6 +17,7 @@ import br.com.company.gwt.server.dao.DaoContrato;
 import br.com.company.gwt.server.dao.DaoFormaPagamento;
 import br.com.company.gwt.server.dao.DaoPrograma;
 import br.com.company.gwt.server.dao.DaoTipoContrato;
+import br.com.company.gwt.server.dao.DaoUsuario;
 import br.com.company.gwt.server.entities.Cliente;
 import br.com.company.gwt.server.entities.Contrato;
 import br.com.company.gwt.server.entities.FormaPagamento;
@@ -39,6 +40,7 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 	@Inject private DaoFormaPagamento daoFormaPagamento;
 	@Inject private DaoTipoContrato daoTipoContrato;
 	@Inject private DaoCliente daoCliente;
+	@Inject private DaoUsuario daoUsuario;
 	
 	@Override
 	public List<DTOContrato> listAll() {
@@ -114,7 +116,7 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 	public DTOContrato salvar(DTOContrato dtoContrato) throws Exception {
 		
 		HttpSession session = getServletRequest().getSession();
-		Usuario usuario = (Usuario) session.getAttribute("user");
+		Usuario usuario = daoUsuario.findByPrimaryKey(((Usuario) session.getAttribute("user")).getId());
 		try {
 			Contrato contrato = null;
 			if (dtoContrato.getId() == null){
@@ -132,6 +134,9 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			contrato.setDataInicio(dtoContrato.getDataInicio());
 			contrato.setDataTermino(dtoContrato.getDataTermino());
 			contrato.setInformacoesTexto(dtoContrato.getInformacoesTexto());
+			if (contrato.getInformacoesTexto() == null){
+				contrato.setInformacoesTexto("");
+			}
 			contrato.setFormaPagamento(daoFormaPagamento.findByPrimaryKey(dtoContrato.getFormaPagamento().getId()));
 			contrato.setValor(dtoContrato.getValor());
 			contrato.setTipoPagamento(TipoPagamento.valueOf(dtoContrato.getTipoPagamento()));
