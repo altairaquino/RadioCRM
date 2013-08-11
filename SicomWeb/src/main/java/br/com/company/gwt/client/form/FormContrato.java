@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.company.gwt.client.InstanceService;
+import br.com.company.gwt.client.component.CurrencyField;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.resources.ImagensResources;
 import br.com.company.gwt.shared.dto.DTOCliente;
@@ -23,6 +24,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DatePickerEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -66,7 +68,7 @@ public class FormContrato extends Window {
 	private ComboBox<DTOFormaPagamento> comboFormaPagamento;
 	private ListStore<DTOFormaPagamento> storeFormaPagamento;
 	private DateField tfDataPagamento;
-	private NumberField tfValor;
+	private CurrencyField tfValor;
 	private NumberField tfPermuta;
 	private ComboBox<DTOTipoContrato> comboTipoContrato;
 	private ListStore<DTOTipoContrato> storeTipoContrato;
@@ -234,10 +236,9 @@ public class FormContrato extends Window {
 		
 		fsDadosDoContrato.add(new LabelField("Valor:"), new AbsoluteData(282, 214));
 		
-		tfValor = new NumberField();
+		tfValor = new CurrencyField();
 		tfValor.setSize("92px", "22px");
-		tfValor.setFormat(NumberFormat.getFormat("0.00"));
-		tfValor.setAllowNegative(false);
+		
 		fsDadosDoContrato.add(tfValor, new AbsoluteData(282, 235));
 		
 		fsDadosDoContrato.add(new LabelField("Permuta (%):"), new AbsoluteData(282, 258));
@@ -248,6 +249,7 @@ public class FormContrato extends Window {
 		tfPermuta.setMinValue(0);
 		tfPermuta.setMaxValue(100);
 		tfPermuta.setAllowDecimals(false);
+		tfPermuta.getPropertyEditor().setType(Float.class);
 		tfPermuta.setFormat(NumberFormat.getFormat("0"));
 		tfPermuta.setSize("91px", "22px");
 		fsDadosDoContrato.add(tfPermuta, new AbsoluteData(282, 279));
@@ -318,22 +320,34 @@ public class FormContrato extends Window {
 		});
 		mainPanel.add(btnSalvar, new AbsoluteData(508, 464));
 		
-		btnCancelar = new Button("Cancelar");
+		btnCancelar = new Button("Cancelar Contrato");
+		btnCancelar.setEnabled(false);
 		btnCancelar.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.cancelar16()));
-		btnCancelar.setSize("100px", "24px");
+		btnCancelar.setSize("125px", "24px");
 		btnCancelar.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				FormContrato.this.hide();
+				cancelarContrato();
 			}
 		});
-		mainPanel.add(btnCancelar, new AbsoluteData(402, 464));
+		mainPanel.add(btnCancelar, new AbsoluteData(10, 464));
 		
-		add(mainPanel);
-		
+		add(mainPanel);		
 		
 	}
 	
+	protected void cancelarContrato() {
+		WebMessageBox.confirm("Confirmar o cancelamento do contrato de nº "+ id +" ?", listenerConfirmar);
+	}
+	
+	private Listener<MessageBoxEvent> listenerConfirmar = new Listener<MessageBoxEvent>() { 
+		public void handleEvent(MessageBoxEvent ce) {
+			if (ce.getButtonClicked().getHtml().equalsIgnoreCase("Yes")){
+				processaCancelamento();
+			}
+		}
+	};
+
 	private void loadFormasPagamento() {
 		InstanceService.FORMAPAGAMENTO_SERVICE.listAll(new AsyncCallback<List<DTOFormaPagamento>>() {
 			@Override
@@ -346,6 +360,27 @@ public class FormContrato extends Window {
 			};
 		});
 		
+	}
+
+	protected void processaCancelamento() {
+		InstanceService.CONTRATO_SERVICE.cancelar(id, new AsyncCallback<Boolean>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());				
+			}
+			
+			@Override
+			public void onSuccess(Boolean result) {
+				if (result){
+					WebMessageBox.alert("Contrato cancelado com sucesso!");
+					FormContrato.this.hide();
+				}else{
+					WebMessageBox.alert("Houve um problema ao cancelar contrato.");
+				}
+				
+			}
+		});
 	}
 
 	private void loadTiposContrato() {
@@ -446,7 +481,7 @@ public class FormContrato extends Window {
 		tfPermuta.setValue(dto.getPercentualPermuta());
 		tfDataPagamento.setValue(dto.getDataPagamento());
 		storeProgramasTo.add(dto.getProgramas());
-		
+		btnCancelar.setEnabled(true);
 	}
 	
 	protected DTOContrato getDTOContratoFromForm(){

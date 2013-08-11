@@ -19,6 +19,7 @@ left join agencia ag on
 inner join forma_pagamento fp on
 	fp.id = c.formapagamento_id
 where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}
+and c.data_cancelamento is null
 order by ag.nome, c.data_cadastro]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
@@ -233,7 +234,7 @@ order by ag.nome, c.data_cadastro]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{data_inicio}]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="166" y="0" width="222" height="12"/>
@@ -247,7 +248,7 @@ order by ag.nome, c.data_cadastro]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{data_termino}]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="512" y="0" width="101" height="12"/>

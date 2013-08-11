@@ -183,7 +183,7 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 				}
 			}else {
 				Cliente cliente = daoCliente.findByPrimaryKey(dtoCliente.getId());
-				for (Contrato contrato : daoContrato.pesquisa(cliente, date)) {
+				for (Contrato contrato : daoContrato.pesquisa(cliente)) {
 					contratos.add(parseToDTOContrato(contrato));
 				}
 			}
@@ -192,6 +192,22 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			throw new Exception(e.getMessage());
 		}
 		return contratos;
+	}
+
+	@Transactional
+	@Override
+	public Boolean cancelar(Integer contratoId){
+		
+		try {
+			Contrato contrato = daoContrato.find(contratoId);
+			contrato.setDataCancelamento(new Date());
+			daoContrato.store(contrato);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
 
 }

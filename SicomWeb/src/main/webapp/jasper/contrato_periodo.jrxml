@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="contrato_periodo" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="78e27ea6-c752-40ea-b06c-5708ea9b2f07">
-	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="P_DATA_INICIO" class="java.util.Date">
@@ -19,7 +19,8 @@ left join agencia ag on
 	cl.agencia_id = ag.id
 inner join forma_pagamento fp on
 	fp.id = c.formapagamento_id
-where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}]]>
+where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}
+and c.data_cancelamento is null]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
 	<field name="nome_cliente" class="java.lang.String"/>
@@ -172,7 +173,7 @@ where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{data_inicio}]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="43" y="0" width="162" height="12"/>
@@ -193,7 +194,7 @@ where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{P_DATA_INICIO}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{data_termino}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="676" y="0" width="64" height="12"/>

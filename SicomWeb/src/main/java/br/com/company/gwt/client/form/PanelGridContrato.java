@@ -23,6 +23,7 @@ import com.extjs.gxt.ui.client.data.PagingLoader;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.DatePickerEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -167,6 +168,12 @@ public class PanelGridContrato extends Window {
 		tfData.setSize("119px", "22px");
 		tfData.setEditable(false);
 		tfData.setValue(new Date());
+		tfData.getDatePicker().addListener(Events.Select, new Listener<DatePickerEvent>() {
+			@Override
+			public void handleEvent(DatePickerEvent be) {
+				loadContratos();				
+			}
+		}); 
 		tfData.getPropertyEditor().setFormat(DateTimeFormat.getFormat("dd/MM/yyyy"));
 		panelTool.add(tfData, new AbsoluteData(298, 28));
 		
@@ -219,7 +226,7 @@ public class PanelGridContrato extends Window {
 
 	private void loadContratos() {
 		mainPanel.mask("Carregando dados. Aguarde...");
-		InstanceService.CONTRATO_SERVICE.listAll(new AsyncCallback<List<DTOContrato>>() {
+		InstanceService.CONTRATO_SERVICE.pesquisa(null, tfData.getValue(), new AsyncCallback<List<DTOContrato>>() {
 			
 			@Override
 			public void onSuccess(List<DTOContrato> contratos) {

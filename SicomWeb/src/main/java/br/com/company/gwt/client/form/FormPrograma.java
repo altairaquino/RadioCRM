@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.company.gwt.client.InstanceService;
+import br.com.company.gwt.client.component.CurrencyField;
 import br.com.company.gwt.client.component.TextFieldUpper;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.resources.ImagensResources;
@@ -24,7 +25,6 @@ import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.LabelField;
-import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
@@ -52,7 +52,7 @@ public class FormPrograma extends Window {
 	private FieldSet fsDadosDoPrograma;
 	private FieldSet fsProgramacao;
 	private TextFieldUpper tfNome;
-	private NumberField tfValor;
+	private CurrencyField tfValor;
 	private Grid<DTOProgramacao> gridProgramacao;
 	private ListStore<DTOProgramacao> storeProgramacao;
 	private CheckBox checkHabilitado;
@@ -112,9 +112,8 @@ public class FormPrograma extends Window {
 
 		fsDadosDoPrograma.add(tfNome, new FormData("100%"));
 		
-		tfValor = new NumberField();
+		tfValor = new CurrencyField();
 		tfValor.setFieldLabel("Valor do Patrocinio");
-		tfValor.setFormat(NumberFormat.getFormat("0.00"));
 
 		fsDadosDoPrograma.add(tfValor, new FormData("50%"));
 		

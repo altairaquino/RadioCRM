@@ -41,6 +41,7 @@ public class FormRelatorioPeriodo extends Window {
 	private Radio rdVendasPeriodo;
 	private Radio rdVendasPorAgencia;
 	private Radio rdRankingVendasAgencia;
+	private Radio rdRankingVendasCliente;
 	private Radio rdPatrocionioProgramas;
 	private Radio rdAniversariantes;
 
@@ -120,6 +121,12 @@ public class FormRelatorioPeriodo extends Window {
 		
 		radioGroup.add(rdRankingVendasAgencia);
 		
+		rdRankingVendasCliente = new Radio();
+		rdRankingVendasCliente.setBoxLabel("Ranking de Compras (Cliente)");
+		rdRankingVendasCliente.setHideLabel(true);
+		
+		radioGroup.add(rdRankingVendasCliente);
+		
 		rdPatrocionioProgramas = new Radio();
 		rdPatrocionioProgramas.setBoxLabel("Patrocínio de programas");
 		rdPatrocionioProgramas.setHideLabel(true);
@@ -179,6 +186,8 @@ public class FormRelatorioPeriodo extends Window {
 			parametros.setNomeRelatorio(JasperName.VENDAS_AGENCIA_PERIODO);
 		}else if (radioGroup.getValue().equals(rdRankingVendasAgencia)){
 			parametros.setNomeRelatorio(JasperName.RANKING_VENDAS_AGENCIA);
+		}else if (radioGroup.getValue().equals(rdRankingVendasCliente)){
+			parametros.setNomeRelatorio(JasperName.RANKING_VENDAS_CLIENTE);
 		}else if (radioGroup.getValue().equals(rdAniversariantes)){
 			parametros.setNomeRelatorio(JasperName.ANIVERSARIANTES);
 		}

@@ -8,18 +8,16 @@
 	</parameter>
 	<parameter name="P_DATA_FIM" class="java.util.Date"/>
 	<queryString>
-		<![CDATA[select ag.nome nome_agencia, sum(c.valor * c.percentual_comissao / 100.0) valor_comissao, sum(c.valor) valor_bruto
+		<![CDATA[select cl.nome nome_cliente, sum(c.valor * c.percentual_comissao / 100.0) valor_comissao, sum(c.valor) valor_bruto
 from contrato c
 inner join cliente cl on
 	cl.id = c.cliente_id
-left join agencia ag on
-	cl.agencia_id = ag.id
 where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}
 and c.data_cancelamento is null
-GROUP by ag.nome
+GROUP by cl.nome
 order by sum(c.valor) desc]]>
 	</queryString>
-	<field name="nome_agencia" class="java.lang.String"/>
+	<field name="nome_cliente" class="java.lang.String"/>
 	<field name="valor_comissao" class="java.lang.Double"/>
 	<field name="valor_bruto" class="java.lang.Float"/>
 	<background>
@@ -35,7 +33,7 @@ order by sum(c.valor) desc]]>
 				<textElement textAlignment="Center">
 					<font fontName="Verdana" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Ranking de Vendas por Agência"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Ranking de Compras por Cliente"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="3" y="23" width="52" height="14"/>
@@ -87,7 +85,7 @@ order by sum(c.valor) desc]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Verdana" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Agencia/Corretor]]></text>
+				<text><![CDATA[Nome do cliente]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="476" y="0" width="79" height="14"/>
@@ -126,7 +124,7 @@ order by sum(c.valor) desc]]>
 					<textElement verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{nome_agencia}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{nome_cliente}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="476" y="0" width="73" height="12"/>

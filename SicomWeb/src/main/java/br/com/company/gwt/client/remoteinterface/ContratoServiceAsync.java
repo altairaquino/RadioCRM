@@ -16,4 +16,6 @@ public interface ContratoServiceAsync {
 
 	void pesquisa(DTOCliente cliente, Date date, AsyncCallback<List<DTOContrato>> callback);
 
+	void cancelar(Integer contratoId, AsyncCallback<Boolean> callback);
+
 }
