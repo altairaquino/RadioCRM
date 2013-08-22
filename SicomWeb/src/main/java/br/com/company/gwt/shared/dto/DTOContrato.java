@@ -13,6 +13,7 @@ public class DTOContrato extends BaseModelData {
 	
 	private DTOCliente cliente;
 	private DTOTipoContrato tipoContrato;
+	private DTOOrigemContrato origemContrato;
 	private DTOFormaPagamento formaPagamento;
 	private List<DTOPrograma> programas;
 
@@ -46,6 +47,14 @@ public class DTOContrato extends BaseModelData {
 
 	public void setTipoContrato(DTOTipoContrato tipoContrato) {
 		this.set("tipoContrato", tipoContrato);
+	}
+	
+	public DTOOrigemContrato getOrigemContrato() {
+		return get("origemContrato");
+	}
+	
+	public void setOrigemContrato(DTOOrigemContrato origemContrato) {
+		this.set("origemContrato", origemContrato);
 	}
 
 	public DTOFormaPagamento getFormaPagamento() {

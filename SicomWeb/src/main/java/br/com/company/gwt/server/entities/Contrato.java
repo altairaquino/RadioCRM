@@ -45,6 +45,9 @@ public class Contrato {
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Usuario usuario;
 	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private OrigemContrato origemContrato;
+	
 	private Float valor;
 	
 	@Basic(optional=false)
@@ -222,6 +225,14 @@ public class Contrato {
 
 	public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
 		this.dataUltimaAlteracao = dataUltimaAlteracao;
+	}
+
+	public OrigemContrato getOrigemContrato() {
+		return origemContrato;
+	}
+
+	public void setOrigemContrato(OrigemContrato origemContrato) {
+		this.origemContrato = origemContrato;
 	}
 	
 }

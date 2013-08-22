@@ -10,6 +10,7 @@ import br.com.company.gwt.client.resources.ImagensResources;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOContrato;
 import br.com.company.gwt.shared.dto.DTOFormaPagamento;
+import br.com.company.gwt.shared.dto.DTOOrigemContrato;
 import br.com.company.gwt.shared.dto.DTOPrograma;
 import br.com.company.gwt.shared.dto.DTOTipoContrato;
 import br.com.company.gwt.shared.enums.TipoPagamento;
@@ -58,6 +59,7 @@ public class FormContrato extends Window {
 	private ContentPanel mainPanel;
 	private ComboBox<DTOCliente> comboCliente;
 	private ListStore<DTOCliente> storeCliente;
+	private ComboBox<DTOOrigemContrato> comboOrigemContrato;
 	private DateField tfDataCadastro;
 	private FieldSet fsDadosDoContrato;
 	private FieldSet fsVigenciaDoContrato;
@@ -89,6 +91,8 @@ public class FormContrato extends Window {
 	private Button btnSalvar;
 
 	private Button btnCancelar;
+
+	private ListStore<DTOOrigemContrato> storeOrigemContrato;
 
 	public FormContrato() {
 		setResizable(false);
@@ -122,12 +126,13 @@ public class FormContrato extends Window {
 		
 		comboCliente = new ComboBox<DTOCliente>();
 		comboCliente.setStore(storeCliente);
-		comboCliente.setSize("456px", "22px");
+		comboCliente.setSize("330px", "22px");
 		comboCliente.setTemplate(getTemplateNome());
 		comboCliente.setValueField("id");
 		comboCliente.setDisplayField("nome");
 		comboCliente.setItemSelector("div.search-item");
 		comboCliente.setHideTrigger(true);
+		comboCliente.setEmptyText("Pesquise o cliente...");
 		comboCliente.setLoadingText("Carregando clientes...");
 		comboCliente.setPageSize(10);
 		comboCliente.addSelectionChangedListener(new SelectionChangedListener<DTOCliente>() {
@@ -146,6 +151,16 @@ public class FormContrato extends Window {
 		fsDadosDoContrato.add(comboCliente, new AbsoluteData(0, 17));
 		
 		fsDadosDoContrato.add(new LabelField("Cliente:"), new AbsoluteData(0, 0));
+		
+		tfDataPagamento = new DateField();
+		tfDataPagamento.setSize("114px", "22px");
+		tfDataPagamento.setValue(new Date());
+		tfDataPagamento.setEditable(false);
+		tfDataPagamento.getPropertyEditor().setFormat(dateFormat);
+		
+		fsDadosDoContrato.add(tfDataPagamento, new AbsoluteData(338, 17));
+		
+		fsDadosDoContrato.add(new LabelField("Data Pagamento:"), new AbsoluteData(335, 0));
 		
 		tfDataCadastro = new DateField();
 		tfDataCadastro.setSize("118px", "22px");
@@ -225,14 +240,21 @@ public class FormContrato extends Window {
 		
 		loadFormasPagamento();
 		
-		fsDadosDoContrato.add(new LabelField("Data pagamento:"), new AbsoluteData(378, 259));
+		fsDadosDoContrato.add(new LabelField("Origem Contrato:"), new AbsoluteData(379, 259));
 		
-		tfDataPagamento = new DateField();
-		tfDataPagamento.setSize("114px", "22px");
-		tfDataPagamento.setValue(new Date());
-		tfDataPagamento.setEditable(false);
-		tfDataPagamento.getPropertyEditor().setFormat(dateFormat);
-		fsDadosDoContrato.add(tfDataPagamento, new AbsoluteData(379, 279));
+		storeOrigemContrato = new ListStore<DTOOrigemContrato>();
+		
+		comboOrigemContrato = new ComboBox<DTOOrigemContrato>();
+		comboOrigemContrato.setStore(storeOrigemContrato);
+		comboOrigemContrato.setValueField("id");
+		comboOrigemContrato.setEditable(false);
+		comboOrigemContrato.setDisplayField("nome");
+		comboOrigemContrato.setTriggerAction(TriggerAction.ALL);
+		comboOrigemContrato.setSize("200px", "22px");
+		
+		fsDadosDoContrato.add(comboOrigemContrato, new AbsoluteData(379, 279));
+		
+		loadOrigensContrato();
 		
 		fsDadosDoContrato.add(new LabelField("Valor:"), new AbsoluteData(282, 214));
 		
@@ -396,6 +418,20 @@ public class FormContrato extends Window {
 		});
 		
 	}
+	
+	private void loadOrigensContrato() {
+		InstanceService.ORIGEM_CONTRATO_SERVICE.listAll(new AsyncCallback<List<DTOOrigemContrato>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				WebMessageBox.error(caught.getMessage());			
+			}
+			@Override
+			public void onSuccess(List<DTOOrigemContrato> origens) {
+				storeOrigemContrato.add(origens);
+			};
+		});
+		
+	}
 
 	private void loadProgramas() {
 		InstanceService.PROGRAMA_SERVICE.listAll(new AsyncCallback<List<DTOPrograma>>() {
@@ -441,6 +477,10 @@ public class FormContrato extends Window {
 			WebMessageBox.alert("Informe o cliente!");
 			return false;
 		}
+		if (comboOrigemContrato.getValue() == null){
+			WebMessageBox.alert("Informe a origem do contrato!");
+			return false;
+		}
 		if (comboFormaPagamento.getValue() == null){
 			WebMessageBox.alert("Informe a forma de pagamento!");
 			return false;
@@ -478,6 +518,7 @@ public class FormContrato extends Window {
 			radioGroup.setValue(rdValorLiquido);
 		}
 		comboTipoContrato.setValue(dto.getTipoContrato());
+		comboOrigemContrato.setValue(dto.getOrigemContrato());
 		tfPermuta.setValue(dto.getPercentualPermuta());
 		tfDataPagamento.setValue(dto.getDataPagamento());
 		storeProgramasTo.add(dto.getProgramas());
@@ -500,6 +541,7 @@ public class FormContrato extends Window {
 			dto.setTipoPagamento(TipoPagamento.LIQUIDO.name());
 		}
 		dto.setTipoContrato(comboTipoContrato.getValue());
+		dto.setOrigemContrato(comboOrigemContrato.getValue());
 		if (comboFormaPagamento.getValue().getTemPermuta()){
 			dto.setPercentualPermuta(tfPermuta.getValue().floatValue());			
 		}else{

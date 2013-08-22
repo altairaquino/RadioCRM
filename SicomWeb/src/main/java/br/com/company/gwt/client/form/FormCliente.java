@@ -150,6 +150,7 @@ public class FormCliente extends Window {
 		comboAgencia.setItemSelector("div.search-item");
 		comboAgencia.setHideTrigger(true);
 		comboAgencia.setLoadingText("Carregando...");
+		comboAgencia.setEmptyText("Pesquisa a agência..");
 		comboAgencia.setPageSize(10);
 		
 		fsDados.add(comboAgencia, new AbsoluteData(283, 17));

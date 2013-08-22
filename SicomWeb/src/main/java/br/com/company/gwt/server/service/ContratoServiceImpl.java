@@ -15,12 +15,14 @@ import br.com.company.gwt.server.InputServletImpl;
 import br.com.company.gwt.server.dao.DaoCliente;
 import br.com.company.gwt.server.dao.DaoContrato;
 import br.com.company.gwt.server.dao.DaoFormaPagamento;
+import br.com.company.gwt.server.dao.DaoOrigemContrato;
 import br.com.company.gwt.server.dao.DaoPrograma;
 import br.com.company.gwt.server.dao.DaoTipoContrato;
 import br.com.company.gwt.server.dao.DaoUsuario;
 import br.com.company.gwt.server.entities.Cliente;
 import br.com.company.gwt.server.entities.Contrato;
 import br.com.company.gwt.server.entities.FormaPagamento;
+import br.com.company.gwt.server.entities.OrigemContrato;
 import br.com.company.gwt.server.entities.Programa;
 import br.com.company.gwt.server.entities.ProgramaContrato;
 import br.com.company.gwt.server.entities.TipoContrato;
@@ -28,6 +30,7 @@ import br.com.company.gwt.server.entities.Usuario;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOContrato;
 import br.com.company.gwt.shared.dto.DTOFormaPagamento;
+import br.com.company.gwt.shared.dto.DTOOrigemContrato;
 import br.com.company.gwt.shared.dto.DTOPrograma;
 import br.com.company.gwt.shared.dto.DTOTipoContrato;
 import br.com.company.gwt.shared.enums.TipoPagamento;
@@ -39,6 +42,7 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 	@Inject private DaoContrato daoContrato;
 	@Inject private DaoFormaPagamento daoFormaPagamento;
 	@Inject private DaoTipoContrato daoTipoContrato;
+	@Inject private DaoOrigemContrato daoOrigemContrato;
 	@Inject private DaoCliente daoCliente;
 	@Inject private DaoUsuario daoUsuario;
 	
@@ -98,6 +102,15 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			dto.setTipoContrato(dtoTipoContrato);
 		}
 		
+		OrigemContrato origemContrato = contrato.getOrigemContrato();
+		
+		if (origemContrato != null){
+			DTOOrigemContrato dtoOrigemContrato = new DTOOrigemContrato();
+			dtoOrigemContrato.setId(origemContrato.getId());
+			dtoOrigemContrato.setNome(origemContrato.getNome());
+			dto.setOrigemContrato(dtoOrigemContrato);
+		}
+		
 		List<ProgramaContrato> programas = contrato.getProgramas();
 		
 		for (ProgramaContrato programaContrato : programas) {
@@ -141,6 +154,7 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			contrato.setValor(dtoContrato.getValor());
 			contrato.setTipoPagamento(TipoPagamento.valueOf(dtoContrato.getTipoPagamento()));
 			contrato.setTipoContrato(daoTipoContrato.findByPrimaryKey(dtoContrato.getTipoContrato().getId()));
+			contrato.setOrigemContrato(daoOrigemContrato.findByPrimaryKey(dtoContrato.getOrigemContrato().getId()));
 			contrato.setPercentualPermuta(dtoContrato.getPercentualPermuta());
 			contrato.setDataPagamento(dtoContrato.getDataPagamento());
 			contrato.setPercentualComissao(cliente.getAgencia().getComissao());
@@ -164,13 +178,12 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			
 			dtoContrato.setId(contrato.getId());
 			
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());
 		}
 		return dtoContrato;
 	}
-
 
 	@Override
 	public List<DTOContrato> pesquisa(DTOCliente dtoCliente, Date date) throws Exception{
