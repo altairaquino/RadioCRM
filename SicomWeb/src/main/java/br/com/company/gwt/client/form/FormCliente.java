@@ -55,8 +55,10 @@ public class FormCliente extends Window {
 	private Radio rdFisica;
 	private Radio rdJuridica;
 	private ListStore<DTOAgencia> storeAgencia;
-	private TextFieldUpper tfRazaoSocial;
 	private TextFieldUpper tfNome;
+	private TextFieldUpper tfRazaoSocial;
+	private TextFieldUpper tfDocumento;
+	private TextFieldUpper tfInscricao;
 	private TextFieldUpper tfSegmento;
 	private TextField<String> tfEmail;
 	private TextField<String> tfTelefone;
@@ -171,40 +173,40 @@ public class FormCliente extends Window {
 		fsDados.add(btnAgencia, new AbsoluteData(562, 17));
 		
 		fsDados.add(new LabelField("Nome:"), new AbsoluteData(0, 43));
-		
 		tfNome = new TextFieldUpper();
-		tfNome.setSize("277px", "22px");
-
-		fsDados.add(tfNome, new AbsoluteData(0, 59));
+		tfNome.setSize("220px", "22px");
+		fsDados.add(tfNome, new AbsoluteData(0, 59));		
 		
-		fsDados.add(new LabelField("Razão Social:"), new AbsoluteData(283, 43));
-		
+		fsDados.add(new LabelField("Razão Social:"), new AbsoluteData(230, 43));
 		tfRazaoSocial = new TextFieldUpper();
-		tfRazaoSocial.setSize("303px", "22px");
-
-		fsDados.add(tfRazaoSocial, new AbsoluteData(283, 59));
+		tfRazaoSocial.setSize("220px", "22px");
+		fsDados.add(tfRazaoSocial, new AbsoluteData(230, 59));
 		
-		fsDados.add(new LabelField("Segmento:"), new AbsoluteData(0, 85));
+		fsDados.add(new LabelField("CPF/CNPJ:"), new AbsoluteData(460, 43));
+		tfDocumento = new TextFieldUpper();
+		tfDocumento.setSize("125px", "22px");
+		fsDados.add(tfDocumento, new AbsoluteData(460, 59));
 		
+		fsDados.add(new LabelField("I.E.:"), new AbsoluteData(0, 85));
+		tfInscricao = new TextFieldUpper();
+		tfInscricao.setSize("120px", "22px");
+		fsDados.add(tfInscricao, new AbsoluteData(0, 103));
+		
+		fsDados.add(new LabelField("Segmento:"), new AbsoluteData(125, 85));		
 		tfSegmento = new TextFieldUpper();
-		tfSegmento.setSize("241px", "22px");
-
-		fsDados.add(tfSegmento, new AbsoluteData(0, 103));
+		tfSegmento.setSize("160px", "22px");
+		fsDados.add(tfSegmento, new AbsoluteData(125, 103));
 		
-		fsDados.add(new LabelField("E-mail:"), new AbsoluteData(247, 85));
-		
+		fsDados.add(new LabelField("E-mail:"), new AbsoluteData(280, 85));		
 		tfEmail = new TextField<String>();
-		tfEmail.setSize("187px", "22px");
+		tfEmail.setSize("170px", "22px");		
+		fsDados.add(tfEmail, new AbsoluteData(280, 103));
 		
-		fsDados.add(tfEmail, new AbsoluteData(247, 103));
 		
-		
-		fsDados.add(new LabelField("Telefone:"), new AbsoluteData(442, 85));
-		
+		fsDados.add(new LabelField("Telefone:"), new AbsoluteData(460, 85));		
 		tfTelefone = new TextField<String>();
-		tfTelefone.setSize("144px", "22px");
-		
-		fsDados.add(tfTelefone, new AbsoluteData(442, 103));
+		tfTelefone.setSize("125px", "22px");
+		fsDados.add(tfTelefone, new AbsoluteData(460, 103));
 		
 		fsContato = new FieldSet();
 		fsContato.setSize("586px", "70px");
@@ -443,8 +445,8 @@ public class FormCliente extends Window {
 			dto.setTipoPessoa("JURIDICA");
 		}
 		dto.setAgencia(comboAgencia.getValue());
-		// TODO CRIAR CAMPO DE DOCUMENTO
-		dto.setDocumento("");
+		dto.setDocumento(tfDocumento.getValue());
+		dto.setInscricao(tfInscricao.getValue());
 		dto.setSegmento(tfSegmento.getValue());
 		dto.setEmail(tfEmail.getValue());
 		dto.setFone(tfTelefone.getValue());
@@ -476,8 +478,9 @@ public class FormCliente extends Window {
 			radioGroupTipoPessoa.setValue(rdJuridica);
 		}
 		comboAgencia.setValue(dto.getAgencia());
-		// TODO CRIAR CAMPO DE DOCUMENTO
-		// dto.setDocumento("");
+
+		tfDocumento.setValue(dto.getDocumento());
+		tfInscricao.setValue(dto.getInscricao());
 		tfSegmento.setValue(dto.getSegmento());
 		tfEmail.setValue(dto.getEmail());
 		tfTelefone.setValue(dto.getFone());

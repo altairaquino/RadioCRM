@@ -83,6 +83,7 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 			cliente.setRazaoSocial(dtoCliente.getRazaoSocial());
 			cliente.setSegmento(dtoCliente.getSegmento());
 			cliente.setDocumento(dtoCliente.getDocumento());
+			cliente.setInscricao(dtoCliente.getInscricao());
 			cliente.setTipoPessoa(TipoPessoa.valueOf(dtoCliente.getTipoPessoa()));
 			cliente.setDataNascimento(dtoCliente.getDataNascimento());
 			cliente.setAgencia(daoAgencia.findByPrimaryKey(dtoCliente.getAgencia().getId()));
@@ -124,6 +125,7 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 		dto.setFone(cliente.getFone());
 		dto.setEmail(cliente.getEmail());
 		dto.setDocumento(cliente.getDocumento());
+		dto.setInscricao(cliente.getInscricao());
 		dto.setDataNascimento(cliente.getDataNascimento());
 		Agencia agencia = cliente.getAgencia();
 		if (agencia != null){

@@ -37,6 +37,14 @@ public class DTOCliente extends BaseModelData {
 	public void setDocumento(String documento){
 		set("documento", documento);
 	}
+	
+	public String getInscricao(){
+		return get("inscricao");
+	}
+	
+	public void setInscricao(String inscricao){
+		set("inscricao", inscricao);
+	}
 
 	public String getRazaoSocial() {
 		return get("razaoSocial");

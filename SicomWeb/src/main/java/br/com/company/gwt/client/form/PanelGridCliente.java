@@ -68,13 +68,15 @@ public class PanelGridCliente extends PanelGridWindow<DTOCliente> {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 		ColumnConfig config = new ColumnConfig("id", "Codigo", 50);
 		configs.add(config);
-		config = new ColumnConfig("nome", "Nome", 250);
+		config = new ColumnConfig("nome", "Nome", 200);
 		configs.add(config);
-		config = new ColumnConfig("tipoPessoa", "Tipo", 70);
+		config = new ColumnConfig("documento", "CPF/CNPJ", 90);
 		configs.add(config);
-		config = new ColumnConfig("fone", "Fone", 90);
+		config = new ColumnConfig("tipoPessoa", "Tipo", 60);
 		configs.add(config);
-		config = new ColumnConfig("segmento", "Segmento", 120);
+		config = new ColumnConfig("fone", "Fone", 80);
+		configs.add(config);
+		config = new ColumnConfig("segmento", "Segmento", 110);
 		configs.add(config);
 		
 		return new ColumnModel(configs);

@@ -53,6 +53,9 @@ public class Cliente {
 	@Column(length=20)
 	private String documento;
 	
+	@Column(length=50)
+	private String inscricao;
+	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private TipoLogradouro tipoLogradouro;
 	
@@ -276,6 +279,14 @@ public class Cliente {
 
 	public void setDataNascimentoProprietario(Date dataNascimentoProprietario) {
 		this.dataNascimentoProprietario = dataNascimentoProprietario;
+	}
+
+	public String getInscricao() {
+		return inscricao;
+	}
+
+	public void setInscricao(String inscricao) {
+		this.inscricao = inscricao;
 	}
 	
 }
