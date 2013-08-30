@@ -47,9 +47,6 @@ public class Cliente {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private Agencia agencia;
-	
 	@Column(length=20)
 	private String documento;
 	
@@ -159,14 +156,6 @@ public class Cliente {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}
-
-	public Agencia getAgencia() {
-		return agencia;
-	}
-
-	public void setAgencia(Agencia agencia) {
-		this.agencia = agencia;
 	}
 
 	public String getRazaoSocial() {

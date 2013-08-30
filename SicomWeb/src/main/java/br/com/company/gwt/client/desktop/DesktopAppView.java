@@ -114,6 +114,7 @@ public class DesktopAppView extends View {
 		SelectionListener listenerExit = new SelectionListener<ComponentEvent>() {
 
 			public void componentSelected(ComponentEvent ce) {
+				Registry.unregister("user");
 				WebUtil.reloadPage();
 			}
 

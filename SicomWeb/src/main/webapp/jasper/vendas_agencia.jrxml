@@ -15,7 +15,7 @@ inner join cliente cl on
 inner join tipo_contrato tc on
 	tc.id = c.tipocontrato_id
 left join agencia ag on
-	cl.agencia_id = ag.id
+	c.agencia_id = ag.id
 inner join forma_pagamento fp on
 	fp.id = c.formapagamento_id
 where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}

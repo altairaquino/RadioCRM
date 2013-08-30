@@ -7,6 +7,7 @@ import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.CurrencyField;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.resources.ImagensResources;
+import br.com.company.gwt.shared.dto.DTOAgencia;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOContrato;
 import br.com.company.gwt.shared.dto.DTOFormaPagamento;
@@ -94,6 +95,10 @@ public class FormContrato extends Window {
 
 	private ListStore<DTOOrigemContrato> storeOrigemContrato;
 
+	private ListStore<DTOAgencia> storeAgencia;
+
+	private ComboBox<DTOAgencia> comboAgencia;
+
 	public FormContrato() {
 		setResizable(false);
 		setMinimizable(true);
@@ -134,19 +139,7 @@ public class FormContrato extends Window {
 		comboCliente.setHideTrigger(true);
 		comboCliente.setEmptyText("Pesquise o cliente...");
 		comboCliente.setLoadingText("Carregando clientes...");
-		comboCliente.setPageSize(10);
-		comboCliente.addSelectionChangedListener(new SelectionChangedListener<DTOCliente>() {
-			@Override
-			public void selectionChanged(SelectionChangedEvent<DTOCliente> se) {
-				DTOCliente dtoCliente = se.getSelectedItem();
-				if (dtoCliente != null && id == null){
-					if (dtoCliente.getAgencia() == null){
-						WebMessageBox.info("Cliente sem agência. Atualize os dados do cliente!");
-						comboCliente.clear();
-					}
-				}
-			}
-		});
+		comboCliente.setPageSize(10);		
 		
 		fsDadosDoContrato.add(comboCliente, new AbsoluteData(0, 17));
 		
@@ -175,12 +168,37 @@ public class FormContrato extends Window {
 		fsVigenciaDoContrato = new FieldSet();
 		fsVigenciaDoContrato.setLayout(new AbsoluteLayout());
 		fsVigenciaDoContrato.setSize("580px", "60px");
-		fsVigenciaDoContrato.setHeadingHtml("Vigência do Contrato");
+		fsVigenciaDoContrato.setHeadingHtml("Agência e Vigência do Contrato");
 		
-		fsVigenciaDoContrato.add(new LabelField("Data de Início:"), new AbsoluteData(0, 0));
+		RpcProxy<PagingLoadResult<DTOAgencia>> proxyAgencia = new RpcProxy<PagingLoadResult<DTOAgencia>>() {
+			@Override
+			public void load(Object loadConfig, AsyncCallback<PagingLoadResult<DTOAgencia>> callback) {
+				InstanceService.AGENCIA_SERVICE.loadPagingList((PagingLoadConfig) loadConfig, callback);
+			}
+		};
+		
+		PagingLoader<PagingLoadResult<ModelData>> loaderAgencia = new BasePagingLoader<PagingLoadResult<ModelData>>(proxyAgencia);
+		
+		storeAgencia = new ListStore<DTOAgencia>(loaderAgencia);
+		
+		comboAgencia = new ComboBox<DTOAgencia>();
+		comboAgencia.setStore(storeAgencia);
+		comboAgencia.setSize("250px", "22px");
+		comboAgencia.setTemplate(getTemplateNome());
+		comboAgencia.setValueField("id");
+		comboAgencia.setDisplayField("nome");
+		comboAgencia.setItemSelector("div.search-item");
+		comboAgencia.setHideTrigger(true);
+		comboAgencia.setLoadingText("Carregando...");
+		comboAgencia.setEmptyText("Informe a agência..");
+		comboAgencia.setPageSize(10);
+		
+		fsVigenciaDoContrato.add(comboAgencia, new AbsoluteData(0, -3));	
+		
+		fsVigenciaDoContrato.add(new LabelField("Início:"), new AbsoluteData(265, 0));
 		
 		tfDataInicio = new DateField();
-		tfDataInicio.setSize("124px", "22px");
+		tfDataInicio.setSize("100px", "22px");
 		tfDataInicio.setEditable(false);
 		tfDataInicio.setValue(new Date());
 		tfDataInicio.getPropertyEditor().setFormat(dateFormat);
@@ -191,17 +209,19 @@ public class FormContrato extends Window {
 				tfDataTermino.setValue(value);
 			};
 		});
-		fsVigenciaDoContrato.add(tfDataInicio, new AbsoluteData(84, -3));
 		
-		fsVigenciaDoContrato.add(new LabelField("Data de Término:"), new AbsoluteData(222, 0));
+		fsVigenciaDoContrato.add(tfDataInicio, new AbsoluteData(305, -3));
+		
+		fsVigenciaDoContrato.add(new LabelField("Término:"), new AbsoluteData(410, 0));
 		
 		tfDataTermino = new DateField();
-		tfDataTermino.setSize("118px", "22px");
+		tfDataTermino.setSize("100px", "22px");
 		tfDataTermino.setValue(new Date());
 		tfDataTermino.setEditable(false);
 		tfDataTermino.setMinValue(new Date());
 		tfDataTermino.getPropertyEditor().setFormat(dateFormat);
-		fsVigenciaDoContrato.add(tfDataTermino, new AbsoluteData(327, -3));
+		
+		fsVigenciaDoContrato.add(tfDataTermino, new AbsoluteData(465, -3));
 		
 		fsDadosDoContrato.add(fsVigenciaDoContrato, new AbsoluteData(0, 43));
 		
@@ -477,6 +497,10 @@ public class FormContrato extends Window {
 			WebMessageBox.alert("Informe o cliente!");
 			return false;
 		}
+		if (comboAgencia.getValue() == null){
+			WebMessageBox.alert("Informe a agência do contrato!");
+			return false;
+		}
 		if (comboOrigemContrato.getValue() == null){
 			WebMessageBox.alert("Informe a origem do contrato!");
 			return false;
@@ -517,6 +541,7 @@ public class FormContrato extends Window {
 		}else{
 			radioGroup.setValue(rdValorLiquido);
 		}
+		comboAgencia.setValue(dto.getAgencia());
 		comboTipoContrato.setValue(dto.getTipoContrato());
 		comboOrigemContrato.setValue(dto.getOrigemContrato());
 		tfPermuta.setValue(dto.getPercentualPermuta());
@@ -541,6 +566,7 @@ public class FormContrato extends Window {
 			dto.setTipoPagamento(TipoPagamento.LIQUIDO.name());
 		}
 		dto.setTipoContrato(comboTipoContrato.getValue());
+		dto.setAgencia(comboAgencia.getValue());
 		dto.setOrigemContrato(comboOrigemContrato.getValue());
 		if (comboFormaPagamento.getValue().getTemPermuta()){
 			dto.setPercentualPermuta(tfPermuta.getValue().floatValue());			

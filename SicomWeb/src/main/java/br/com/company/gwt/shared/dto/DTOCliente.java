@@ -94,14 +94,6 @@ public class DTOCliente extends BaseModelData {
 		this.set("dataNascimento", dataNascimento);
 	}
 
-	public DTOAgencia getAgencia() {
-		return get("agencia");
-	}
-
-	public void setAgencia(DTOAgencia agencia) {
-		this.set("agencia", agencia);
-	}
-
 	public DTOTipoLogradouro getTipoLogradouro() {
 		return get("tipoLogradouro");
 	}

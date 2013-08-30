@@ -48,6 +48,9 @@ public class Contrato {
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private OrigemContrato origemContrato;
 	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Agencia agencia;
+	
 	private Float valor;
 	
 	@Basic(optional=false)
@@ -233,6 +236,14 @@ public class Contrato {
 
 	public void setOrigemContrato(OrigemContrato origemContrato) {
 		this.origemContrato = origemContrato;
+	}
+
+	public Agencia getAgencia() {
+		return agencia;
+	}
+
+	public void setAgencia(Agencia agencia) {
+		this.agencia = agencia;
 	}
 	
 }

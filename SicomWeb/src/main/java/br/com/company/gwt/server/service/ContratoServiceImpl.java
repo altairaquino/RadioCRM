@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.company.gwt.client.remoteinterface.ContratoService;
 import br.com.company.gwt.server.InputServletImpl;
+import br.com.company.gwt.server.dao.DaoAgencia;
 import br.com.company.gwt.server.dao.DaoCliente;
 import br.com.company.gwt.server.dao.DaoContrato;
 import br.com.company.gwt.server.dao.DaoFormaPagamento;
@@ -19,6 +20,7 @@ import br.com.company.gwt.server.dao.DaoOrigemContrato;
 import br.com.company.gwt.server.dao.DaoPrograma;
 import br.com.company.gwt.server.dao.DaoTipoContrato;
 import br.com.company.gwt.server.dao.DaoUsuario;
+import br.com.company.gwt.server.entities.Agencia;
 import br.com.company.gwt.server.entities.Cliente;
 import br.com.company.gwt.server.entities.Contrato;
 import br.com.company.gwt.server.entities.FormaPagamento;
@@ -27,6 +29,7 @@ import br.com.company.gwt.server.entities.Programa;
 import br.com.company.gwt.server.entities.ProgramaContrato;
 import br.com.company.gwt.server.entities.TipoContrato;
 import br.com.company.gwt.server.entities.Usuario;
+import br.com.company.gwt.shared.dto.DTOAgencia;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOContrato;
 import br.com.company.gwt.shared.dto.DTOFormaPagamento;
@@ -45,6 +48,7 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 	@Inject private DaoOrigemContrato daoOrigemContrato;
 	@Inject private DaoCliente daoCliente;
 	@Inject private DaoUsuario daoUsuario;
+	@Inject private DaoAgencia daoAgencia;
 	
 	@Override
 	public List<DTOContrato> listAll() {
@@ -102,6 +106,15 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 			dto.setTipoContrato(dtoTipoContrato);
 		}
 		
+		Agencia agencia = contrato.getAgencia();
+		
+		if (agencia != null){
+			DTOAgencia dtoAgencia = new DTOAgencia();
+			dtoAgencia.setId(agencia.getId());
+			dtoAgencia.setNome(agencia.getNome());
+			dto.setAgencia(dtoAgencia);
+		}
+		
 		OrigemContrato origemContrato = contrato.getOrigemContrato();
 		
 		if (origemContrato != null){
@@ -151,13 +164,15 @@ public class ContratoServiceImpl extends InputServletImpl implements ContratoSer
 				contrato.setInformacoesTexto("");
 			}
 			contrato.setFormaPagamento(daoFormaPagamento.findByPrimaryKey(dtoContrato.getFormaPagamento().getId()));
+			Agencia agencia = daoAgencia.findByPrimaryKey(dtoContrato.getAgencia().getId());
+			contrato.setAgencia(agencia);
 			contrato.setValor(dtoContrato.getValor());
 			contrato.setTipoPagamento(TipoPagamento.valueOf(dtoContrato.getTipoPagamento()));
 			contrato.setTipoContrato(daoTipoContrato.findByPrimaryKey(dtoContrato.getTipoContrato().getId()));
 			contrato.setOrigemContrato(daoOrigemContrato.findByPrimaryKey(dtoContrato.getOrigemContrato().getId()));
 			contrato.setPercentualPermuta(dtoContrato.getPercentualPermuta());
 			contrato.setDataPagamento(dtoContrato.getDataPagamento());
-			contrato.setPercentualComissao(cliente.getAgencia().getComissao());
+			contrato.setPercentualComissao(agencia.getComissao());
 			contrato.getProgramas().clear();
 			
 			for (DTOPrograma dtoPrograma : dtoContrato.getProgramas()) {

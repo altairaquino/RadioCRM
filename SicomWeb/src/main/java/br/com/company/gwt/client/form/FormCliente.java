@@ -5,9 +5,7 @@ import java.util.List;
 import br.com.company.gwt.client.InstanceService;
 import br.com.company.gwt.client.component.TextFieldUpper;
 import br.com.company.gwt.client.component.WebMessageBox;
-import br.com.company.gwt.client.mvc.ProviderFacadeManager;
 import br.com.company.gwt.client.resources.ImagensResources;
-import br.com.company.gwt.shared.dto.DTOAgencia;
 import br.com.company.gwt.shared.dto.DTOCidade;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
@@ -49,12 +47,12 @@ public class FormCliente extends Window {
 
 	private ContentPanel mainPanel;
 	private FieldSet fsDados;
-	private ComboBox<DTOAgencia> comboAgencia;
-	private Button btnAgencia;
+//	private ComboBox<DTOAgencia> comboAgencia;
+//	private Button btnAgencia;
 	private RadioGroup radioGroupTipoPessoa;
 	private Radio rdFisica;
 	private Radio rdJuridica;
-	private ListStore<DTOAgencia> storeAgencia;
+//	private ListStore<DTOAgencia> storeAgencia;
 	private TextFieldUpper tfNome;
 	private TextFieldUpper tfRazaoSocial;
 	private TextFieldUpper tfDocumento;
@@ -130,6 +128,7 @@ public class FormCliente extends Window {
 		
 		fsDados.add(radioGroupTipoPessoa, new AbsoluteData(0, 17));
 		
+		/*
 		fsDados.add(new LabelField("Agência/Corretor de atendimento:"), new AbsoluteData(283, 0));
 		
 		RpcProxy<PagingLoadResult<DTOAgencia>> proxyAgencia = new RpcProxy<PagingLoadResult<DTOAgencia>>() {
@@ -171,6 +170,7 @@ public class FormCliente extends Window {
 		});
 		
 		fsDados.add(btnAgencia, new AbsoluteData(562, 17));
+		 */
 		
 		fsDados.add(new LabelField("Nome:"), new AbsoluteData(0, 43));
 		tfNome = new TextFieldUpper();
@@ -200,8 +200,7 @@ public class FormCliente extends Window {
 		fsDados.add(new LabelField("E-mail:"), new AbsoluteData(280, 85));		
 		tfEmail = new TextField<String>();
 		tfEmail.setSize("170px", "22px");		
-		fsDados.add(tfEmail, new AbsoluteData(280, 103));
-		
+		fsDados.add(tfEmail, new AbsoluteData(280, 103));		
 		
 		fsDados.add(new LabelField("Telefone:"), new AbsoluteData(460, 85));		
 		tfTelefone = new TextField<String>();
@@ -444,7 +443,7 @@ public class FormCliente extends Window {
 		}else{
 			dto.setTipoPessoa("JURIDICA");
 		}
-		dto.setAgencia(comboAgencia.getValue());
+//		dto.setAgencia(comboAgencia.getValue());
 		dto.setDocumento(tfDocumento.getValue());
 		dto.setInscricao(tfInscricao.getValue());
 		dto.setSegmento(tfSegmento.getValue());
@@ -477,7 +476,7 @@ public class FormCliente extends Window {
 		}else{
 			radioGroupTipoPessoa.setValue(rdJuridica);
 		}
-		comboAgencia.setValue(dto.getAgencia());
+//		comboAgencia.setValue(dto.getAgencia());
 
 		tfDocumento.setValue(dto.getDocumento());
 		tfInscricao.setValue(dto.getInscricao());
@@ -506,10 +505,10 @@ public class FormCliente extends Window {
 	}
 
 	protected boolean validaCampos() {
-		if (comboAgencia.getValue() == null){
-			WebMessageBox.alert("Informe a Agência!");
-			return false;
-		}
+//		if (comboAgencia.getValue() == null){
+//			WebMessageBox.alert("Informe a Agência!");
+//			return false;
+//		}
 		if (tfNome.getValue() == null){
 			WebMessageBox.alert("Informe o nome!");
 			return false;

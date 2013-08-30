@@ -64,6 +64,18 @@ public class LoginDialog extends Dialog {
 		
 	}
 	
+	@Override
+	protected void afterShow() {
+		super.afterShow();
+		validaLogin();
+	}
+	
+	private void validaLogin() {
+		if (Registry.get("user") != null){
+			LoginDialog.this.hide();
+		}
+	}
+
 	Listener<BoxComponentEvent> keyLogin = new Listener<BoxComponentEvent>(){
 		public void handleEvent(BoxComponentEvent e) {
 			if(e.getKeyCode() == 13){
@@ -110,16 +122,16 @@ public class LoginDialog extends Dialog {
 					return;
 				}
 				Registry.register("user", dto);
-					status.show();
-					getButtonBar().disable();
-					Timer t = new Timer() {
-						
-						@Override
-						public void run() {
-							LoginDialog.this.hide();
-						}						
-					};
-					t.schedule(2000);
+				status.show();
+				getButtonBar().disable();
+				Timer t = new Timer() {
+					
+					@Override
+					public void run() {
+						LoginDialog.this.hide();
+					}						
+				};
+				t.schedule(2000);
 				
 			}
 			

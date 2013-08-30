@@ -12,6 +12,7 @@ public class DTOContrato extends BaseModelData {
 	private static final long serialVersionUID = 5725429209891863235L;
 	
 	private DTOCliente cliente;
+	private DTOAgencia agencia;
 	private DTOTipoContrato tipoContrato;
 	private DTOOrigemContrato origemContrato;
 	private DTOFormaPagamento formaPagamento;
@@ -47,6 +48,14 @@ public class DTOContrato extends BaseModelData {
 
 	public void setTipoContrato(DTOTipoContrato tipoContrato) {
 		this.set("tipoContrato", tipoContrato);
+	}
+	
+	public DTOAgencia getAgencia() {
+		return get("agencia");
+	}
+
+	public void setAgencia(DTOAgencia agencia) {
+		this.set("agencia", agencia);
 	}
 	
 	public DTOOrigemContrato getOrigemContrato() {

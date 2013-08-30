@@ -8,32 +8,28 @@ import javax.inject.Named;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-
 import br.com.company.gwt.client.remoteinterface.ClienteService;
 import br.com.company.gwt.server.InputServletImpl;
-import br.com.company.gwt.server.dao.DaoAgencia;
 import br.com.company.gwt.server.dao.DaoCidade;
 import br.com.company.gwt.server.dao.DaoCliente;
 import br.com.company.gwt.server.dao.DaoTipoLogradouro;
-import br.com.company.gwt.server.entities.Agencia;
 import br.com.company.gwt.server.entities.Cidade;
 import br.com.company.gwt.server.entities.Cliente;
 import br.com.company.gwt.server.entities.TipoLogradouro;
 import br.com.company.gwt.server.entities.TipoPessoa;
-import br.com.company.gwt.shared.dto.DTOAgencia;
 import br.com.company.gwt.shared.dto.DTOCidade;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOTipoLogradouro;
+
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 
 @Named("clienteService")
 public class ClienteServiceImpl extends InputServletImpl implements ClienteService{
 	
 	@Inject private DaoCliente daoCliente;
 	@Inject private DaoCidade daoCidade;
-	@Inject private DaoAgencia daoAgencia;
 	@Inject private DaoTipoLogradouro daoTipoLogradouro;
 
 	@Override
@@ -86,7 +82,6 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 			cliente.setInscricao(dtoCliente.getInscricao());
 			cliente.setTipoPessoa(TipoPessoa.valueOf(dtoCliente.getTipoPessoa()));
 			cliente.setDataNascimento(dtoCliente.getDataNascimento());
-			cliente.setAgencia(daoAgencia.findByPrimaryKey(dtoCliente.getAgencia().getId()));
 			cliente.setEmail(dtoCliente.getEmail());
 			cliente.setFone(dtoCliente.getFone());
 			cliente.setTipoLogradouro(daoTipoLogradouro.findByPrimaryKey(dtoCliente.getTipoLogradouro().getId()));
@@ -127,13 +122,7 @@ public class ClienteServiceImpl extends InputServletImpl implements ClienteServi
 		dto.setDocumento(cliente.getDocumento());
 		dto.setInscricao(cliente.getInscricao());
 		dto.setDataNascimento(cliente.getDataNascimento());
-		Agencia agencia = cliente.getAgencia();
-		if (agencia != null){
-			DTOAgencia dtoAgencia = new DTOAgencia();
-			dtoAgencia.setId(agencia.getId());
-			dtoAgencia.setNome(agencia.getNome());
-			dto.setAgencia(dtoAgencia);
-		}
+		
 		TipoLogradouro tipoLogradouro = cliente.getTipoLogradouro();
 		if (tipoLogradouro != null){
 			DTOTipoLogradouro tipo = new DTOTipoLogradouro();
