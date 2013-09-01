@@ -16,7 +16,7 @@ inner join cliente cl on
 inner join tipo_contrato tc on
 	tc.id = c.tipocontrato_id
 left join agencia ag on
-	cl.agencia_id = ag.id
+	c.agencia_id = ag.id
 inner join forma_pagamento fp on
 	fp.id = c.formapagamento_id
 where c.data_cadastro BETWEEN $P{P_DATA_INICIO} AND $P{P_DATA_FIM}
@@ -61,7 +61,7 @@ and c.data_cancelamento is null]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Verdana" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Período:]]></text>
+				<text><![CDATA[Periodo:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="55" y="23" width="75" height="14"/>
@@ -196,14 +196,14 @@ and c.data_cancelamento is null]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{data_termino}]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<textField pattern="� #,##0.00" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="676" y="0" width="64" height="12"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{valor} * $F{percentual_comissao} / 100.0]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<textField pattern="� #,##0.00" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="613" y="0" width="63" height="12"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
@@ -217,7 +217,7 @@ and c.data_cancelamento is null]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{tipo_contrato}]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<textField pattern="� #,##0.00" isBlankWhenNull="true">
 					<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="740" y="0" width="62" height="12"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font fontName="Verdana" size="8" isBold="false"/>
@@ -237,7 +237,7 @@ and c.data_cancelamento is null]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Verdana"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement uuid="bb0fd572-fb1c-4146-8d70-be8385aa3ec1" x="766" y="0" width="30" height="17"/>
@@ -257,21 +257,21 @@ and c.data_cancelamento is null]]>
 	</pageFooter>
 	<summary>
 		<band height="15" splitType="Stretch">
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+			<textField pattern="� #,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="613" y="0" width="63" height="12"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Verdana" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{SOMA_BRUTO}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+			<textField pattern="� #,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="676" y="0" width="64" height="12"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Verdana" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{SOMA_COMISSAO}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+			<textField pattern="� #,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="740" y="0" width="62" height="12"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Verdana" size="8" isBold="false"/>
