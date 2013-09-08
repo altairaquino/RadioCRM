@@ -5,9 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.company.gwt.client.InstanceService;
+import br.com.company.gwt.client.component.JasperName;
+import br.com.company.gwt.client.component.RelatorioCallback;
 import br.com.company.gwt.client.component.WebMessageBox;
 import br.com.company.gwt.client.mvc.ProviderFacadeManager;
 import br.com.company.gwt.client.resources.ImagensResources;
+import br.com.company.gwt.shared.bean.ParametrosReport;
 import br.com.company.gwt.shared.dto.DTOCliente;
 import br.com.company.gwt.shared.dto.DTOContrato;
 
@@ -88,7 +91,17 @@ public class PanelGridContrato extends Window {
 		btnRelatrio.setSize("44px", "44px");
 		btnRelatrio.setIconAlign(IconAlign.TOP);
 		btnRelatrio.setIcon(AbstractImagePrototype.create(ImagensResources.INSTANCE.report24()));
-		btnRelatrio.setEnabled(false);
+//		btnRelatrio.setEnabled(false);
+		btnRelatrio.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				ParametrosReport parametros = new ParametrosReport();
+				parametros.setNomeRelatorio(JasperName.CONTRATO);
+				parametros.setContratoId(getSelecaoGrid().getId());
+				
+				InstanceService.RELATORIO_SERVICE.relatorio(parametros, new RelatorioCallback());
+			}
+		});
 
 		panelTool.add(btnRelatrio, new AbsoluteData(606, 6));
 		
@@ -230,6 +243,7 @@ public class PanelGridContrato extends Window {
 			
 			@Override
 			public void onSuccess(List<DTOContrato> contratos) {
+				storeContratos.removeAll();
 				storeContratos.add(contratos);
 				mainPanel.unmask();
 			}

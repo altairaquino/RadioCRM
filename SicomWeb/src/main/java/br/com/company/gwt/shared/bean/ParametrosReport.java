@@ -11,7 +11,7 @@ public class ParametrosReport implements Serializable{
 	private Date dataIncio;
 	private Date dataFim;
 	private Integer codigoLoja;
-	private Integer vendaId;
+	private Integer contratoId;
 	private Integer lojaId;
 	
 	public ParametrosReport(){}
@@ -48,12 +48,12 @@ public class ParametrosReport implements Serializable{
 		this.codigoLoja = codigoLoja;
 	}
 
-	public void setVendaId(Integer vendaId) {
-		this.vendaId = vendaId;
+	public void setContratoId(Integer contratoId) {
+		this.contratoId = contratoId;
 	}
 	
-	public Integer getVendaId() {
-		return vendaId;
+	public Integer getContratoId() {
+		return contratoId;
 	}
 
 	public void setLojaId(Integer lojaId) {

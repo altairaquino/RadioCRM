@@ -17,5 +17,6 @@ public class JasperName {
 	public static final String PROGRAMAS = "programas";
 	public static final String CONTRATO_PERIODO = "contrato_periodo";
 	public static final String ANIVERSARIANTES = "aniversariantes";
+	public static final String CONTRATO = "contrato";
 	
 }

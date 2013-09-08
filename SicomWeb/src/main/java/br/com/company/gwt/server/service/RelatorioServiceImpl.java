@@ -33,6 +33,7 @@ public class RelatorioServiceImpl extends InputServletImpl implements RelatorioS
 	public String relatorio(ParametrosReport parametros) throws Exception {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("JASPER_NAME", parametros.getNomeRelatorio());
+		params.put("P_CONTRATO_ID", parametros.getContratoId());
 		logger.debug("relatorio()");
 		return gerarReport.exportToPDF(getServletRequest(), params);
 	}
