@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vendas_agencia" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78e27ea6-c752-40ea-b06c-5708ea9b2f07">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="472"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="P_DATA_INICIO" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="P_DATA_FIM" class="java.util.Date"/>
+	<parameter name="IMAGEM_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Altair\\git\\RadioCRM\\SicomWeb\\src\\main\\webapp\\imagens\\"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select c.id, cl.nome nome_cliente, ag.nome nome_agencia, c.data_cadastro, c.data_inicio, c.data_termino,  c.percentual_comissao, tc.nome tipo_contrato, c.valor
 from contrato c
@@ -113,7 +116,12 @@ order by ag.nome, c.data_cadastro]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="57" splitType="Stretch"/>
+		<band height="57" splitType="Stretch">
+			<image>
+				<reportElement uuid="9766dc14-c6fd-49b3-bd97-4c4cf69f2f20" x="3" y="0" width="131" height="57"/>
+				<imageExpression><![CDATA[$P{IMAGEM_DIR} + "logonova.png"]]></imageExpression>
+			</image>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="42" splitType="Stretch">

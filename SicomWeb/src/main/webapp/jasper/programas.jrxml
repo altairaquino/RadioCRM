@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="IMAGEM_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Altair\\git\\RadioCRM\\SicomWeb\\src\\main\\webapp\\imagens\\"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select p.id, p.nome, p.valor_patrocinio
 from programa p
@@ -15,7 +18,12 @@ order by p.nome]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="57" splitType="Stretch"/>
+		<band height="57" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement uuid="9766dc14-c6fd-49b3-bd97-4c4cf69f2f20" x="0" y="0" width="122" height="57"/>
+				<imageExpression><![CDATA[$P{IMAGEM_DIR} + "logonova.png"]]></imageExpression>
+			</image>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="23" splitType="Stretch">

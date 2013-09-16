@@ -6,6 +6,9 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Altair\\git\\RadioCRM\\SicomWeb\\src\\main\\webapp\\jasper\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="IMAGEM_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Altair\\git\\RadioCRM\\SicomWeb\\src\\main\\webapp\\imagens\\"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select id, nome, tipo_pessoa, fone, segmento
 from cliente p
@@ -21,12 +24,10 @@ order by p.nome]]>
 	</background>
 	<title>
 		<band height="57" splitType="Stretch">
-			<subreport>
-				<reportElement uuid="672bd75f-255d-4f7a-9a68-38121b40a377" x="10" y="0" width="421" height="57"/>
-				<subreportParameter name="LOJA_ID"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "cabecalho.jasper"]]></subreportExpression>
-			</subreport>
+			<image scaleImage="FillFrame">
+				<reportElement uuid="9766dc14-c6fd-49b3-bd97-4c4cf69f2f20" x="0" y="0" width="115" height="57"/>
+				<imageExpression><![CDATA[$P{IMAGEM_DIR} + "logonova.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

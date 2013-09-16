@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ranking_vendas_agencia" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78e27ea6-c752-40ea-b06c-5708ea9b2f07">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="101"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="P_DATA_INICIO" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="P_DATA_FIM" class="java.util.Date"/>
+	<parameter name="IMAGEM_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Altair\\git\\RadioCRM\\SicomWeb\\src\\main\\webapp\\imagens\\"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select ag.nome nome_agencia, sum(c.valor * c.percentual_comissao / 100.0) valor_comissao, sum(c.valor) valor_bruto
 from contrato c
@@ -34,7 +37,12 @@ order by sum(c.valor) desc]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="57" splitType="Stretch"/>
+		<band height="57" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement uuid="9766dc14-c6fd-49b3-bd97-4c4cf69f2f20" x="0" y="0" width="120" height="57"/>
+				<imageExpression><![CDATA[$P{IMAGEM_DIR} + "logonova.png"]]></imageExpression>
+			</image>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="42" splitType="Stretch">
@@ -161,29 +169,7 @@ order by sum(c.valor) desc]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="12" splitType="Stretch">
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="318" y="0" width="79" height="12"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Verdana" size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{SOMA_VALOR_BRUTO}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="397" y="0" width="79" height="12"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Verdana" size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{SOMA_VALOR_COMISSAO}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="476" y="0" width="74" height="12"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Verdana" size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new Float($V{SOMA_VALOR_BRUTO}.floatValue() - $V{SOMA_VALOR_COMISSAO}.floatValue())]]></textFieldExpression>
-			</textField>
-		</band>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="17" splitType="Stretch">
@@ -211,6 +197,28 @@ order by sum(c.valor) desc]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch"/>
+		<band height="12" splitType="Stretch">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="318" y="0" width="79" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SOMA_VALOR_BRUTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="397" y="0" width="79" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SOMA_VALOR_COMISSAO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="fd6b0f74-042b-496b-aec9-b8368e1b63b9" x="476" y="0" width="74" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Verdana" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Float($V{SOMA_VALOR_BRUTO}.floatValue() - $V{SOMA_VALOR_COMISSAO}.floatValue())]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>
