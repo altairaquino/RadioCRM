@@ -43,7 +43,7 @@ public class FormRelatorioPeriodo extends Window {
 	private Radio rdRankingVendasAgencia;
 	private Radio rdRankingVendasCliente;
 	private Radio rdRankingVendasOrigem;
-	private Radio rdPatrocionioProgramas;
+	private Radio rdVendasPorCliente;
 	private Radio rdAniversariantes;
 
 	@SuppressWarnings("deprecation")
@@ -134,12 +134,12 @@ public class FormRelatorioPeriodo extends Window {
 		
 		radioGroup.add(rdRankingVendasOrigem);
 		
-		rdPatrocionioProgramas = new Radio();
-		rdPatrocionioProgramas.setBoxLabel("Patrocínio de programas");
-		rdPatrocionioProgramas.setHideLabel(true);
-		rdPatrocionioProgramas.setEnabled(false);
+		rdVendasPorCliente = new Radio();
+		rdVendasPorCliente.setBoxLabel("Vendas por Cliente");
+		rdVendasPorCliente.setHideLabel(true);
+//		rdPatrocionioProgramas.setEnabled(false);
 		
-		radioGroup.add(rdPatrocionioProgramas);
+		radioGroup.add(rdVendasPorCliente);
 		
 		rdAniversariantes = new Radio();
 		rdAniversariantes.setBoxLabel("Aniversariantes");
@@ -199,8 +199,9 @@ public class FormRelatorioPeriodo extends Window {
 			parametros.setNomeRelatorio(JasperName.RANKING_VENDAS_ORIGEM);
 		}else if (radioGroup.getValue().equals(rdAniversariantes)){
 			parametros.setNomeRelatorio(JasperName.ANIVERSARIANTES);
-		}
-		
+		}else if (radioGroup.getValue().equals(rdVendasPorCliente)){
+			parametros.setNomeRelatorio(JasperName.VENDAS_CLIENTE_PERIODO);
+		}		
 		
 		InstanceService.RELATORIO_SERVICE.relatorioPeriodo(parametros, new RelatorioCallback());
 		

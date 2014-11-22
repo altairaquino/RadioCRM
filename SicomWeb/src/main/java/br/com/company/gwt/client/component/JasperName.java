@@ -9,6 +9,7 @@ public class JasperName {
 	
 	public static final String CLIENTES = "clientes";
 	public static final String VENDAS_AGENCIA_PERIODO = "vendas_agencia";
+	public static final String VENDAS_CLIENTE_PERIODO = "vendas_cliente";
 	public static final String RANKING_VENDAS = "";
 	public static final String RANKING_VENDAS_AGENCIA = "ranking_vendas_agencia";
 	public static final String RANKING_VENDAS_CLIENTE = "ranking_vendas_cliente";
