@@ -130,7 +130,7 @@ order by cl.nome, c.data_cadastro]]>
 				<textElement textAlignment="Center">
 					<font fontName="Verdana" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Vendas por Agência"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Vendas por Cliente"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement uuid="f9d62c23-32fe-40e2-8969-4accf51c493a" x="3" y="23" width="52" height="14"/>
